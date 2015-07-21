@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  Lola
+
+  Created by Harry Nguyen on 1/6/14.
+  Copyright (c) 2014 Harry Nguyen. All rights reserved.
+*/
+
+////// VCLFirstView
+"FVTitleButtonSignIn"               = "Sign in w/ Facebook";
+
+"FVTitleOneQuality"                 = "One quality match. Noon, daily.";
+"FVTitleGetToKnow"                  = "Get to know your match better.";
+"FVTitleReadyToMeet"                = "Ready to meet?";
+"FVTitleStuck"                      = "Stuck? Need tips and advice?";
+
+"FVTitleArrMessage24hrs"            = "24hrs to decide. ‘Like’ or ‘Pass’?";
+"FVTitleArrMessagePickFrom"         = "Pick from hundreds of questions.";
+"FVTitleArrMessagePropose"          = "Propose a date in 30 secs!";
+"FVTitleArrMessageChatWith"         = "Chat with your personal Love Assistant.";
