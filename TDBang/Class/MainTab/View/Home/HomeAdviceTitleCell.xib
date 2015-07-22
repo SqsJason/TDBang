@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="35" id="KGk-i7-Jjw" customClass="HomeAdviceTitleCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="34"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="首页推荐" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4sp-Om-0AL">
+                        <rect key="frame" x="48" y="6" width="64" height="20"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                        <color key="textColor" red="0.57775015789999995" green="0.57775015789999995" blue="0.57775015789999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7oS-VO-vCy">
+                        <rect key="frame" x="0.0" y="16" width="42" height="1"/>
+                        <color key="backgroundColor" red="0.87450678659191916" green="0.87450678659191916" blue="0.87450678659191916" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="42" id="Hqr-Lt-rbv"/>
+                            <constraint firstAttribute="height" constant="1" id="wRh-SK-9nj"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9rA-ne-m89">
+                        <rect key="frame" x="112" y="16" width="208" height="1"/>
+                        <color key="backgroundColor" red="0.87450678659191916" green="0.87450678659191916" blue="0.87450678659191916" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="4sp-Om-0AL" firstAttribute="leading" secondItem="7oS-VO-vCy" secondAttribute="trailing" constant="6" id="0cE-n3-QjT"/>
+                    <constraint firstItem="9rA-ne-m89" firstAttribute="firstBaseline" secondItem="7oS-VO-vCy" secondAttribute="firstBaseline" id="5mQ-xZ-e3X"/>
+                    <constraint firstItem="4sp-Om-0AL" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="6" id="6EJ-Md-QUT"/>
+                    <constraint firstItem="7oS-VO-vCy" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="90h-2b-v3y"/>
+                    <constraint firstAttribute="trailing" secondItem="9rA-ne-m89" secondAttribute="trailing" id="A9V-Ce-wTU"/>
+                    <constraint firstItem="9rA-ne-m89" firstAttribute="leading" secondItem="4sp-Om-0AL" secondAttribute="trailing" constant="3" id="FAf-F3-K4D"/>
+                    <constraint firstAttribute="trailing" secondItem="9rA-ne-m89" secondAttribute="trailing" id="OBS-iB-8VK"/>
+                    <constraint firstItem="9rA-ne-m89" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="104" id="eRh-bY-rvy"/>
+                    <constraint firstItem="7oS-VO-vCy" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="16" id="eSf-n1-VRf"/>
+                    <constraint firstItem="9rA-ne-m89" firstAttribute="centerY" secondItem="4sp-Om-0AL" secondAttribute="centerY" id="euw-wC-NyE"/>
+                    <constraint firstItem="9rA-ne-m89" firstAttribute="baseline" secondItem="7oS-VO-vCy" secondAttribute="baseline" id="wE1-rx-tIB"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="A9V-Ce-wTU"/>
+                        <exclude reference="FAf-F3-K4D"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="0.85392992420000002" green="0.85392992420000002" blue="0.85392992420000002" alpha="1" colorSpace="calibratedRGB"/>
+            <point key="canvasLocation" x="316" y="264"/>
+        </tableViewCell>
+    </objects>
+</document>

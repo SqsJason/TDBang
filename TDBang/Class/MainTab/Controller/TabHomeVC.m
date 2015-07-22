@@ -24,6 +24,8 @@
 #import "ProductLotteryVC.h"
 #import "ShowOrderListVC.h"
 #import "ShowOrderDetailVC.h"
+#import "HomeAdviceCell.h"
+#import "HomeAdviceTitleCell.h"
 
 /*
  tFont: AppleSDGothicNeo-Bold
@@ -75,7 +77,7 @@
     tbView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     tbView.delegate = self;
     tbView.dataSource = self;
-    tbView.backgroundColor = [UIColor hexFloatColor:@"f8f8f8"];
+    tbView.backgroundColor = [UIColor hexFloatColor:@"e6eaea"];
     tbView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tbView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:tbView];
@@ -166,13 +168,13 @@
 #pragma mark - tableview
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if(section == 3)
-        return 1;
+    if(section == 1)
+        return 4;
     return 2;
 }
 
@@ -180,10 +182,10 @@
 {
     if (indexPath.section == 0)
     {
-        return indexPath.row == 0 ? 150:100;
+        return indexPath.row == 0 ? 150:175;
     }
-    if (indexPath.section == 1 && indexPath.row == 1)
-        return 140.5;
+    if (indexPath.section == 1 && indexPath.row == 0)
+        return 34;
     if (indexPath.section == 2 && indexPath.row == 1)
         return 200;
     if (indexPath.section == 3)
@@ -196,7 +198,7 @@
     }
     if (indexPath.section == 4 && indexPath.row == 1)
         return 250;
-    return 44;
+    return 100;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -245,27 +247,29 @@
     {
         if(row == 0)
         {
-            static NSString *CellIdentifier = @"newTitleCell";
-            UITableViewCell *cell = (UITableViewCell*)[tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
+            static NSString *CellIdentifier = @"homeAdviceCell";
+            HomeAdviceTitleCell *cell = (HomeAdviceTitleCell*)[tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
             if(cell == nil)
             {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"HomeAdviceTitleCell" owner:self options:nil] lastObject];
+                cell.backgroundColor = [UIColor hexFloatColor:@"e6eaea"];
             }
-            cell.textLabel.text = @"最新揭晓";
-            cell.textLabel.font = TitleFont;
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
             return cell;
         }
-        else if(row == 1)
+        else
         {
-            static NSString *CellIdentifier = @"homeNewCell";
-            HomeNewCell *cell = (HomeNewCell*)[tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
+            static NSString *CellIdentifier = @"homeAdviceCell";
+            HomeAdviceCell *cell = (HomeAdviceCell*)[tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
             if(cell == nil)
             {
-                cell = [[HomeNewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"HomeAdviceCell" owner:self options:nil] lastObject];
             }
-            [cell setDelegate:self];
-            [cell setNews:[HomeInstance ShardInstnce].listNewing homepage:listHomepage.Rows1];
+//            [cell setDelegate:self];
+//            [cell setNews:[HomeInstance ShardInstnce].listNewing homepage:listHomepage.Rows1];
             return cell;
         }
     }
@@ -368,10 +372,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if(indexPath.section == 1 && indexPath.row == 0)
     {
-        self.tabBarController.selectedIndex = 2;
+//        self.tabBarController.selectedIndex = 2;
     }
     else if(indexPath.section == 2 && indexPath.row == 0)
     {

@@ -37,22 +37,26 @@
 
 - (void)getAds
 {
-    [HomeModel getAds:^(AFHTTPRequestOperation* operation,NSObject* result){
-        HomeAdList* ads = [[HomeAdList alloc] initWithDictionary:(NSDictionary*)result];
-        adArr = ads.Rows;
-        NSMutableArray* arrNames = [NSMutableArray array];
-        for (HomeAd* ad in ads.Rows) {
-            [arrNames addObject:ad.src];
-        }
-        if([OyTool ShardInstance].bIsForReview)
-        {
-            [adPage setAds:@[@"http://img.1yyg.com/Poster/20140918182340689.jpg"]];
-        }
-        else
-            [adPage setAds:arrNames];
-    } failure:^(NSError* error){
-        //[[XBToastManager ShardInstance] showtoast:[NSString stringWithFormat:@"获取首页顶部异常：%@",error]];
-    }];
+    NSMutableArray* arrNames = [NSMutableArray array];
+    [arrNames addObject:@"home_top_ad"];
+    [adPage setAds:arrNames];
+    
+//    [HomeModel getAds:^(AFHTTPRequestOperation* operation,NSObject* result){
+//        HomeAdList* ads = [[HomeAdList alloc] initWithDictionary:(NSDictionary*)result];
+//        adArr = ads.Rows;
+//        NSMutableArray* arrNames = [NSMutableArray array];
+//        for (HomeAd* ad in ads.Rows) {
+//            [arrNames addObject:ad.src];
+//        }
+//        if([OyTool ShardInstance].bIsForReview)
+//        {
+//            [adPage setAds:@[@"http://img.1yyg.com/Poster/20140918182340689.jpg"]];
+//        }
+//        else
+//            [adPage setAds:arrNames];
+//    } failure:^(NSError* error){
+//        //[[XBToastManager ShardInstance] showtoast:[NSString stringWithFormat:@"获取首页顶部异常：%@",error]];
+//    }];
 }
 
 - (void)click:(int)index

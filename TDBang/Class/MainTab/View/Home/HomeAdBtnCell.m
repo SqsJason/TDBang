@@ -33,12 +33,14 @@
     if (self)
     {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.backgroundColor = [UIColor hexFloatColor:@"e6eaea"];
         
-        CGFloat width = 60;
-        CGFloat perW = (mainWidth - width * 3) / 6;
+        CGFloat width = (mainWidth - 30)/2;
+        CGFloat height = 80;
+        CGFloat perW = 10;
         
-        btnNew = [[UIButton alloc] initWithFrame:CGRectMake(perW, 10, width, width)];
-        [btnNew setImage:[UIImage imageNamed:@"home_btn_new"] forState:UIControlStateNormal];
+        btnNew = [[UIButton alloc] initWithFrame:CGRectMake(perW, 10, width, height)];
+        [btnNew setBackgroundImage:[UIImage imageNamed:@"home_btn_work"] forState:UIControlStateNormal];
         [btnNew addTarget:self action:@selector(newAction) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btnNew];
         
@@ -48,10 +50,10 @@
         lblNew.textColor = [UIColor grayColor];
         CGSize snew = [lblNew.text textSizeWithFont:lblNew.font constrainedToSize:CGSizeMake(MAXFLOAT, 999) lineBreakMode:NSLineBreakByCharWrapping];
         lblNew.frame = CGRectMake(perW + (60 - snew.width) / 2, 75, snew.width, snew.height);
-        [self addSubview:lblNew];
+//        [self addSubview:lblNew];
         
-        btnShow = [[UIButton alloc] initWithFrame:CGRectMake(perW * 3 + width, 10, width, width)];
-        [btnShow setImage:[UIImage imageNamed:@"home_btn_show"] forState:UIControlStateNormal];
+        btnShow = [[UIButton alloc] initWithFrame:CGRectMake(perW * 2 + width, 10, width, height)];
+        [btnShow setBackgroundImage:[UIImage imageNamed:@"home_btn_advice"] forState:UIControlStateNormal];
         [btnShow addTarget:self action:@selector(showAction) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btnShow];
         
@@ -60,21 +62,55 @@
         lblShow.font = [UIFont systemFontOfSize:14];
         lblShow.textColor = [UIColor grayColor];
         CGSize sshow = [lblShow.text textSizeWithFont:lblShow.font constrainedToSize:CGSizeMake(MAXFLOAT, 999) lineBreakMode:NSLineBreakByCharWrapping];
-        lblShow.frame = CGRectMake(perW * 3 + width + (60 - sshow.width) / 2, 75, sshow.width, sshow.height);
-        [self addSubview:lblShow];
+        lblShow.frame = CGRectMake(perW * 2 + width + (60 - sshow.width) / 2, 75, sshow.width, sshow.height);
+//        [self addSubview:lblShow]; home_btn_life
         
-        btnBuy = [[UIButton alloc] initWithFrame:CGRectMake(perW * 5 + width * 2, 10, width, width)];
-        [btnBuy setImage:[UIImage imageNamed:@"home_btn_buy"] forState:UIControlStateNormal];
+        btnBuy = [[UIButton alloc] initWithFrame:CGRectMake(perW, btnNew.frame.size.height + 2*10, mainWidth - 2*10, height)];
+        [btnBuy setBackgroundImage:[UIImage imageNamed:@"home_btn_life"] forState:UIControlStateNormal];
         [btnBuy addTarget:self action:@selector(buyAction) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btnBuy];
         
-        lblBuy = [[UILabel alloc] init];
-        lblBuy.text = @"云购记录";
-        lblBuy.font = [UIFont systemFontOfSize:14];
-        lblBuy.textColor = [UIColor grayColor];
-        CGSize sbuy = [lblBuy.text textSizeWithFont:lblBuy.font constrainedToSize:CGSizeMake(MAXFLOAT, 999) lineBreakMode:NSLineBreakByCharWrapping];
-        lblBuy.frame = CGRectMake(perW * 5 + width * 2 + (60 - sbuy.width) / 2, 75, sbuy.width, sbuy.height);
-        [self addSubview:lblBuy];
+        
+        /*
+         btnNew = [[UIButton alloc] initWithFrame:CGRectMake(perW, 10, width, width)];
+         [btnNew setImage:[UIImage imageNamed:@"home_btn_new"] forState:UIControlStateNormal];
+         [btnNew addTarget:self action:@selector(newAction) forControlEvents:UIControlEventTouchUpInside];
+         [self addSubview:btnNew];
+         
+         lblNew = [[UILabel alloc] init];
+         lblNew.text = @"新品";
+         lblNew.font = [UIFont systemFontOfSize:14];
+         lblNew.textColor = [UIColor grayColor];
+         CGSize snew = [lblNew.text textSizeWithFont:lblNew.font constrainedToSize:CGSizeMake(MAXFLOAT, 999) lineBreakMode:NSLineBreakByCharWrapping];
+         lblNew.frame = CGRectMake(perW + (60 - snew.width) / 2, 75, snew.width, snew.height);
+         [self addSubview:lblNew];
+         
+         btnShow = [[UIButton alloc] initWithFrame:CGRectMake(perW * 3 + width, 10, width, width)];
+         [btnShow setImage:[UIImage imageNamed:@"home_btn_show"] forState:UIControlStateNormal];
+         [btnShow addTarget:self action:@selector(showAction) forControlEvents:UIControlEventTouchUpInside];
+         [self addSubview:btnShow];
+         
+         lblShow = [[UILabel alloc] init];
+         lblShow.text = @"晒单";
+         lblShow.font = [UIFont systemFontOfSize:14];
+         lblShow.textColor = [UIColor grayColor];
+         CGSize sshow = [lblShow.text textSizeWithFont:lblShow.font constrainedToSize:CGSizeMake(MAXFLOAT, 999) lineBreakMode:NSLineBreakByCharWrapping];
+         lblShow.frame = CGRectMake(perW * 3 + width + (60 - sshow.width) / 2, 75, sshow.width, sshow.height);
+         [self addSubview:lblShow];
+         
+         btnBuy = [[UIButton alloc] initWithFrame:CGRectMake(perW * 5 + width * 2, 10, width, width)];
+         [btnBuy setImage:[UIImage imageNamed:@"home_btn_buy"] forState:UIControlStateNormal];
+         [btnBuy addTarget:self action:@selector(buyAction) forControlEvents:UIControlEventTouchUpInside];
+         [self addSubview:btnBuy];
+         
+         lblBuy = [[UILabel alloc] init];
+         lblBuy.text = @"云购记录";
+         lblBuy.font = [UIFont systemFontOfSize:14];
+         lblBuy.textColor = [UIColor grayColor];
+         CGSize sbuy = [lblBuy.text textSizeWithFont:lblBuy.font constrainedToSize:CGSizeMake(MAXFLOAT, 999) lineBreakMode:NSLineBreakByCharWrapping];
+         lblBuy.frame = CGRectMake(perW * 5 + width * 2 + (60 - sbuy.width) / 2, 75, sbuy.width, sbuy.height);
+         [self addSubview:lblBuy];
+         */
         
     }
     return self;

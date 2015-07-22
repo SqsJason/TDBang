@@ -159,6 +159,10 @@
 		EF9A055D1B5EA5F1009428AA /* XBHttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9A05491B5EA5F1009428AA /* XBHttpClient.m */; };
 		EF9A055E1B5EA5F1009428AA /* XBParser.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9A054C1B5EA5F1009428AA /* XBParser.m */; };
 		EF9A055F1B5EA5F1009428AA /* XBBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9A05501B5EA5F1009428AA /* XBBaseVC.m */; };
+		EF9A05621B5FE9A4009428AA /* HomeAdviceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9A05611B5FE9A4009428AA /* HomeAdviceCell.m */; };
+		EF9A05641B5FE9E9009428AA /* HomeAdviceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF9A05631B5FE9E9009428AA /* HomeAdviceCell.xib */; };
+		EF9A056D1B5FF798009428AA /* HomeAdviceTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9A056B1B5FF798009428AA /* HomeAdviceTitleCell.m */; };
+		EF9A056E1B5FF798009428AA /* HomeAdviceTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF9A056C1B5FF798009428AA /* HomeAdviceTitleCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -477,6 +481,12 @@
 		EF9A054C1B5EA5F1009428AA /* XBParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBParser.m; sourceTree = "<group>"; };
 		EF9A054F1B5EA5F1009428AA /* XBBaseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XBBaseVC.h; sourceTree = "<group>"; };
 		EF9A05501B5EA5F1009428AA /* XBBaseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XBBaseVC.m; sourceTree = "<group>"; };
+		EF9A05601B5FE9A4009428AA /* HomeAdviceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeAdviceCell.h; sourceTree = "<group>"; };
+		EF9A05611B5FE9A4009428AA /* HomeAdviceCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeAdviceCell.m; sourceTree = "<group>"; };
+		EF9A05631B5FE9E9009428AA /* HomeAdviceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeAdviceCell.xib; sourceTree = "<group>"; };
+		EF9A056A1B5FF798009428AA /* HomeAdviceTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeAdviceTitleCell.h; sourceTree = "<group>"; };
+		EF9A056B1B5FF798009428AA /* HomeAdviceTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeAdviceTitleCell.m; sourceTree = "<group>"; };
+		EF9A056C1B5FF798009428AA /* HomeAdviceTitleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeAdviceTitleCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -810,6 +820,12 @@
 		EF9A03B21B5E9AAF009428AA /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				EF9A056A1B5FF798009428AA /* HomeAdviceTitleCell.h */,
+				EF9A056B1B5FF798009428AA /* HomeAdviceTitleCell.m */,
+				EF9A056C1B5FF798009428AA /* HomeAdviceTitleCell.xib */,
+				EF9A05601B5FE9A4009428AA /* HomeAdviceCell.h */,
+				EF9A05611B5FE9A4009428AA /* HomeAdviceCell.m */,
+				EF9A05631B5FE9E9009428AA /* HomeAdviceCell.xib */,
 				EF9A03B31B5E9AAF009428AA /* HomeAdBtnCell.h */,
 				EF9A03B41B5E9AAF009428AA /* HomeAdBtnCell.m */,
 				EF9A03B51B5E9AAF009428AA /* HomeAdCell.h */,
@@ -1479,8 +1495,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF9A05641B5FE9E9009428AA /* HomeAdviceCell.xib in Resources */,
 				EF9A05001B5E9AAF009428AA /* cyjx.ttf in Resources */,
 				EF9A034E1B5E99EE009428AA /* Main.storyboard in Resources */,
+				EF9A056E1B5FF798009428AA /* HomeAdviceTitleCell.xib in Resources */,
 				EF9A05141B5E9AC8009428AA /* PushConfig.plist in Resources */,
 				EF9A04FF1B5E9AAF009428AA /* Localizable.strings in Resources */,
 				EF9A03531B5E99EE009428AA /* LaunchScreen.xib in Resources */,
@@ -1619,6 +1637,7 @@
 				EF9A04C01B5E9AAF009428AA /* MineLoginView.m in Sources */,
 				EF9A04BE1B5E9AAF009428AA /* HomeOrderShowCell.m in Sources */,
 				EF9A04DB1B5E9AAF009428AA /* MineOrderHeadView.m in Sources */,
+				EF9A056D1B5FF798009428AA /* HomeAdviceTitleCell.m in Sources */,
 				EF9A04F01B5E9AAF009428AA /* SearchModel.m in Sources */,
 				EF9A04B81B5E9AAF009428AA /* HomeHotView.m in Sources */,
 				EF9A05051B5E9AAF009428AA /* SVPullToRefreshView+OY_PullRefreshView.m in Sources */,
@@ -1660,6 +1679,7 @@
 				EF9A04DE1B5E9AAF009428AA /* MineShowOrderCell.m in Sources */,
 				EF9A05571B5EA5F1009428AA /* UIColor+hexColor.m in Sources */,
 				EF9A04EE1B5E9AAF009428AA /* RegModel.m in Sources */,
+				EF9A05621B5FE9A4009428AA /* HomeAdviceCell.m in Sources */,
 				EF9A04ED1B5E9AAF009428AA /* RegUserVC.m in Sources */,
 				EF9A04D41B5E9AAF009428AA /* MineMyOrderTransModel.m in Sources */,
 				EF9A04AF1B5E9AAF009428AA /* UserInstance.m in Sources */,

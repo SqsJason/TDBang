@@ -35,7 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"最新揭晓";
+    self.title = @"管理";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadNewest) name:kDidNotifyReloadNewest object:nil];
     

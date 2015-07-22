@@ -27,6 +27,8 @@ const static float userHeadPadding_Right    = 30.0;
     self = [super initWithFrame:frame];
     if (self)
     {
+        self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"me_top_bg"]];
+        
         UIImageView *imvHead = [[UIImageView alloc] init];
         imvHead.layer.cornerRadius = userHead_Size/2;
         imvHead.layer.masksToBounds = YES;
@@ -45,14 +47,47 @@ const static float userHeadPadding_Right    = 30.0;
         [self addSubview:imvHead];
         [self addSubview:lbl];
         
-        UIButton* btn = [[UIButton alloc] initWithFrame:CGRectMake(headPadding_L + imvHead.frame.size.width + userHeadPadding_Right, 60, 150, 44)];
+        UIButton* btn = [[UIButton alloc] initWithFrame:CGRectMake(headPadding_L + imvHead.frame.size.width + userHeadPadding_Right, 60, 90, 40)];
+        [btn.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
         [btn setTitle:@"马上登录" forState:UIControlStateNormal];
-        [btn setTitleColor:mainColor forState:UIControlStateNormal];
+        [btn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
         [btn setBackgroundColor:[UIColor whiteColor]];
         btn.layer.borderWidth = 0.5;
         btn.layer.borderColor = [UIColor hexFloatColor:@"dedede"].CGColor;
         [btn addTarget:self action:@selector(btnLoginAction) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:btn];
+        
+        CGFloat width = (mainWidth - 1)/2;
+        CGFloat height = 30;
+        CGFloat perW = 0;
+        
+        UIButton *btnNew = [[UIButton alloc] initWithFrame:CGRectMake(perW, userHeadPadding_Top + 20 + imvHead.frame.size.height, width, height)];
+        btnNew.backgroundColor = [UIColor blackColor];
+        btnNew.alpha = 0.4;
+        [btnNew addTarget:self action:@selector(newAction) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:btnNew];
+        
+        UILabel *lblNew = [[UILabel alloc] init];
+        lblNew.text = @"我的余额: 1000.00";
+        lblNew.font = [UIFont systemFontOfSize:14];
+        lblNew.textColor = [UIColor whiteColor];
+        lblNew.textAlignment = NSTextAlignmentCenter;
+        lblNew.frame = CGRectMake(perW, btnNew.frame.origin.y, width, height);
+                [self addSubview:lblNew];
+        
+        UIButton * btnShow = [[UIButton alloc] initWithFrame:CGRectMake(perW * 2 + width + 1, btnNew.frame.origin.y, width, height)];
+        btnShow.backgroundColor = [UIColor blackColor];
+        btnShow.alpha = 0.4;
+        [btnShow addTarget:self action:@selector(showAction) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:btnShow];
+        
+        UILabel *lblShow = [[UILabel alloc] init];
+        lblShow.text = @"我的积分: 10000";
+        lblShow.font = [UIFont systemFontOfSize:14];
+        lblShow.textColor = [UIColor whiteColor];
+        lblShow.frame = CGRectMake(btnShow.frame.origin.x, btnNew.frame.origin.y, width, height);
+        lblShow.textAlignment = NSTextAlignmentCenter;
+        [self addSubview:lblShow];
     }
     return self;
 }
@@ -61,4 +96,21 @@ const static float userHeadPadding_Right    = 30.0;
 {
     [delegate doLogin];
 }
+
+- (void)newAction
+{
+    if(delegate)
+    {
+        
+    }
+}
+
+- (void)showAction
+{
+    if(delegate)
+    {
+        
+    }
+}
+
 @end

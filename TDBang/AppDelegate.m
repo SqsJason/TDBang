@@ -100,7 +100,7 @@
     unselectedImage = [UIImage imageNamed:@"tab-pro"];
     selectedImage = [UIImage imageNamed:@"tab-pro-s"];
     
-    proNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"所有商品"
+    proNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"任务"
                                                       image:[unselectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
                                               selectedImage:[selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     proNav.tabBarItem.tag = 1;
@@ -110,7 +110,7 @@
     unselectedImage = [UIImage imageNamed:@"tab-new"];
     selectedImage = [UIImage imageNamed:@"tab-new-s"];
     
-    newNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"最新揭晓"
+    newNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"管理"
                                                       image:[unselectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
                                               selectedImage:[selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     newNav.tabBarItem.tag = 2;
@@ -120,7 +120,7 @@
     unselectedImage = [UIImage imageNamed:@"tab-cart"];
     selectedImage = [UIImage imageNamed:@"tab-cart-s"];
     
-    cartNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"购物车"
+    cartNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"购物"
                                                        image:[unselectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
                                                selectedImage:[selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     cartNav.tabBarItem.tag = 3;
@@ -130,7 +130,7 @@
     unselectedImage = [UIImage imageNamed:@"tab-mine"];
     selectedImage = [UIImage imageNamed:@"tab-mine-s"];
     
-    mineNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"我的云购"
+    mineNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"我的"
                                                        image:[unselectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
                                                selectedImage:[selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     mineNav.tabBarItem.tag = 4;

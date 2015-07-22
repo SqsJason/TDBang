@@ -43,7 +43,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLoginOk) name:kDidLoginOk object:nil];
     __weak typeof (self) wSelf = self;
-    self.title = @"我的云购";
+    self.title = @"我的";
     
     arrTitles = @[@"我的云购记录",@"获得的商品",@"我的晒单",@"账户明细",@"收货地址管理"];//@"我的好友",@"消息中心",,
     arrImages = @[@"me1",@"me2",@"me3",@"me6",@"me7"];//@"me4",@"me5",
@@ -88,7 +88,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if(section == 0)
-        return 130;
+        return 150;
     return 10;
 }
 
@@ -96,7 +96,7 @@
 {
     if (section == 0)
     {
-        if (![UserInstance ShardInstnce].userId)
+        if ([UserInstance ShardInstnce].userId)
         {
             MineUserView* v = [[MineUserView alloc] initWithFrame:CGRectMake(0, 0, mainWidth, 130)];
             v.delegate = self;

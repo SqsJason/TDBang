@@ -98,7 +98,8 @@
         img.userInteractionEnabled = YES;
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(Actiondo)];
         [img addGestureRecognizer:tap];
-        [img setImage_oy:nil image:name];
+//        [img setImage_oy:nil image:name];
+        [img setImage:[UIImage imageNamed:@"home_top_ad"]];
         [scView addSubview:img];
     }
     scView.contentOffset = CGPointMake(((adCount>1)?mainWidth*addBeyond:0), 0);
@@ -111,7 +112,11 @@
         pcView.pageIndicatorTintColor = [UIColor grayColor];
         pcView.currentPageIndicatorTintColor = [UIColor redColor];
     }
-    [self addSubview:pcView];
+    
+    if (imgNameArr.count > 1) {
+        [self addSubview:pcView];
+    }
+    
     
     pcView.numberOfPages = imgNameArr.count;
     

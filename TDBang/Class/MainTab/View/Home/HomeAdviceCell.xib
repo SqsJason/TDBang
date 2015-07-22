@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HomeAdviceCell">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="101"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kefu" translatesAutoresizingMaskIntoConstraints="NO" id="XVw-jG-EEd">
+                    <rect key="frame" x="10" y="10" width="80" height="80"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="80" id="Em6-MT-gUL"/>
+                        <constraint firstAttribute="width" constant="80" id="yU3-1j-M0X"/>
+                    </constraints>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_advice_icon" translatesAutoresizingMaskIntoConstraints="NO" id="3As-9H-nCJ">
+                    <rect key="frame" x="98" y="10" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="Y9K-V8-2nm"/>
+                        <constraint firstAttribute="width" constant="20" id="faB-ZU-gOL"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="肯德基外卖" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xn7-is-EcO">
+                    <rect key="frame" x="123" y="10" width="80" height="19.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100.00元/天" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wjc-Gl-FEv">
+                    <rect key="frame" x="98" y="40" width="82" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.9647059440612793" green="0.1098039299249649" blue="0.12156863510608673" alpha="1" colorSpace="deviceRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10个月前 发布" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBr-hN-czM">
+                    <rect key="frame" x="98" y="68" width="103" height="20"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" red="0.52211881463535348" green="0.52211881463535348" blue="0.52211881463535348" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="招聘30人" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ofo-Im-ZwZ">
+                    <rect key="frame" x="520" y="61" width="70" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                    <color key="textColor" red="0.22745099663734436" green="0.68235296010971069" blue="0.15294118225574493" alpha="1" colorSpace="deviceRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ukw-0g-csv">
+                    <rect key="frame" x="0.0" y="100" width="600" height="1"/>
+                    <color key="backgroundColor" red="0.85392992421818181" green="0.85392992421818181" blue="0.85392992421818181" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="l3h-g6-VGf"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_advice_enroll" translatesAutoresizingMaskIntoConstraints="NO" id="UFf-Cn-dek">
+                    <rect key="frame" x="514" y="10" width="76" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="W3O-vJ-zJa"/>
+                        <constraint firstAttribute="width" constant="76" id="fNs-7M-bDJ"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Ofo-Im-ZwZ" secondAttribute="trailing" constant="10" id="0nf-K1-JUe"/>
+                <constraint firstAttribute="trailing" secondItem="Ukw-0g-csv" secondAttribute="trailing" id="8Bx-Dk-MkW"/>
+                <constraint firstItem="3As-9H-nCJ" firstAttribute="leading" secondItem="XVw-jG-EEd" secondAttribute="trailing" constant="8" id="BS2-c3-m7Y"/>
+                <constraint firstItem="XVw-jG-EEd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="EXP-YI-ZXx"/>
+                <constraint firstItem="Ukw-0g-csv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="J3D-GA-dXR"/>
+                <constraint firstItem="UFf-Cn-dek" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="M3O-9c-L7t"/>
+                <constraint firstItem="wjc-Gl-FEv" firstAttribute="top" secondItem="3As-9H-nCJ" secondAttribute="bottom" constant="10" id="V6s-Kb-bvI"/>
+                <constraint firstItem="Ofo-Im-ZwZ" firstAttribute="top" secondItem="UFf-Cn-dek" secondAttribute="bottom" constant="1" id="WIb-Cw-DoM"/>
+                <constraint firstAttribute="trailing" secondItem="UFf-Cn-dek" secondAttribute="trailing" constant="10" id="a1Z-yK-QPW"/>
+                <constraint firstItem="XVw-jG-EEd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="cBY-6l-PKg"/>
+                <constraint firstItem="fBr-hN-czM" firstAttribute="top" secondItem="wjc-Gl-FEv" secondAttribute="bottom" constant="10" id="dDh-KL-DHG"/>
+                <constraint firstItem="Xn7-is-EcO" firstAttribute="leading" secondItem="3As-9H-nCJ" secondAttribute="trailing" constant="5" id="dNC-rV-k21"/>
+                <constraint firstAttribute="bottom" secondItem="Ukw-0g-csv" secondAttribute="bottom" id="ge2-yc-Lub"/>
+                <constraint firstItem="Xn7-is-EcO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="igC-2w-6gu"/>
+                <constraint firstItem="wjc-Gl-FEv" firstAttribute="leading" secondItem="XVw-jG-EEd" secondAttribute="trailing" constant="8" id="rJt-QP-lSs"/>
+                <constraint firstItem="fBr-hN-czM" firstAttribute="leading" secondItem="XVw-jG-EEd" secondAttribute="trailing" constant="8" id="u79-sm-SbE"/>
+                <constraint firstItem="3As-9H-nCJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="xw8-cY-MFY"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="361" y="283.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="home_advice_enroll" width="150" height="110"/>
+        <image name="home_advice_icon" width="98" height="98"/>
+        <image name="kefu" width="180" height="180"/>
+    </resources>
+</document>
