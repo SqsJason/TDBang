@@ -88,7 +88,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if(section == 0)
-        return 150;
+        return 160;
     return 10;
 }
 
@@ -98,13 +98,13 @@
     {
         if ([UserInstance ShardInstnce].userId)
         {
-            MineUserView* v = [[MineUserView alloc] initWithFrame:CGRectMake(0, 0, mainWidth, 130)];
+            MineUserView* v = [[MineUserView alloc] initWithFrame:CGRectMake(0, 0, mainWidth, 150)];
             v.delegate = self;
             return v;
         }
         else
         {
-            MineLoginView* v = [[MineLoginView alloc] initWithFrame:CGRectMake(0, 0, mainWidth, 130)];
+            MineLoginView* v = [[MineLoginView alloc] initWithFrame:CGRectMake(0, 0, mainWidth, 150)];
             v.delegate = self;
             return v;
         }
@@ -121,7 +121,7 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell =  nil;//(UITableViewCell*)[tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell =  nil;
     if(cell == nil)
     {
         cell = [[UITableViewCell alloc] init];

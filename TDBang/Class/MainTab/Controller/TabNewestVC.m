@@ -14,8 +14,10 @@
 #import "AllProTypeView.h"
 #import "ProductLotteryVC.h"
 #import "ProductDetailVC.h"
+#import "MineLoginView.h"
+#import "HomeNewCell.h"
 
-@interface TabNewestVC () <UITableViewDataSource,UITableViewDelegate,AllProTypeViewDelegate>
+@interface TabNewestVC () <UITableViewDataSource,UITableViewDelegate,AllProTypeViewDelegate,HomeNewCellDelegate>
 {
     LMDropdownView  *dropdownView;
     
@@ -65,7 +67,7 @@
     tbView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     tbView.delegate = self;
     tbView.dataSource = self;
-    tbView.backgroundColor = [UIColor hexFloatColor:@"f8f8f8"];
+    tbView.backgroundColor = [UIColor hexFloatColor:@"e6eaea"];
     tbView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tbView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:tbView];
@@ -96,7 +98,6 @@
     
     dropdownView = [[LMDropdownView alloc] init];
     dropdownView.contentBackgroundColor = [UIColor whiteColor];
-//    dropdownView.menuContentView = tview;
 }
 
 - (void)actionCustomNavBtn:(UIButton *)btn nrlImage:(NSString *)nrlImage
@@ -127,9 +128,8 @@
     }
     else
     {
-        //[tbViewType reloadData];
-//        - (void)showInView:(UIView *)containerView withContentView:(UIView *)contentView atOrigin:(CGPoint)origin;
-//        [dropdownView showInView:self.view withFrame:CGRectMake(0, 0, mainWidth, self.view.bounds.size.height)];
+        [tbView reloadData];
+        [dropdownView showInView:self.view withContentView:tbView atOrigin:CGPointMake(0, 0)];
     }
 
 }
@@ -168,29 +168,65 @@
     } failure:^(NSError* error){
         [tbView.pullToRefreshView stopAnimating];
         [tbView.infiniteScrollingView stopAnimating];
-        //[[XBToastManager ShardInstance] showtoast:[NSString stringWithFormat:@"获取最新揭晓页面数据异常:%@",error]];
     }];
 }
 
 #pragma mark - tableview
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [HomeInstance ShardInstnce].listNewing.listItems.count + listNew.count;
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100;
+    if (indexPath.section == 0 || indexPath.section == 1 || indexPath.section == 2)
+        return 60;
+    return 44;
+        
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 0.1;
+    if (section == 0)
+        return 150;
+    if (section == 1 || section == 2)
+        return 35;
+    return 15;
+    
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section == 0)
+    {
+        MineLoginView* v = [[MineLoginView alloc] initWithFrame:CGRectMake(0, 0, mainWidth, 150)];
+        return v;
+    }
+    if (section == 1 || section == 2)
+    {
+        UIView *headV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mainWidth, 35)];
+        headV.backgroundColor = [UIColor clearColor];
+        UILabel *lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(30, 0, mainWidth-30, 35)];
+        if (section == 1) {
+            lblTitle.text = @"任务评论";
+        }else{
+            lblTitle.text = @"投诉与建议";
+        }
+        lblTitle.font = [UIFont systemFontOfSize:16];
+        lblTitle.textColor = [UIColor darkGrayColor];
+        
+        [headV addSubview:lblTitle];
+        
+        return headV;
+    }
+    UIView *headV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mainWidth, 20)];
+    headV.backgroundColor = [UIColor clearColor];
+    return headV;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -200,29 +236,34 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row < [[[[HomeInstance ShardInstnce] listNewing] listItems] count])
-    {
-        static NSString *CellIdentifier = @"newingCell";
-        NewestingCell *cell = (NewestingCell*)[tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (indexPath.section == 3) {
+        UITableViewCell *cell =  nil;
         if(cell == nil)
         {
-            cell = [[NewestingCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            cell = [[UITableViewCell alloc] init];
         }
-        [cell setNewesting:[[[[HomeInstance ShardInstnce] listNewing] listItems] objectAtIndex:indexPath.row]];
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        NSString* title = nil;
+        NSString* image = nil;
+        title = @"系统公告";
+        image = @"home_btn_new";
+        cell.textLabel.text = [NSString stringWithFormat:@"        %@",title];
+        
+        UIImageView* img = [[UIImageView alloc] initWithFrame:CGRectMake(16, 10, 24, 24)];
+        img.image = [UIImage imageNamed:image];
+        [cell addSubview:img];
+        
         return cell;
-    }
-    else
-    {
-        static NSString *CellIdentifier = @"newedCell";
-        NewestedCell *cell = (NewestedCell*)[tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
+    }else{
+        static NSString *CellIdentifier = @"homeNewCell";
+        HomeNewCell *cell = (HomeNewCell*)[tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
         if(cell == nil)
         {
-            cell = [[NewestedCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            cell = [[HomeNewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
-        [cell setNewed:[listNew objectAtIndex:indexPath.row - [HomeInstance ShardInstnce].listNewing.listItems.count]];
+        [cell setDelegate:self];
         return cell;
     }
-    return nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

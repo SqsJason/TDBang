@@ -10,4 +10,8 @@
 
 @interface HomeAdviceCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIImageView *imvAdviceIcon;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintsTitlePaddingLeft;
+@property (weak, nonatomic) IBOutlet UILabel *lblTitle;
+
 @end

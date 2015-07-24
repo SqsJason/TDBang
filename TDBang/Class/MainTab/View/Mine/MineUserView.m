@@ -27,6 +27,8 @@ const static float userHeadPadding_Right    = 30.0;
     self = [super initWithFrame:frame];
     if (self)
     {
+        self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"mine_headview_bg"]];
+        
         UIImageView *imvHead = [[UIImageView alloc] init];
         imvHead.layer.cornerRadius = userHead_Size/2;
         imvHead.layer.masksToBounds = YES;

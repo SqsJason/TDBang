@@ -9,6 +9,7 @@
 #import "AllProView.h"
 #import "AllProModel.h"
 #import "AllProItemCell.h"
+#import "HomeAdviceCell.h"
 
 #define pageSize    10
 
@@ -19,9 +20,10 @@
     __block UITableView     *tbView;
     __block NSMutableArray  *arrPros;
     
-    __block int       curPage;
-    __block int       proType;
-    __block int       proSort;
+    __block int             curPage;
+    __block int             proType;
+    __block int             proSort;
+    NSMutableArray          *arrAdvices;
 }
 
 @end
@@ -52,11 +54,23 @@
         tbView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, mainWidth, frame.size.height) style:UITableViewStyleGrouped];
         tbView.delegate = self;
         tbView.dataSource = self;
-        tbView.backgroundColor = [UIColor whiteColor];
+        tbView.backgroundColor = [UIColor hexFloatColor:@"e6eaea"];
         tbView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
         tbView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         
         [self addSubview:tbView];
+        
+        if (arrAdvices == nil) {
+            arrAdvices = [[NSMutableArray alloc] init];
+        }
+        
+        [arrAdvices addObject:@"Advices1"];
+        [arrAdvices addObject:@"Advices2"];
+        [arrAdvices addObject:@"Advices3"];
+        [arrAdvices addObject:@"Advices4"];
+        [arrAdvices addObject:@"Advices5"];
+        [arrAdvices addObject:@"Advices6"];
+        
         proType = 0;
         [tbView addPullToRefreshWithActionHandler:^{
             __strong typeof (wSelf) sSelf = wSelf;
@@ -116,22 +130,22 @@
 #pragma mark - tableview
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return arrAdvices.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return arrPros.count;
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 120;
+    return 100;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 0.1;
+    return 10;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -141,14 +155,26 @@
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"allProItemCell";
-    AllProItemCell *cell = (AllProItemCell*)[tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"homeAdviceCell";
+    HomeAdviceCell *cell = (HomeAdviceCell*)[tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
     if(cell == nil)
     {
-        cell = [[AllProItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"HomeAdviceCell" owner:self options:nil] lastObject];
     }
-    [cell setProItem:[arrPros objectAtIndex:indexPath.row] type:ProCellType_All];
+    
+    cell.imvAdviceIcon.hidden = YES;
+    cell.constraintsTitlePaddingLeft.constant = -20;
+    
     return cell;
+    
+//    static NSString *CellIdentifier = @"allProItemCell";
+//    AllProItemCell *cell = (AllProItemCell*)[tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
+//    if(cell == nil)
+//    {
+//        cell = [[AllProItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+//    }
+//    [cell setProItem:[arrPros objectAtIndex:indexPath.row] type:ProCellType_All];
+//    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

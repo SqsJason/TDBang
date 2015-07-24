@@ -40,9 +40,10 @@
 
 @interface TabHomeVC ()<UITableViewDataSource,UITableViewDelegate,HomeAdCellDelegate,HomeAdBtnCellDelegate,HomeAdDigitalCellDelegate,HomeHotCellDelegate,HomeNewCellDelegate,HomeOrderShowCellDelegate>
 {
-    NSTimer         *timer;
-    UITableView     *tbView;
+    NSTimer                 *timer;
+    UITableView             *tbView;
     __block HomePageList    *listHomepage;
+    NSMutableArray          *arrAdvices;
 }
 @end
 
@@ -73,6 +74,14 @@
             [wSelf.navigationController pushViewController:vc animated:YES];
         }];
     }
+    
+    if (arrAdvices == nil) {
+        arrAdvices = [[NSMutableArray alloc] init];
+    }
+    
+    [arrAdvices addObject:@"Advices1"];
+    [arrAdvices addObject:@"Advices2"];
+    [arrAdvices addObject:@"Advices3"];
     
     tbView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     tbView.delegate = self;
@@ -168,14 +177,14 @@
 #pragma mark - tableview
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 2 + arrAdvices.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if(section == 1)
-        return 4;
-    return 2;
+    if(section == 0)
+        return 2;
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -186,24 +195,12 @@
     }
     if (indexPath.section == 1 && indexPath.row == 0)
         return 34;
-    if (indexPath.section == 2 && indexPath.row == 1)
-        return 200;
-    if (indexPath.section == 3)
-    {
-        if([OyTool ShardInstance].bIsForReview)
-        {
-            return 44;
-        }
-        return 270;
-    }
-    if (indexPath.section == 4 && indexPath.row == 1)
-        return 250;
     return 100;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section==0)
+    if (section == 0 || section == 2)
         return 0.1;
     return 10;
 }
@@ -245,129 +242,29 @@
     }
     if (section == 1)
     {
-        if(row == 0)
+        static NSString *CellIdentifier = @"homeAdviceCell";
+        HomeAdviceTitleCell *cell = (HomeAdviceTitleCell*)[tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
+        if(cell == nil)
         {
-            static NSString *CellIdentifier = @"homeAdviceCell";
-            HomeAdviceTitleCell *cell = (HomeAdviceTitleCell*)[tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
-            if(cell == nil)
-            {
-                cell = [[[NSBundle mainBundle] loadNibNamed:@"HomeAdviceTitleCell" owner:self options:nil] lastObject];
-                cell.backgroundColor = [UIColor hexFloatColor:@"e6eaea"];
-            }
-            
-            cell.accessoryType = UITableViewCellAccessoryNone;
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
-            return cell;
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"HomeAdviceTitleCell" owner:self options:nil] lastObject];
+            cell.backgroundColor = [UIColor hexFloatColor:@"e6eaea"];
         }
-        else
-        {
-            static NSString *CellIdentifier = @"homeAdviceCell";
-            HomeAdviceCell *cell = (HomeAdviceCell*)[tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
-            if(cell == nil)
-            {
-                cell = [[[NSBundle mainBundle] loadNibNamed:@"HomeAdviceCell" owner:self options:nil] lastObject];
-            }
-//            [cell setDelegate:self];
-//            [cell setNews:[HomeInstance ShardInstnce].listNewing homepage:listHomepage.Rows1];
-            return cell;
-        }
+        
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        return cell;
     }
-    else if (section == 2)
+    else
     {
-        if(row == 0)
+        static NSString *CellIdentifier = @"homeAdviceCell";
+        HomeAdviceCell *cell = (HomeAdviceCell*)[tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
+        if(cell == nil)
         {
-            static NSString *CellIdentifier = @"hotTitleCell";
-            UITableViewCell *cell = (UITableViewCell*)[tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
-            if(cell == nil)
-            {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-            }
-            cell.textLabel.text = @"人气推荐";
-            cell.textLabel.font = TitleFont;
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            return cell;
+            cell = [[[NSBundle mainBundle] loadNibNamed:@"HomeAdviceCell" owner:self options:nil] lastObject];
         }
-        else if (row == 1)
-        {
-            static NSString *CellIdentifier = @"homeHotCell";
-            HomeHotCell *cell = (HomeHotCell*)[tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
-            if(cell == nil)
-            {
-                cell = [[HomeHotCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-            }
-            cell.delegate = self;
-            [cell setHots:listHomepage.Rows2];
-            return cell;
-        }
+        return cell;
     }
-    else if(section == 3)
-    {
-        if (row == 0)
-        {
-            if ([OyTool ShardInstance].bIsForReview)
-            {
-                static NSString *CellIdentifier = @"homeAdDigReviewCell";
-                UITableViewCell *cell = (UITableViewCell*)[tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
-                if(cell == nil)
-                {
-                    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-                }
-                cell.textLabel.text = @"一元云购，云友的查询利器";
-                return cell;
-
-            }
-            else
-            {
-                static NSString *CellIdentifier = @"homeAdDigCell";
-                HomeAdDigitalCell *cell = (HomeAdDigitalCell*)[tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
-                if(cell == nil)
-                {
-                    cell = [[HomeAdDigitalCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-                }
-                [cell setDelegate:self];
-                [cell doLoadAds];
-                return cell;
-            }
-        }
-
-    }
-    else if (section == 4)
-    {
-        if(row == 0)
-        {
-            static NSString *CellIdentifier = @"showTitleCell";
-            UITableViewCell *cell = (UITableViewCell*)[tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
-            if(cell == nil)
-            {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-            }
-            cell.textLabel.text = @"晒单分享";
-            cell.textLabel.font = TitleFont;
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            return cell;
-        }
-        else if(row==1)
-        {
-            static NSString *CellIdentifier = @"homeOrderShowCell";
-            HomeOrderShowCell *cell = (HomeOrderShowCell*)[tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
-            if(cell == nil)
-            {
-                cell = [[HomeOrderShowCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-            }
-            [cell setDelegate:self];
-            [cell setOrderShows];
-            return cell;
-
-        }
-    }
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = (UITableViewCell*)[tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
-    if(cell == nil)
-    {
-        cell = [[UITableViewCell alloc] init];
-    }
-    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

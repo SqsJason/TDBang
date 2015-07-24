@@ -133,13 +133,13 @@
     mineNav.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"我的"
                                                        image:[unselectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]
                                                selectedImage:[selectedImage imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    mineNav.tabBarItem.tag = 4;
+    mineNav.tabBarItem.tag = 3;
     
     
     
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     if(bShowCart)
-        tabBarController.viewControllers = @[homeNav,proNav,newNav,cartNav,mineNav];
+        tabBarController.viewControllers = @[homeNav,proNav,newNav,mineNav];
     else
         tabBarController.viewControllers = @[homeNav,proNav,newNav,mineNav];
     tabBarController.delegate = self;

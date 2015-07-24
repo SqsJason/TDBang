@@ -10,7 +10,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="101"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kefu" translatesAutoresizingMaskIntoConstraints="NO" id="XVw-jG-EEd">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default_image" translatesAutoresizingMaskIntoConstraints="NO" id="XVw-jG-EEd">
                     <rect key="frame" x="10" y="10" width="80" height="80"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="80" id="Em6-MT-gUL"/>
@@ -37,18 +37,18 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10个月前 发布" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBr-hN-czM">
-                    <rect key="frame" x="98" y="68" width="103" height="20"/>
+                    <rect key="frame" x="98" y="68" width="103" height="19.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                     <color key="textColor" red="0.52211881463535348" green="0.52211881463535348" blue="0.52211881463535348" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="招聘30人" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ofo-Im-ZwZ">
-                    <rect key="frame" x="520" y="61" width="70" height="20.5"/>
+                    <rect key="frame" x="520" y="58" width="70" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                    <color key="textColor" red="0.22745099663734436" green="0.68235296010971069" blue="0.15294118225574493" alpha="1" colorSpace="deviceRGB"/>
+                    <color key="textColor" red="0.30738556310691506" green="0.63747376203536987" blue="0.54546627194503527" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ukw-0g-csv">
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ukw-0g-csv">
                     <rect key="frame" x="0.0" y="100" width="600" height="1"/>
                     <color key="backgroundColor" red="0.85392992421818181" green="0.85392992421818181" blue="0.85392992421818181" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -58,12 +58,20 @@
                     <color key="textColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home_advice_enroll" translatesAutoresizingMaskIntoConstraints="NO" id="UFf-Cn-dek">
-                    <rect key="frame" x="514" y="10" width="76" height="50"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_task_status_baoming" translatesAutoresizingMaskIntoConstraints="NO" id="UFf-Cn-dek">
+                    <rect key="frame" x="520" y="10" width="70" height="40"/>
                     <constraints>
+                        <constraint firstAttribute="width" constant="70" id="4FO-fn-n8Q"/>
                         <constraint firstAttribute="height" constant="50" id="W3O-vJ-zJa"/>
                         <constraint firstAttribute="width" constant="76" id="fNs-7M-bDJ"/>
+                        <constraint firstAttribute="height" constant="40" id="ycq-PY-vHe"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="W3O-vJ-zJa"/>
+                            <exclude reference="fNs-7M-bDJ"/>
+                        </mask>
+                    </variation>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -80,20 +88,35 @@
                 <constraint firstItem="XVw-jG-EEd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="cBY-6l-PKg"/>
                 <constraint firstItem="fBr-hN-czM" firstAttribute="top" secondItem="wjc-Gl-FEv" secondAttribute="bottom" constant="10" id="dDh-KL-DHG"/>
                 <constraint firstItem="Xn7-is-EcO" firstAttribute="leading" secondItem="3As-9H-nCJ" secondAttribute="trailing" constant="5" id="dNC-rV-k21"/>
+                <constraint firstAttribute="trailing" secondItem="UFf-Cn-dek" secondAttribute="trailing" constant="10" id="eOr-Fj-t8b"/>
+                <constraint firstItem="UFf-Cn-dek" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="fIL-Re-J4Y"/>
                 <constraint firstAttribute="bottom" secondItem="Ukw-0g-csv" secondAttribute="bottom" id="ge2-yc-Lub"/>
                 <constraint firstItem="Xn7-is-EcO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="igC-2w-6gu"/>
                 <constraint firstItem="wjc-Gl-FEv" firstAttribute="leading" secondItem="XVw-jG-EEd" secondAttribute="trailing" constant="8" id="rJt-QP-lSs"/>
                 <constraint firstItem="fBr-hN-czM" firstAttribute="leading" secondItem="XVw-jG-EEd" secondAttribute="trailing" constant="8" id="u79-sm-SbE"/>
+                <constraint firstItem="Ofo-Im-ZwZ" firstAttribute="top" secondItem="UFf-Cn-dek" secondAttribute="bottom" constant="8" id="vra-22-S7x"/>
                 <constraint firstItem="3As-9H-nCJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="xw8-cY-MFY"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="361" y="283.5"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="M3O-9c-L7t"/>
+                    <exclude reference="a1Z-yK-QPW"/>
+                    <exclude reference="WIb-Cw-DoM"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="constraintsTitlePaddingLeft" destination="dNC-rV-k21" id="SWO-JJ-Hko"/>
+                <outlet property="imvAdviceIcon" destination="3As-9H-nCJ" id="vaJ-rJ-fMj"/>
+                <outlet property="lblTitle" destination="Xn7-is-EcO" id="0kL-vf-MDs"/>
+            </connections>
+            <point key="canvasLocation" x="154" y="278.5"/>
         </view>
     </objects>
     <resources>
-        <image name="home_advice_enroll" width="150" height="110"/>
-        <image name="home_advice_icon" width="98" height="98"/>
-        <image name="kefu" width="180" height="180"/>
+        <image name="default_image" width="199" height="199"/>
+        <image name="home_advice_icon" width="28" height="28"/>
+        <image name="icon_task_status_baoming" width="117" height="70"/>
     </resources>
 </document>

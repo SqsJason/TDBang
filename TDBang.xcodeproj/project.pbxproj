@@ -163,6 +163,12 @@
 		EF9A05641B5FE9E9009428AA /* HomeAdviceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF9A05631B5FE9E9009428AA /* HomeAdviceCell.xib */; };
 		EF9A056D1B5FF798009428AA /* HomeAdviceTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9A056B1B5FF798009428AA /* HomeAdviceTitleCell.m */; };
 		EF9A056E1B5FF798009428AA /* HomeAdviceTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF9A056C1B5FF798009428AA /* HomeAdviceTitleCell.xib */; };
+		EFE74DB01B62953600DB11BB /* TaskDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE74DAE1B62953600DB11BB /* TaskDetailVC.m */; };
+		EFE74DB11B62953600DB11BB /* TaskDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFE74DAF1B62953600DB11BB /* TaskDetailVC.xib */; };
+		EFE74DBA1B6296D200DB11BB /* TaskDetailTitleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE74DB81B6296D200DB11BB /* TaskDetailTitleCell.m */; };
+		EFE74DBB1B6296D200DB11BB /* TaskDetailTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFE74DB91B6296D200DB11BB /* TaskDetailTitleCell.xib */; };
+		EFE74DBF1B62A48C00DB11BB /* TaskDetailJobCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE74DBD1B62A48C00DB11BB /* TaskDetailJobCell.m */; };
+		EFE74DC01B62A48C00DB11BB /* TaskDetailJobCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFE74DBE1B62A48C00DB11BB /* TaskDetailJobCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -487,6 +493,15 @@
 		EF9A056A1B5FF798009428AA /* HomeAdviceTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeAdviceTitleCell.h; sourceTree = "<group>"; };
 		EF9A056B1B5FF798009428AA /* HomeAdviceTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeAdviceTitleCell.m; sourceTree = "<group>"; };
 		EF9A056C1B5FF798009428AA /* HomeAdviceTitleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeAdviceTitleCell.xib; sourceTree = "<group>"; };
+		EFE74DAD1B62953600DB11BB /* TaskDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskDetailVC.h; sourceTree = "<group>"; };
+		EFE74DAE1B62953600DB11BB /* TaskDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskDetailVC.m; sourceTree = "<group>"; };
+		EFE74DAF1B62953600DB11BB /* TaskDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskDetailVC.xib; sourceTree = "<group>"; };
+		EFE74DB71B6296D200DB11BB /* TaskDetailTitleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskDetailTitleCell.h; sourceTree = "<group>"; };
+		EFE74DB81B6296D200DB11BB /* TaskDetailTitleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskDetailTitleCell.m; sourceTree = "<group>"; };
+		EFE74DB91B6296D200DB11BB /* TaskDetailTitleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskDetailTitleCell.xib; sourceTree = "<group>"; };
+		EFE74DBC1B62A48C00DB11BB /* TaskDetailJobCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskDetailJobCell.h; sourceTree = "<group>"; };
+		EFE74DBD1B62A48C00DB11BB /* TaskDetailJobCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskDetailJobCell.m; sourceTree = "<group>"; };
+		EFE74DBE1B62A48C00DB11BB /* TaskDetailJobCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskDetailJobCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -599,6 +614,7 @@
 		EF9A036A1B5E9AAF009428AA /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				EFE74DAC1B62950800DB11BB /* Task */,
 				EF9A036B1B5E9AAF009428AA /* Base */,
 				EF9A03791B5E9AAF009428AA /* Cart */,
 				EF9A037F1B5E9AAF009428AA /* Common */,
@@ -1413,6 +1429,46 @@
 			path = XBBaseVC;
 			sourceTree = "<group>";
 		};
+		EFE74DAC1B62950800DB11BB /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				EFE74DB21B62964000DB11BB /* Controller */,
+				EFE74DB51B62968000DB11BB /* Model */,
+				EFE74DB61B62968000DB11BB /* View */,
+			);
+			path = Task;
+			sourceTree = "<group>";
+		};
+		EFE74DB21B62964000DB11BB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				EFE74DAD1B62953600DB11BB /* TaskDetailVC.h */,
+				EFE74DAE1B62953600DB11BB /* TaskDetailVC.m */,
+				EFE74DAF1B62953600DB11BB /* TaskDetailVC.xib */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		EFE74DB51B62968000DB11BB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		EFE74DB61B62968000DB11BB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				EFE74DB71B6296D200DB11BB /* TaskDetailTitleCell.h */,
+				EFE74DB81B6296D200DB11BB /* TaskDetailTitleCell.m */,
+				EFE74DB91B6296D200DB11BB /* TaskDetailTitleCell.xib */,
+				EFE74DBC1B62A48C00DB11BB /* TaskDetailJobCell.h */,
+				EFE74DBD1B62A48C00DB11BB /* TaskDetailJobCell.m */,
+				EFE74DBE1B62A48C00DB11BB /* TaskDetailJobCell.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1498,12 +1554,15 @@
 				EF9A05641B5FE9E9009428AA /* HomeAdviceCell.xib in Resources */,
 				EF9A05001B5E9AAF009428AA /* cyjx.ttf in Resources */,
 				EF9A034E1B5E99EE009428AA /* Main.storyboard in Resources */,
+				EFE74DC01B62A48C00DB11BB /* TaskDetailJobCell.xib in Resources */,
 				EF9A056E1B5FF798009428AA /* HomeAdviceTitleCell.xib in Resources */,
+				EFE74DB11B62953600DB11BB /* TaskDetailVC.xib in Resources */,
 				EF9A05141B5E9AC8009428AA /* PushConfig.plist in Resources */,
 				EF9A04FF1B5E9AAF009428AA /* Localizable.strings in Resources */,
 				EF9A03531B5E99EE009428AA /* LaunchScreen.xib in Resources */,
 				EF9A03501B5E99EE009428AA /* Images.xcassets in Resources */,
 				EF9A05011B5E9AAF009428AA /* msyh.ttf in Resources */,
+				EFE74DBB1B6296D200DB11BB /* TaskDetailTitleCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1598,6 +1657,7 @@
 				EF9A049A1B5E9AAF009428AA /* OneBaseNavVC.m in Sources */,
 				EF9A04C41B5E9AAF009428AA /* AllProItemCell.m in Sources */,
 				EF9A050A1B5E9AAF009428AA /* Jxb_Common_Common.m in Sources */,
+				EFE74DB01B62953600DB11BB /* TaskDetailVC.m in Sources */,
 				EF9A04F11B5E9AAF009428AA /* SearchCartView.m in Sources */,
 				EF9A05061B5E9AAF009428AA /* UIImageView+NoMapMode.m in Sources */,
 				EF9A04EC1B5E9AAF009428AA /* RegUserNextVC.m in Sources */,
@@ -1622,6 +1682,7 @@
 				EF9A04B91B5E9AAF009428AA /* HomeNewCell.m in Sources */,
 				EF9A04DF1B5E9AAF009428AA /* ProductBuyListVC.m in Sources */,
 				EF9A04C71B5E9AAF009428AA /* MineBuylistVC.m in Sources */,
+				EFE74DBA1B6296D200DB11BB /* TaskDetailTitleCell.m in Sources */,
 				EF9A04C31B5E9AAF009428AA /* NewestingCell.m in Sources */,
 				EF9A04D71B5E9AAF009428AA /* MineBuyingCell.m in Sources */,
 				EF9A04A01B5E9AAF009428AA /* CartModel.m in Sources */,
@@ -1639,6 +1700,7 @@
 				EF9A04DB1B5E9AAF009428AA /* MineOrderHeadView.m in Sources */,
 				EF9A056D1B5FF798009428AA /* HomeAdviceTitleCell.m in Sources */,
 				EF9A04F01B5E9AAF009428AA /* SearchModel.m in Sources */,
+				EFE74DBF1B62A48C00DB11BB /* TaskDetailJobCell.m in Sources */,
 				EF9A04B81B5E9AAF009428AA /* HomeHotView.m in Sources */,
 				EF9A05051B5E9AAF009428AA /* SVPullToRefreshView+OY_PullRefreshView.m in Sources */,
 				EF9A05081B5E9AAF009428AA /* XBDbVersionTable.m in Sources */,
