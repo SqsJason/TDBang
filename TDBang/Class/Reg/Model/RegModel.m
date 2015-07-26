@@ -10,6 +10,7 @@
 
 @implementation RegSms
 @synthesize state;
+@synthesize str;
 @end
 
 @implementation RegResut
@@ -27,12 +28,12 @@
  */
 + (void)regPhoneSms:(NSString*)phone success:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure
 {
-    NSString* url = API_URL(aGetCode);
+    NSString* url = [NSString stringWithFormat:@"%@&SessionID=%@&phone=%@",API_URL(aGetCode),[Sessions sharedInstance].accessToken,phone];
     NSDictionary *parasDic;
     if (![Jxb_Common_Common isNullOrNilObject:phone] && ![Jxb_Common_Common isNullOrNilObject:[Sessions sharedInstance].accessToken]) {
         parasDic = @{@"SessionID" : [Sessions sharedInstance].accessToken, @"phone" : phone};
     }
-    [[XBApi SharedXBApi] requestWithURL:url paras:parasDic type:XBHttpResponseType_Json success:success failure:failure];
+    [[XBApi SharedXBApi] requestWithURL:url paras:nil type:XBHttpResponseType_Json success:success failure:failure];
 }
 
 
@@ -42,6 +43,13 @@
 	参数：SessionID=0000001&phone=1370000000&code=1111&pwd=123123&nickName=用户昵称
 	返回值：{"success","true", "result":"注册成功"}
  */
++ (void)regPhoneCode:(NSString*)phone code:(NSString*)code pwd:(NSString *)pwd nickName:(NSString *)nickN success:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure
+{
+    NSString* url = [NSString stringWithFormat:@"%@&SessionID=%@&phone=%@&code=%@&pwd=%@&nickName=%@",API_URL(aRegister),[Sessions sharedInstance].accessToken,phone,code,pwd,nickN];
+    [[XBApi SharedXBApi] requestWithURL:url paras:nil type:XBHttpResponseType_Json success:success failure:failure];
+}
+
+
 + (void)regPhoneCode:(NSString*)phone code:(NSString*)code success:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure
 {
     NSString* url = [NSString stringWithFormat:oyRegPhoneCode,phone,code];

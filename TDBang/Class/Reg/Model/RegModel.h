@@ -10,6 +10,7 @@
 
 @interface RegSms : OneBaseParser
 @property(nonatomic,copy)NSNumber* state;
+@property(nonatomic,copy)NSString* str;
 @end
 
 @interface RegResut : OneBaseParser
@@ -20,6 +21,8 @@
 @interface RegModel : NSObject
 + (void)regPhoneSms:(NSString*)phone success:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure;
 + (void)regPhoneCode:(NSString*)phone code:(NSString*)code success:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure;
+
++ (void)regPhoneCode:(NSString*)phone code:(NSString*)code pwd:(NSString *)pwd nickName:(NSString *)nickN success:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure;
 
 + (void)regPhoneSetPwd:(NSString*)str pwd:(NSString*)pwd success:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure;
 + (void)regPhoneOK:(NSString*)str success:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure;

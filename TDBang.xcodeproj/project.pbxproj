@@ -173,6 +173,8 @@
 		EFE74DC51B63EC8400DB11BB /* TaskDetailContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFE74DC31B63EC8400DB11BB /* TaskDetailContentCell.xib */; };
 		EFE74DC91B63F50700DB11BB /* oneConmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE74DC71B63F50700DB11BB /* oneConmentCell.m */; };
 		EFE74DCA1B63F50700DB11BB /* oneConmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFE74DC81B63F50700DB11BB /* oneConmentCell.xib */; };
+		EFE74DCE1B65388A00DB11BB /* RegUserNewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE74DCC1B65388A00DB11BB /* RegUserNewVC.m */; };
+		EFE74DCF1B65388A00DB11BB /* RegUserNewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFE74DCD1B65388A00DB11BB /* RegUserNewVC.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -512,6 +514,9 @@
 		EFE74DC61B63F50700DB11BB /* oneConmentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oneConmentCell.h; sourceTree = "<group>"; };
 		EFE74DC71B63F50700DB11BB /* oneConmentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = oneConmentCell.m; sourceTree = "<group>"; };
 		EFE74DC81B63F50700DB11BB /* oneConmentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = oneConmentCell.xib; sourceTree = "<group>"; };
+		EFE74DCB1B65388A00DB11BB /* RegUserNewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegUserNewVC.h; sourceTree = "<group>"; };
+		EFE74DCC1B65388A00DB11BB /* RegUserNewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegUserNewVC.m; sourceTree = "<group>"; };
+		EFE74DCD1B65388A00DB11BB /* RegUserNewVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegUserNewVC.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1067,6 +1072,9 @@
 				EF9A04311B5E9AAF009428AA /* RegUserNextVC.m */,
 				EF9A04321B5E9AAF009428AA /* RegUserVC.h */,
 				EF9A04331B5E9AAF009428AA /* RegUserVC.m */,
+				EFE74DCB1B65388A00DB11BB /* RegUserNewVC.h */,
+				EFE74DCC1B65388A00DB11BB /* RegUserNewVC.m */,
+				EFE74DCD1B65388A00DB11BB /* RegUserNewVC.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1571,6 +1579,7 @@
 				EFE74DCA1B63F50700DB11BB /* oneConmentCell.xib in Resources */,
 				EF9A05001B5E9AAF009428AA /* cyjx.ttf in Resources */,
 				EF9A034E1B5E99EE009428AA /* Main.storyboard in Resources */,
+				EFE74DCF1B65388A00DB11BB /* RegUserNewVC.xib in Resources */,
 				EFE74DC01B62A48C00DB11BB /* TaskDetailJobCell.xib in Resources */,
 				EF9A056E1B5FF798009428AA /* HomeAdviceTitleCell.xib in Resources */,
 				EFE74DB11B62953600DB11BB /* TaskDetailVC.xib in Resources */,
@@ -1693,6 +1702,7 @@
 				EF9A049C1B5E9AAF009428AA /* OneBaseParser.m in Sources */,
 				EF9A04C81B5E9AAF009428AA /* MineMoneyDetailVC.m in Sources */,
 				EF9A04C21B5E9AAF009428AA /* NewestedCell.m in Sources */,
+				EFE74DCE1B65388A00DB11BB /* RegUserNewVC.m in Sources */,
 				EF9A04F21B5E9AAF009428AA /* SettingFeedbackVC.m in Sources */,
 				EF9A055B1B5EA5F1009428AA /* UIView+StringTag.m in Sources */,
 				EF9A04E41B5E9AAF009428AA /* ProductBuyCell.m in Sources */,

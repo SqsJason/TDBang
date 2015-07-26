@@ -10,6 +10,7 @@
 #import "RegModel.h"
 #import "RegUserNextVC.h"
 #import "RegSetPwdVC.h"
+#import "CJSONDeserializer.h"
 
 @interface RegUserVC ()<UITextFieldDelegate>
 {
@@ -84,10 +85,13 @@
     [[XBToastManager ShardInstance] showprogress];
     [RegModel regPhoneSms:txtPhone.text success:^(AFHTTPRequestOperation* operation, NSObject* result){
         [[XBToastManager ShardInstance] hideprogress];
+        NSDictionary *dic = (NSDictionary *)result;
+        NSLog(@"%@",result);
+
         RegSms* sms = [[RegSms alloc] initWithDictionary:(NSDictionary*)result];
-        if([sms.state intValue] == 3)
+        if(![sms.state boolValue])
         {
-            [[XBToastManager ShardInstance] showtoast:@"该手机号已经注册"];
+            [[XBToastManager ShardInstance] showtoast:[dic objectForKey:@"result"]];
             return ;
         }
         RegUserNextVC* vc = [[RegUserNextVC alloc] initWithPhone:txtPhone.text];

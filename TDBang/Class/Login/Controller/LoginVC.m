@@ -10,6 +10,7 @@
 #import "LoginModel.h"
 #import "UserInstance.h"
 #import "RegUserVC.h"
+#import "RegUserNewVC.h"
 
 @interface LoginVC ()
 {
@@ -112,7 +113,11 @@
 #pragma mark - action
 - (void)btnRegAction
 {
-    RegUserVC* vc  = [[RegUserVC alloc] init];
+//    RegUserVC* vc  = [[RegUserVC alloc] init];
+//    vc.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:vc animated:YES];
+    
+    RegUserNewVC* vc  = [[RegUserNewVC alloc] initWithNibName:@"RegUserNewVC" bundle:nil];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
