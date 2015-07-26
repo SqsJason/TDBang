@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="KGk-i7-Jjw" customClass="oneConmentCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaulthead" translatesAutoresizingMaskIntoConstraints="NO" id="VY7-dU-IiS">
+                        <rect key="frame" x="15" y="10" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="CWK-BH-omD"/>
+                            <constraint firstAttribute="height" constant="40" id="twO-DQ-bo1"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="如何在UITableViewCell中使用Autolayout来实现Cell的内容和子视图自动计算行高，并且能够保持平滑滚动的？" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a13-7F-Avt">
+                        <rect key="frame" x="68" y="5" width="237" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="237" id="g3Q-Uj-tR4"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" red="0.6870462437" green="0.6870462437" blue="0.6870462437" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="a13-7F-Avt" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-3" id="DzL-pg-l8N"/>
+                    <constraint firstItem="VY7-dU-IiS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="FVG-hM-jmE"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="a13-7F-Avt" secondAttribute="bottom" constant="-3.5" id="HUU-4n-4hG"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="a13-7F-Avt" secondAttribute="trailing" constant="7" id="ULJ-TU-1Jg"/>
+                    <constraint firstItem="VY7-dU-IiS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="X4X-IY-vsy"/>
+                    <constraint firstItem="a13-7F-Avt" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="60" id="cWL-bs-yLK"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="imvHeadImage" destination="VY7-dU-IiS" id="C0S-jf-VRI"/>
+                <outlet property="lblConment" destination="a13-7F-Avt" id="pFd-yD-n6n"/>
+            </connections>
+            <point key="canvasLocation" x="234" y="249"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="defaulthead" width="200" height="200"/>
+    </resources>
+</document>

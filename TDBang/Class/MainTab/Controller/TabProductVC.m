@@ -10,6 +10,7 @@
 #import "AllProView.h"
 #import "SearchVC.h"
 #import "ProductDetailVC.h"
+#import "TaskDetailVC.h"
 
 typedef enum
 {
@@ -157,9 +158,13 @@ typedef enum
 
 - (void)doClickProduct:(int)goodsId
 {
-    ProductDetailVC* vc = [[ProductDetailVC alloc] initWithGoodsId:goodsId codeId:0];
+    TaskDetailVC *vc = [[TaskDetailVC alloc] initWithNibName:@"TaskDetailVC" bundle:nil];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
+    
+//    ProductDetailVC* vc = [[ProductDetailVC alloc] initWithGoodsId:goodsId codeId:0];
+//    vc.hidesBottomBarWhenPushed = YES;
+//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
@@ -334,33 +339,36 @@ typedef enum
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    switch (tbType) {
-        case 0:
-        {
-            indexType = indexPath.row;
-            [btnType setTitle:[arrOfType objectAtIndex:indexPath.row] forState:UIControlStateNormal];
-        }
-            break;
-        case 1:
-        {
-            indexOrder = indexPath.row;
-            [btnOrder setTitle:[arrOfOrder objectAtIndex:indexPath.row] forState:UIControlStateNormal];
-        }
-            break;
-        case 2:
-        {
-            indexSmart = indexPath.row;
-            [btnSmart setTitle:[arrOfSmart objectAtIndex:indexPath.row] forState:UIControlStateNormal];
-        }
-            break;
-            
-        default:
-            break;
-    }
-
-    [tbViewType reloadData];
-    [dropdownView hide];
+    TaskDetailVC *vc = [[TaskDetailVC alloc] initWithNibName:@"TaskDetailVC" bundle:nil];
+    [self.navigationController pushViewController:vc animated:YES];
     
-    [allProView setTypeAndOrder:[[[arrOfTypeImage objectAtIndex:indexType] stringByReplacingOccurrencesOfString:@"sort" withString:@""] intValue] sort:[[arrOfOrderFlag objectAtIndex:indexOrder] intValue]];
+//    switch (tbType) {
+//        case 0:
+//        {
+//            indexType = indexPath.row;
+//            [btnType setTitle:[arrOfType objectAtIndex:indexPath.row] forState:UIControlStateNormal];
+//        }
+//            break;
+//        case 1:
+//        {
+//            indexOrder = indexPath.row;
+//            [btnOrder setTitle:[arrOfOrder objectAtIndex:indexPath.row] forState:UIControlStateNormal];
+//        }
+//            break;
+//        case 2:
+//        {
+//            indexSmart = indexPath.row;
+//            [btnSmart setTitle:[arrOfSmart objectAtIndex:indexPath.row] forState:UIControlStateNormal];
+//        }
+//            break;
+//            
+//        default:
+//            break;
+//    }
+//
+//    [tbViewType reloadData];
+//    [dropdownView hide];
+//    
+//    [allProView setTypeAndOrder:[[[arrOfTypeImage objectAtIndex:indexType] stringByReplacingOccurrencesOfString:@"sort" withString:@""] intValue] sort:[[arrOfOrderFlag objectAtIndex:indexOrder] intValue]];
 }
 @end

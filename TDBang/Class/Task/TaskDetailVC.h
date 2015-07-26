@@ -8,9 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TaskDetailVC : UIViewController
-
+@interface TaskDetailVC : OneBaseVC
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
+@property (strong, nonatomic) IBOutlet UITableViewCell *conmentCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *moreConmentCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *noticeCell;
+@property (weak, nonatomic) IBOutlet UIButton *btnWantEnroll;
+- (IBAction)wantEnrollAction:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *btnWantComplaint;
+- (IBAction)wantComplaintAction:(id)sender;
+
 
 @end

@@ -16,6 +16,7 @@
 #import "ProductDetailVC.h"
 #import "MineLoginView.h"
 #import "HomeNewCell.h"
+#import "TaskDetailVC.h"
 
 @interface TabNewestVC () <UITableViewDataSource,UITableViewDelegate,AllProTypeViewDelegate,HomeNewCellDelegate>
 {
@@ -270,6 +271,9 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+//    TaskDetailVC *vc = [[TaskDetailVC alloc] initWithNibName:@"TaskDetailVC" bundle:nil];
+//    [self.navigationController pushViewController:vc animated:YES];
+    
     if(indexPath.row < [[[[HomeInstance ShardInstnce] listNewing] listItems] count])
     {
         HomeNewing* item = [[[[HomeInstance ShardInstnce] listNewing] listItems] objectAtIndex:indexPath.row];
@@ -304,6 +308,11 @@
         __strong typeof (wSelf) sSelf = wSelf;
         sSelf->listNew = nil;
     }];
+}
+
+-(void)doClickGoods:(int)goodsId codeId:(int)codeId
+{
+    
 }
 
 @end

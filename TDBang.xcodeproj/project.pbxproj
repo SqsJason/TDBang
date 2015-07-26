@@ -169,6 +169,10 @@
 		EFE74DBB1B6296D200DB11BB /* TaskDetailTitleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFE74DB91B6296D200DB11BB /* TaskDetailTitleCell.xib */; };
 		EFE74DBF1B62A48C00DB11BB /* TaskDetailJobCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE74DBD1B62A48C00DB11BB /* TaskDetailJobCell.m */; };
 		EFE74DC01B62A48C00DB11BB /* TaskDetailJobCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFE74DBE1B62A48C00DB11BB /* TaskDetailJobCell.xib */; };
+		EFE74DC41B63EC8400DB11BB /* TaskDetailContentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE74DC21B63EC8400DB11BB /* TaskDetailContentCell.m */; };
+		EFE74DC51B63EC8400DB11BB /* TaskDetailContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFE74DC31B63EC8400DB11BB /* TaskDetailContentCell.xib */; };
+		EFE74DC91B63F50700DB11BB /* oneConmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFE74DC71B63F50700DB11BB /* oneConmentCell.m */; };
+		EFE74DCA1B63F50700DB11BB /* oneConmentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EFE74DC81B63F50700DB11BB /* oneConmentCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -502,6 +506,12 @@
 		EFE74DBC1B62A48C00DB11BB /* TaskDetailJobCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskDetailJobCell.h; sourceTree = "<group>"; };
 		EFE74DBD1B62A48C00DB11BB /* TaskDetailJobCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskDetailJobCell.m; sourceTree = "<group>"; };
 		EFE74DBE1B62A48C00DB11BB /* TaskDetailJobCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskDetailJobCell.xib; sourceTree = "<group>"; };
+		EFE74DC11B63EC8400DB11BB /* TaskDetailContentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskDetailContentCell.h; sourceTree = "<group>"; };
+		EFE74DC21B63EC8400DB11BB /* TaskDetailContentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskDetailContentCell.m; sourceTree = "<group>"; };
+		EFE74DC31B63EC8400DB11BB /* TaskDetailContentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskDetailContentCell.xib; sourceTree = "<group>"; };
+		EFE74DC61B63F50700DB11BB /* oneConmentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = oneConmentCell.h; sourceTree = "<group>"; };
+		EFE74DC71B63F50700DB11BB /* oneConmentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = oneConmentCell.m; sourceTree = "<group>"; };
+		EFE74DC81B63F50700DB11BB /* oneConmentCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = oneConmentCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1465,6 +1475,12 @@
 				EFE74DBC1B62A48C00DB11BB /* TaskDetailJobCell.h */,
 				EFE74DBD1B62A48C00DB11BB /* TaskDetailJobCell.m */,
 				EFE74DBE1B62A48C00DB11BB /* TaskDetailJobCell.xib */,
+				EFE74DC11B63EC8400DB11BB /* TaskDetailContentCell.h */,
+				EFE74DC21B63EC8400DB11BB /* TaskDetailContentCell.m */,
+				EFE74DC31B63EC8400DB11BB /* TaskDetailContentCell.xib */,
+				EFE74DC61B63F50700DB11BB /* oneConmentCell.h */,
+				EFE74DC71B63F50700DB11BB /* oneConmentCell.m */,
+				EFE74DC81B63F50700DB11BB /* oneConmentCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1552,6 +1568,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF9A05641B5FE9E9009428AA /* HomeAdviceCell.xib in Resources */,
+				EFE74DCA1B63F50700DB11BB /* oneConmentCell.xib in Resources */,
 				EF9A05001B5E9AAF009428AA /* cyjx.ttf in Resources */,
 				EF9A034E1B5E99EE009428AA /* Main.storyboard in Resources */,
 				EFE74DC01B62A48C00DB11BB /* TaskDetailJobCell.xib in Resources */,
@@ -1563,6 +1580,7 @@
 				EF9A03501B5E99EE009428AA /* Images.xcassets in Resources */,
 				EF9A05011B5E9AAF009428AA /* msyh.ttf in Resources */,
 				EFE74DBB1B6296D200DB11BB /* TaskDetailTitleCell.xib in Resources */,
+				EFE74DC51B63EC8400DB11BB /* TaskDetailContentCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1644,6 +1662,7 @@
 				EF9A04EF1B5E9AAF009428AA /* SearchVC.m in Sources */,
 				EF9A049F1B5E9AAF009428AA /* CartInstance.m in Sources */,
 				EF9A04A11B5E9AAF009428AA /* OyTool.m in Sources */,
+				EFE74DC41B63EC8400DB11BB /* TaskDetailContentCell.m in Sources */,
 				EF9A049B1B5E9AAF009428AA /* OneBaseVC.m in Sources */,
 				EF9A05581B5EA5F1009428AA /* UIImage+RenderedImage.m in Sources */,
 				EF9A04B41B5E9AAF009428AA /* HomeAdBtnCell.m in Sources */,
@@ -1697,6 +1716,7 @@
 				EF9A04AE1B5E9AAF009428AA /* NewestModel.m in Sources */,
 				EF9A04C01B5E9AAF009428AA /* MineLoginView.m in Sources */,
 				EF9A04BE1B5E9AAF009428AA /* HomeOrderShowCell.m in Sources */,
+				EFE74DC91B63F50700DB11BB /* oneConmentCell.m in Sources */,
 				EF9A04DB1B5E9AAF009428AA /* MineOrderHeadView.m in Sources */,
 				EF9A056D1B5FF798009428AA /* HomeAdviceTitleCell.m in Sources */,
 				EF9A04F01B5E9AAF009428AA /* SearchModel.m in Sources */,
