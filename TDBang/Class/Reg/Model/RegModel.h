@@ -18,6 +18,11 @@
 @property(nonatomic,copy)NSString* str;
 @end
 
+@interface RegGetCode : OneBaseParser
+@property(nonatomic,copy)NSNumber* success;
+@property(nonatomic,copy)NSString* result;
+@end
+
 @interface RegModel : NSObject
 + (void)regPhoneSms:(NSString*)phone success:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure;
 + (void)regPhoneCode:(NSString*)phone code:(NSString*)code success:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure;

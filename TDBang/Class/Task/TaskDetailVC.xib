@@ -59,28 +59,36 @@
                         <constraint firstAttribute="trailing" secondItem="dlS-Uw-5lR" secondAttribute="trailing" id="orT-z7-i9X"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="商户推荐" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJd-uX-lkS">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="商户推荐" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJd-uX-lkS">
                     <rect key="frame" x="0.0" y="560" width="600" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="jUu-vt-QSC"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.31060606060000001" green="0.31060606060000001" blue="0.31060606060000001" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b27-eW-dmf">
-                    <rect key="frame" x="572" y="563" width="13" height="32.5"/>
-                    <inset key="contentEdgeInsets" minX="0.0" minY="7" maxX="0.0" maxY="7"/>
-                    <state key="normal" image="icon_arrow_right">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="2xl-mH-8og">
+                    <rect key="frame" x="560" y="570" width="14" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="iWZ-fj-bj4"/>
+                        <constraint firstAttribute="width" constant="14" id="m6A-Qa-J68"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="gJd-uX-lkS" secondAttribute="bottom" id="1Yb-FP-ljz"/>
                 <constraint firstAttribute="bottom" secondItem="4v7-3Y-NZA" secondAttribute="bottom" constant="40" id="2gg-qV-uVL"/>
                 <constraint firstItem="WUN-Bx-0HL" firstAttribute="trailing" secondItem="4v7-3Y-NZA" secondAttribute="trailing" id="4Pa-YP-uC9"/>
+                <constraint firstItem="gJd-uX-lkS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="7WS-ly-DRZ"/>
                 <constraint firstItem="WUN-Bx-0HL" firstAttribute="leading" secondItem="4v7-3Y-NZA" secondAttribute="leading" id="81d-iq-wGq"/>
+                <constraint firstAttribute="trailing" secondItem="gJd-uX-lkS" secondAttribute="trailing" id="82p-wG-8w3"/>
+                <constraint firstAttribute="bottom" secondItem="2xl-mH-8og" secondAttribute="bottom" constant="10" id="GZk-Yk-iaS"/>
                 <constraint firstItem="4v7-3Y-NZA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="GeY-tk-2Yx"/>
                 <constraint firstItem="4v7-3Y-NZA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="HHY-PE-ajz"/>
                 <constraint firstItem="WUN-Bx-0HL" firstAttribute="bottom" secondItem="4v7-3Y-NZA" secondAttribute="bottom" id="mEd-6g-Yf7"/>
+                <constraint firstAttribute="trailing" secondItem="2xl-mH-8og" secondAttribute="trailing" constant="26" id="nBw-hW-0Zf"/>
                 <constraint firstAttribute="trailing" secondItem="4v7-3Y-NZA" secondAttribute="trailing" id="p9l-JD-Yrc"/>
                 <constraint firstItem="WUN-Bx-0HL" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="560" id="qkd-U1-H6g"/>
             </constraints>

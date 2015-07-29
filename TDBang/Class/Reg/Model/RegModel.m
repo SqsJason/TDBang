@@ -17,6 +17,11 @@
 @synthesize state,str;
 @end
 
+@implementation RegGetCode
+@synthesize result,success;
+@end
+
+
 @implementation RegModel
 
 

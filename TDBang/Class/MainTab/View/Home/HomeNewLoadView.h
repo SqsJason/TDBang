@@ -10,4 +10,8 @@
 
 @interface HomeNewLoadView : UIView
 
+@property (nonatomic, strong) NSString *strImage;
+@property (nonatomic, strong) NSString *strName;
+- (id)initWithFrame:(CGRect)frame image:(NSString *)imgName title:(NSString *)title;
+
 @end

@@ -53,17 +53,17 @@
     
     __weak typeof (self) wSelf = self;
     
-    btnRigth = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btnRigth addTarget:self action:@selector(btnRightAction) forControlEvents:UIControlEventTouchUpInside];
-    if(![OyTool ShardInstance].bIsForReview)
-    {
-        [self actionCustomNavBtn:btnRigth nrlImage:@"" htlImage:@"" title:@"全部分类▽"];
-    }
-    else
-    {
-        [self actionCustomNavBtn:btnRigth nrlImage:@"" htlImage:@"" title:[dicTypeName.allValues objectAtIndex:0]];
-    }
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btnRigth];
+//    btnRigth = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [btnRigth addTarget:self action:@selector(btnRightAction) forControlEvents:UIControlEventTouchUpInside];
+//    if(![OyTool ShardInstance].bIsForReview)
+//    {
+//        [self actionCustomNavBtn:btnRigth nrlImage:@"" htlImage:@"" title:@"全部分类▽"];
+//    }
+//    else
+//    {
+//        [self actionCustomNavBtn:btnRigth nrlImage:@"" htlImage:@"" title:[dicTypeName.allValues objectAtIndex:0]];
+//    }
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btnRigth];
     
     tbView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     tbView.delegate = self;
@@ -270,9 +270,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-//    TaskDetailVC *vc = [[TaskDetailVC alloc] initWithNibName:@"TaskDetailVC" bundle:nil];
-//    [self.navigationController pushViewController:vc animated:YES];
     
     if(indexPath.row < [[[[HomeInstance ShardInstnce] listNewing] listItems] count])
     {

@@ -11,6 +11,7 @@
 #import "TaskDetailJobCell.h"
 #import "TaskDetailContentCell.h"
 #import "oneConmentCell.h"
+#import "UserInfoVC.h"
 
 @interface TaskDetailVC ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -188,6 +189,10 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
+    if(indexPath.section == 0){
+        UserInfoVC *userInfo = [[UserInfoVC alloc] initWithNibName:@"UserInfoVC" bundle:nil];
+        [self.navigationController pushViewController:userInfo animated:YES];
+    }
 }
 
 

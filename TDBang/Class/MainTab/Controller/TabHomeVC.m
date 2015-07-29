@@ -26,6 +26,7 @@
 #import "ShowOrderDetailVC.h"
 #import "HomeAdviceCell.h"
 #import "HomeAdviceTitleCell.h"
+#import "TaskDetailVC.h"
 
 /*
  tFont: AppleSDGothicNeo-Bold
@@ -272,16 +273,11 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if(indexPath.section == 1 && indexPath.row == 0)
     {
-//        self.tabBarController.selectedIndex = 2;
+        
     }
-    else if(indexPath.section == 2 && indexPath.row == 0)
+    else
     {
-        [[NSNotificationCenter defaultCenter] postNotificationName:kDidShowNewPro object:[NSNumber numberWithInt:1]];
-        self.tabBarController.selectedIndex = 1;
-    }
-    else if(indexPath.section == 4 && indexPath.row == 0)
-    {
-        ShowOrderListVC* vc = [[ShowOrderListVC alloc] initWithGoodsId:0];
+        TaskDetailVC *vc = [[TaskDetailVC alloc] initWithNibName:@"TaskDetailVC" bundle:nil];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
@@ -324,7 +320,11 @@
     {
         if(![UserInstance ShardInstnce].userId)
         {
-            LoginVC* vc = [[LoginVC alloc] init];
+//            LoginVC* vc = [[LoginVC alloc] init];
+//            UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:vc];
+//            [self.navigationController presentViewController:nav animated:YES completion:nil];
+            
+            LoginNewVC* vc = [[LoginNewVC alloc] initWithNibName:@"LoginNewVC" bundle:nil];
             UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:vc];
             [self.navigationController presentViewController:nav animated:YES completion:nil];
         }

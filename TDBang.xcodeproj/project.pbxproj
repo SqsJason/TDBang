@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		6B81E6F43F9EC282DB2F5164 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 809CA04F2CE11973CC00DEA4 /* libPods.a */; };
+		EF2D4DD81B6673EC00820C65 /* LoginNewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D4DD61B6673EC00820C65 /* LoginNewVC.m */; };
+		EF2D4DD91B6673EC00820C65 /* LoginNewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF2D4DD71B6673EC00820C65 /* LoginNewVC.xib */; };
+		EF85D5CD1B67D1F1007E78C9 /* UserInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = EF85D5CB1B67D1F1007E78C9 /* UserInfoVC.m */; };
+		EF85D5CE1B67D1F1007E78C9 /* UserInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF85D5CC1B67D1F1007E78C9 /* UserInfoVC.xib */; };
+		EF85D5D51B67EE6A007E78C9 /* ReleaseTaskVC.m in Sources */ = {isa = PBXBuildFile; fileRef = EF85D5D31B67EE6A007E78C9 /* ReleaseTaskVC.m */; };
+		EF85D5D61B67EE6A007E78C9 /* ReleaseTaskVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF85D5D41B67EE6A007E78C9 /* ReleaseTaskVC.xib */; };
 		EF9A03451B5E99EE009428AA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9A03441B5E99EE009428AA /* main.m */; };
 		EF9A03481B5E99EE009428AA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9A03471B5E99EE009428AA /* AppDelegate.m */; };
 		EF9A034E1B5E99EE009428AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF9A034C1B5E99EE009428AA /* Main.storyboard */; };
@@ -191,6 +197,15 @@
 		55C2AAEC37C44718FC2B2393 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		809CA04F2CE11973CC00DEA4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		97365352072220ABB7003B2B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		EF2D4DD51B6673EC00820C65 /* LoginNewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginNewVC.h; sourceTree = "<group>"; };
+		EF2D4DD61B6673EC00820C65 /* LoginNewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginNewVC.m; sourceTree = "<group>"; };
+		EF2D4DD71B6673EC00820C65 /* LoginNewVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginNewVC.xib; sourceTree = "<group>"; };
+		EF85D5CA1B67D1F1007E78C9 /* UserInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoVC.h; sourceTree = "<group>"; };
+		EF85D5CB1B67D1F1007E78C9 /* UserInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoVC.m; sourceTree = "<group>"; };
+		EF85D5CC1B67D1F1007E78C9 /* UserInfoVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserInfoVC.xib; sourceTree = "<group>"; };
+		EF85D5D21B67EE6A007E78C9 /* ReleaseTaskVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseTaskVC.h; sourceTree = "<group>"; };
+		EF85D5D31B67EE6A007E78C9 /* ReleaseTaskVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReleaseTaskVC.m; sourceTree = "<group>"; };
+		EF85D5D41B67EE6A007E78C9 /* ReleaseTaskVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReleaseTaskVC.xib; sourceTree = "<group>"; };
 		EF9A033F1B5E99EE009428AA /* TDBang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TDBang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF9A03431B5E99EE009428AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF9A03441B5E99EE009428AA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -559,6 +574,40 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		EF85D5C91B67D1D2007E78C9 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				EF85D5D11B67D233007E78C9 /* Cell */,
+				EF85D5D01B67D22E007E78C9 /* Model */,
+				EF85D5CF1B67D1FB007E78C9 /* ViewController */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		EF85D5CF1B67D1FB007E78C9 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				EF85D5CA1B67D1F1007E78C9 /* UserInfoVC.h */,
+				EF85D5CB1B67D1F1007E78C9 /* UserInfoVC.m */,
+				EF85D5CC1B67D1F1007E78C9 /* UserInfoVC.xib */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		EF85D5D01B67D22E007E78C9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		EF85D5D11B67D233007E78C9 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
 		EF9A03361B5E99EE009428AA = {
 			isa = PBXGroup;
 			children = (
@@ -629,6 +678,7 @@
 		EF9A036A1B5E9AAF009428AA /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				EF85D5C91B67D1D2007E78C9 /* User */,
 				EFE74DAC1B62950800DB11BB /* Task */,
 				EF9A036B1B5E9AAF009428AA /* Base */,
 				EF9A03791B5E9AAF009428AA /* Cart */,
@@ -764,6 +814,9 @@
 			children = (
 				EF9A038C1B5E9AAF009428AA /* LoginVC.h */,
 				EF9A038D1B5E9AAF009428AA /* LoginVC.m */,
+				EF2D4DD51B6673EC00820C65 /* LoginNewVC.h */,
+				EF2D4DD61B6673EC00820C65 /* LoginNewVC.m */,
+				EF2D4DD71B6673EC00820C65 /* LoginNewVC.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1463,6 +1516,9 @@
 				EFE74DAD1B62953600DB11BB /* TaskDetailVC.h */,
 				EFE74DAE1B62953600DB11BB /* TaskDetailVC.m */,
 				EFE74DAF1B62953600DB11BB /* TaskDetailVC.xib */,
+				EF85D5D21B67EE6A007E78C9 /* ReleaseTaskVC.h */,
+				EF85D5D31B67EE6A007E78C9 /* ReleaseTaskVC.m */,
+				EF85D5D41B67EE6A007E78C9 /* ReleaseTaskVC.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -1584,8 +1640,11 @@
 				EF9A056E1B5FF798009428AA /* HomeAdviceTitleCell.xib in Resources */,
 				EFE74DB11B62953600DB11BB /* TaskDetailVC.xib in Resources */,
 				EF9A05141B5E9AC8009428AA /* PushConfig.plist in Resources */,
+				EF85D5CE1B67D1F1007E78C9 /* UserInfoVC.xib in Resources */,
 				EF9A04FF1B5E9AAF009428AA /* Localizable.strings in Resources */,
+				EF85D5D61B67EE6A007E78C9 /* ReleaseTaskVC.xib in Resources */,
 				EF9A03531B5E99EE009428AA /* LaunchScreen.xib in Resources */,
+				EF2D4DD91B6673EC00820C65 /* LoginNewVC.xib in Resources */,
 				EF9A03501B5E99EE009428AA /* Images.xcassets in Resources */,
 				EF9A05011B5E9AAF009428AA /* msyh.ttf in Resources */,
 				EFE74DBB1B6296D200DB11BB /* TaskDetailTitleCell.xib in Resources */,
@@ -1677,6 +1736,7 @@
 				EF9A04B41B5E9AAF009428AA /* HomeAdBtnCell.m in Sources */,
 				EF9A04D51B5E9AAF009428AA /* MineShowOrderModel.m in Sources */,
 				EF9A04E01B5E9AAF009428AA /* ProductDetailVC.m in Sources */,
+				EF85D5D51B67EE6A007E78C9 /* ReleaseTaskVC.m in Sources */,
 				EF9A04B51B5E9AAF009428AA /* HomeAdCell.m in Sources */,
 				EF9A04FB1B5E9AAF009428AA /* ShowOrderListVC.m in Sources */,
 				EF9A04AD1B5E9AAF009428AA /* HomeModel.m in Sources */,
@@ -1744,6 +1804,7 @@
 				EF9A04BA1B5E9AAF009428AA /* HomeNewedView.m in Sources */,
 				EF9A04E61B5E9AAF009428AA /* ProductDetailOptView.m in Sources */,
 				EF9A05071B5E9AAF009428AA /* XBDbHandler.m in Sources */,
+				EF85D5CD1B67D1F1007E78C9 /* UserInfoVC.m in Sources */,
 				EF9A04C61B5E9AAF009428AA /* AllProView.m in Sources */,
 				EF9A049D1B5E9AAF009428AA /* BaseLoadView.m in Sources */,
 				EF9A04E11B5E9AAF009428AA /* ProductLotteryVC.m in Sources */,
@@ -1771,6 +1832,7 @@
 				EF9A04DE1B5E9AAF009428AA /* MineShowOrderCell.m in Sources */,
 				EF9A05571B5EA5F1009428AA /* UIColor+hexColor.m in Sources */,
 				EF9A04EE1B5E9AAF009428AA /* RegModel.m in Sources */,
+				EF2D4DD81B6673EC00820C65 /* LoginNewVC.m in Sources */,
 				EF9A05621B5FE9A4009428AA /* HomeAdviceCell.m in Sources */,
 				EF9A04ED1B5E9AAF009428AA /* RegUserVC.m in Sources */,
 				EF9A04D41B5E9AAF009428AA /* MineMyOrderTransModel.m in Sources */,

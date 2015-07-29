@@ -10,6 +10,12 @@
 
 @interface LoginParser : OneBaseParser
 @property (nonatomic,copy)NSNumber* state;
+@property(nonatomic,copy)NSString* str;
+@end
+
+@interface LoginParserNew : OneBaseParser
+@property(nonatomic,copy)NSNumber* success;
+@property(nonatomic,copy)NSString* result;
 @end
 
 @interface LoginOkParser : OneBaseParser

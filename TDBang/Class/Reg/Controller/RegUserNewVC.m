@@ -12,7 +12,14 @@
 #import "RegSetPwdVC.h"
 #import "CJSONDeserializer.h"
 
+const static int flTimeWait = 150;
+
 @interface RegUserNewVC ()<UITextFieldDelegate>
+{
+    __block NSString    *myPhone;
+    __block int         leftTime;
+    __block NSTimer     *timer;
+}
 
 @property (weak, nonatomic) IBOutlet UIView *vHolder;
 
@@ -23,6 +30,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *tfConfirmPass;
 @property (weak, nonatomic) IBOutlet UIButton *btnRegister;
 @property (weak, nonatomic) IBOutlet UIButton *btnGetCode;
+@property (weak, nonatomic) IBOutlet UIView *vBlurBG;
 
 - (IBAction)actionGetCode:(id)sender;
 - (IBAction)actionRegister:(id)sender;
@@ -42,23 +50,57 @@
         [wSelf.navigationController popViewControllerAnimated:YES];
     }];
     
-//    UIGestureRecognizer *tapGesture = [[UIGestureRecognizer alloc] initWithTarget:self action:@selector(getBackKeyBoard)];
-//    [_vHolder addGestureRecognizer:tapGesture];
+    UITapGestureRecognizer *_left = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handTap:)];
+    [self.view addGestureRecognizer:_left];
+    
+    _btnGetCode.layer.cornerRadius = 5;
+    _btnGetCode.layer.borderWidth = 0.5;
+    _btnGetCode.layer.borderColor = [UIColor hexFloatColor:@"dedede"].CGColor;
+    
+    _vBlurBG.layer.cornerRadius = 5.0;
+    _vBlurBG.layer.masksToBounds = YES;
 }
 
-//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-//{
-//    if(string.length > 0)
-//    {
-//        if(textField.text.length > 10)
-//            return NO;
-//        if([string isEqualToString:@"0"])
-//            return YES;
-//        if([string intValue] == 0)
-//            return NO;
-//    }
-//    return YES;
-//}
+- (void)timerAction
+{
+    leftTime--;
+    if(leftTime<=0)
+    {
+        [_btnGetCode setEnabled:YES];
+        [_btnGetCode setTitle:@"点击重新发送" forState:UIControlStateNormal];
+        [_btnGetCode setTitle:@"点击重新发送" forState:UIControlStateDisabled];
+    }
+    else
+    {
+        [_btnGetCode setEnabled:NO];
+        [_btnGetCode setTitle:[NSString stringWithFormat:@"%d秒后可重新发送",leftTime] forState:UIControlStateNormal];
+        [_btnGetCode setTitle:[NSString stringWithFormat:@"%d秒后可重新发送",leftTime] forState:UIControlStateDisabled];
+    }
+}
+
+- (void) handTap:(UITapGestureRecognizer*) gesture
+{
+    for (UITextField *tf in [_vHolder subviews]) {
+        if ([tf isFirstResponder]) {
+            [tf resignFirstResponder];
+            break;
+        }
+    }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if(string.length > 0)
+    {
+        if(textField.text.length > 10)
+            return NO;
+        if([string isEqualToString:@"0"])
+            return YES;
+        if([string intValue] == 0)
+            return NO;
+    }
+    return YES;
+}
 
 - (IBAction)actionGetCode:(id)sender {
     if(![[Jxb_Common_Common sharedInstance] validatePhone:_tfPhone.text])
@@ -72,13 +114,18 @@
         [[XBToastManager ShardInstance] hideprogress];
         NSDictionary *dic = (NSDictionary *)result;
 
-        RegSms* sms = [[RegSms alloc] initWithDictionary:(NSDictionary*)result];
-        if(![sms.state boolValue])
+        RegGetCode* sms = [[RegGetCode alloc] initWithDictionary:(NSDictionary*)result];
+        if(![sms.success boolValue])
         {
             [[XBToastManager ShardInstance] showtoast:[dic objectForKey:@"result"]];
             return ;
         }else{
-            NSLog(@"Success Get Code.");
+            leftTime = flTimeWait;
+            [_btnGetCode setTitle:[NSString stringWithFormat:@"%d秒后可重新发送",flTimeWait] forState:UIControlStateNormal];
+
+            if(timer)
+                [timer invalidate];
+            timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerAction) userInfo:nil repeats:YES];
         }
     } failure:^(NSError* error){
         [[XBToastManager ShardInstance] hideprogress];
@@ -139,15 +186,6 @@
     } failure:^(NSError *error) {
         [[XBToastManager ShardInstance] hideprogress];
     }];
-}
-
-- (void)getBackKeyBoard
-{
-    for (UITextField *tf in [_vHolder subviews]) {
-        if ([tf isFirstResponder]) {
-            [tf resignFirstResponder];
-        }
-    }
 }
 
 @end

@@ -11,6 +11,7 @@
 #import "SearchVC.h"
 #import "ProductDetailVC.h"
 #import "TaskDetailVC.h"
+#import "ReleaseTaskVC.h"
 
 typedef enum
 {
@@ -29,6 +30,7 @@ typedef enum
     AllProView      *allProView;
     
     UITableView     *tbViewType;
+    UITableView     *tbTaskList;
     
     TbViewType      tbType;
     NSArray         *arrOfType;
@@ -63,8 +65,7 @@ typedef enum
     if(![OyTool ShardInstance].bIsForReview)
     {
         [self actionCustomRightBtnWithNrlImage:@"search" htlImage:@"search" title:@"" action:^{
-            SearchVC* vc = [[SearchVC alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
+            ReleaseTaskVC* vc = [[ReleaseTaskVC alloc] init];
             [wSelf.navigationController pushViewController:vc animated:YES];
         }];
         
@@ -144,8 +145,17 @@ typedef enum
     tbViewType.backgroundColor = [UIColor whiteColor];
     tbViewType.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     tbViewType.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    
+    tbViewType.tag = 0;
     tbType = TbViewType_Type;
+    
+    
+    tbTaskList = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
+    tbTaskList.delegate = self;
+    tbTaskList.dataSource = self;
+    tbTaskList.backgroundColor = [UIColor whiteColor];
+    tbTaskList.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    tbTaskList.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    tbTaskList.tag = 1;
     
     dropdownView = [[LMDropdownView alloc] init];
     dropdownView.contentBackgroundColor = [UIColor whiteColor];
@@ -161,10 +171,6 @@ typedef enum
     TaskDetailVC *vc = [[TaskDetailVC alloc] initWithNibName:@"TaskDetailVC" bundle:nil];
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
-    
-//    ProductDetailVC* vc = [[ProductDetailVC alloc] initWithGoodsId:goodsId codeId:0];
-//    vc.hidesBottomBarWhenPushed = YES;
-//    [self.navigationController pushViewController:vc animated:YES];
 }
 
 
@@ -339,36 +345,33 @@ typedef enum
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    TaskDetailVC *vc = [[TaskDetailVC alloc] initWithNibName:@"TaskDetailVC" bundle:nil];
-    [self.navigationController pushViewController:vc animated:YES];
+    switch (tbType) {
+        case 0:
+        {
+            indexType = indexPath.row;
+            [btnType setTitle:[arrOfType objectAtIndex:indexPath.row] forState:UIControlStateNormal];
+        }
+            break;
+        case 1:
+        {
+            indexOrder = indexPath.row;
+            [btnOrder setTitle:[arrOfOrder objectAtIndex:indexPath.row] forState:UIControlStateNormal];
+        }
+            break;
+        case 2:
+        {
+            indexSmart = indexPath.row;
+            [btnSmart setTitle:[arrOfSmart objectAtIndex:indexPath.row] forState:UIControlStateNormal];
+        }
+            break;
+            
+        default:
+            break;
+    }
     
-//    switch (tbType) {
-//        case 0:
-//        {
-//            indexType = indexPath.row;
-//            [btnType setTitle:[arrOfType objectAtIndex:indexPath.row] forState:UIControlStateNormal];
-//        }
-//            break;
-//        case 1:
-//        {
-//            indexOrder = indexPath.row;
-//            [btnOrder setTitle:[arrOfOrder objectAtIndex:indexPath.row] forState:UIControlStateNormal];
-//        }
-//            break;
-//        case 2:
-//        {
-//            indexSmart = indexPath.row;
-//            [btnSmart setTitle:[arrOfSmart objectAtIndex:indexPath.row] forState:UIControlStateNormal];
-//        }
-//            break;
-//            
-//        default:
-//            break;
-//    }
-//
-//    [tbViewType reloadData];
-//    [dropdownView hide];
-//    
-//    [allProView setTypeAndOrder:[[[arrOfTypeImage objectAtIndex:indexType] stringByReplacingOccurrencesOfString:@"sort" withString:@""] intValue] sort:[[arrOfOrderFlag objectAtIndex:indexOrder] intValue]];
+    [tbViewType reloadData];
+    [dropdownView hide];
+    
+    [allProView setTypeAndOrder:[[[arrOfTypeImage objectAtIndex:indexType] stringByReplacingOccurrencesOfString:@"sort" withString:@""] intValue] sort:[[arrOfOrderFlag objectAtIndex:indexOrder] intValue]];
 }
 @end

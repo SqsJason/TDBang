@@ -179,9 +179,13 @@
 #pragma mark - login view delegate
 - (void)doLogin
 {
-    LoginVC* vc = [[LoginVC alloc] init];
+//    LoginVC* vc = [[LoginVC alloc] init];
+//    UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:vc];
+//    [self.tabBarController presentViewController:nav animated:YES completion:nil];
+    
+    LoginNewVC* vc = [[LoginNewVC alloc] initWithNibName:@"LoginNewVC" bundle:nil];
     UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    [self.tabBarController presentViewController:nav animated:YES completion:nil];
+    [self.navigationController presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)btnPayAction

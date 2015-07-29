@@ -12,10 +12,12 @@
 {
     UIImageView             *imgProduct;
     UIActivityIndicatorView *imgLoad;
+    UILabel                 *lblTitle;
 }
 @end
 
 @implementation HomeNewLoadView
+@synthesize strImage,strName;
 
 - (void)removeFromSuperview
 {
@@ -31,14 +33,35 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        imgLoad = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        [imgLoad startAnimating];
-        imgLoad.frame = CGRectMake((frame.size.width - 50) / 2, (frame.size.height - 32) / 2, 32, 32);
-        [self addSubview:imgLoad];
-        
-        imgProduct = [[UIImageView alloc] initWithFrame:CGRectMake(frame.size.width - 50, 10, 40, frame.size.height - 20)];
+        imgProduct = [[UIImageView alloc] initWithFrame:CGRectMake(30, (frame.size.height - 40) / 2, 40, 40)];
         imgProduct.image = [UIImage imageNamed:@"noimage"];
         [self addSubview:imgProduct];
+        
+        lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(75, (frame.size.height - 20) / 2, 100, 20)];
+        lblTitle.textColor = [UIColor darkGrayColor];
+        lblTitle.font = [UIFont systemFontOfSize:16.0];
+        [self addSubview:lblTitle];
+        
+        self.layer.borderWidth = 0.5;
+        self.layer.borderColor = [[UIColor lightGrayColor] CGColor];
+    }
+    return self;
+}
+
+- (id)initWithFrame:(CGRect)frame image:(NSString *)imgName title:(NSString *)title
+{
+    self = [super initWithFrame:frame];
+    if (self)
+    {
+        imgProduct = [[UIImageView alloc] initWithFrame:CGRectMake(30, (frame.size.height - 40) / 2, 40, 40)];
+        imgProduct.image = [UIImage imageNamed:imgName];
+        [self addSubview:imgProduct];
+        
+        lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(75, (frame.size.height - 20) / 2, 100, 20)];
+        lblTitle.textColor = [UIColor darkGrayColor];
+        lblTitle.font = [UIFont systemFontOfSize:16.0];
+        lblTitle.text = title;
+        [self addSubview:lblTitle];
         
         self.layer.borderWidth = 0.5;
         self.layer.borderColor = [[UIColor lightGrayColor] CGColor];

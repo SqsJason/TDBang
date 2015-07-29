@@ -13,6 +13,7 @@
                 <outlet property="tfNickName" destination="MBg-LZ-SVd" id="GaC-2J-Are"/>
                 <outlet property="tfPassword" destination="Gxl-FY-d72" id="JhM-VU-jaS"/>
                 <outlet property="tfPhone" destination="GXm-vd-7Ju" id="OBX-7z-fWJ"/>
+                <outlet property="vBlurBG" destination="rzH-jX-w6Z" id="1Sp-3j-g4S"/>
                 <outlet property="vHolder" destination="qqC-Ah-ppf" id="Cdb-Bw-59O"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -24,6 +25,7 @@
             <subviews>
                 <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_register" translatesAutoresizingMaskIntoConstraints="NO" id="cZM-P9-bPV">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <gestureRecognizers/>
                 </imageView>
                 <view alpha="0.40000000000000002" tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rzH-jX-w6Z">
                     <rect key="frame" x="20" y="60" width="560" height="300"/>
@@ -45,7 +47,7 @@
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="验证码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cJT-20-Epl">
-                            <rect key="frame" x="20" y="100" width="410" height="30"/>
+                            <rect key="frame" x="20" y="100" width="380" height="30"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <textInputTraits key="textInputTraits"/>
@@ -63,12 +65,13 @@
                             <textInputTraits key="textInputTraits"/>
                         </textField>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CrX-xf-JdV">
-                            <rect key="frame" x="438" y="100" width="102" height="30"/>
+                            <rect key="frame" x="408" y="100" width="132" height="30"/>
                             <color key="backgroundColor" red="1" green="0.66636493159999999" blue="0.1209400679" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="129-Nx-ZEn"/>
-                                <constraint firstAttribute="width" constant="102" id="eeK-fa-moL"/>
+                                <constraint firstAttribute="width" constant="132" id="eeK-fa-moL"/>
                             </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <state key="normal" title="获取验证码">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -102,7 +105,7 @@
                         <constraint firstItem="MBg-LZ-SVd" firstAttribute="leading" secondItem="qqC-Ah-ppf" secondAttribute="leading" constant="20" id="1o8-E3-a0K"/>
                         <constraint firstItem="GXm-vd-7Ju" firstAttribute="top" secondItem="MBg-LZ-SVd" secondAttribute="bottom" constant="10" id="25p-8f-3YE"/>
                         <constraint firstAttribute="trailing" secondItem="CrX-xf-JdV" secondAttribute="trailing" constant="20" id="Eh5-bY-djZ"/>
-                        <constraint firstAttribute="trailing" secondItem="cJT-20-Epl" secondAttribute="trailing" constant="130" id="F6J-wT-J00"/>
+                        <constraint firstAttribute="trailing" secondItem="cJT-20-Epl" secondAttribute="trailing" constant="160" id="F6J-wT-J00"/>
                         <constraint firstAttribute="trailing" secondItem="Gxl-FY-d72" secondAttribute="trailing" constant="20" id="Jkr-Zo-nmE"/>
                         <constraint firstAttribute="trailing" secondItem="MBg-LZ-SVd" secondAttribute="trailing" constant="20" id="KYM-de-Sha"/>
                         <constraint firstItem="AxG-Kt-XUD" firstAttribute="leading" secondItem="qqC-Ah-ppf" secondAttribute="leading" constant="20" id="RVW-aE-hu1"/>

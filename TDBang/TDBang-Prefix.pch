@@ -29,6 +29,7 @@
 #import "OyTool.h"
 
 #import "LoginVC.h"
+#import "LoginNewVC.h"
 
 #import "TouchJSON/NSDictionary_JSONExtensions.h"
 #import "Jastor.h"
