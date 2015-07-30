@@ -14,6 +14,8 @@
 		EF85D5CE1B67D1F1007E78C9 /* UserInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF85D5CC1B67D1F1007E78C9 /* UserInfoVC.xib */; };
 		EF85D5D51B67EE6A007E78C9 /* ReleaseTaskVC.m in Sources */ = {isa = PBXBuildFile; fileRef = EF85D5D31B67EE6A007E78C9 /* ReleaseTaskVC.m */; };
 		EF85D5D61B67EE6A007E78C9 /* ReleaseTaskVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF85D5D41B67EE6A007E78C9 /* ReleaseTaskVC.xib */; };
+		EF85D5DA1B693769007E78C9 /* UserBasicInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = EF85D5D81B693769007E78C9 /* UserBasicInfoVC.m */; };
+		EF85D5DB1B693769007E78C9 /* UserBasicInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF85D5D91B693769007E78C9 /* UserBasicInfoVC.xib */; };
 		EF9A03451B5E99EE009428AA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9A03441B5E99EE009428AA /* main.m */; };
 		EF9A03481B5E99EE009428AA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9A03471B5E99EE009428AA /* AppDelegate.m */; };
 		EF9A034E1B5E99EE009428AA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF9A034C1B5E99EE009428AA /* Main.storyboard */; };
@@ -206,6 +208,9 @@
 		EF85D5D21B67EE6A007E78C9 /* ReleaseTaskVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReleaseTaskVC.h; sourceTree = "<group>"; };
 		EF85D5D31B67EE6A007E78C9 /* ReleaseTaskVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReleaseTaskVC.m; sourceTree = "<group>"; };
 		EF85D5D41B67EE6A007E78C9 /* ReleaseTaskVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ReleaseTaskVC.xib; sourceTree = "<group>"; };
+		EF85D5D71B693769007E78C9 /* UserBasicInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserBasicInfoVC.h; sourceTree = "<group>"; };
+		EF85D5D81B693769007E78C9 /* UserBasicInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserBasicInfoVC.m; sourceTree = "<group>"; };
+		EF85D5D91B693769007E78C9 /* UserBasicInfoVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserBasicInfoVC.xib; sourceTree = "<group>"; };
 		EF9A033F1B5E99EE009428AA /* TDBang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TDBang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF9A03431B5E99EE009428AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EF9A03441B5E99EE009428AA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -590,6 +595,9 @@
 				EF85D5CA1B67D1F1007E78C9 /* UserInfoVC.h */,
 				EF85D5CB1B67D1F1007E78C9 /* UserInfoVC.m */,
 				EF85D5CC1B67D1F1007E78C9 /* UserInfoVC.xib */,
+				EF85D5D71B693769007E78C9 /* UserBasicInfoVC.h */,
+				EF85D5D81B693769007E78C9 /* UserBasicInfoVC.m */,
+				EF85D5D91B693769007E78C9 /* UserBasicInfoVC.xib */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -1645,6 +1653,7 @@
 				EF85D5D61B67EE6A007E78C9 /* ReleaseTaskVC.xib in Resources */,
 				EF9A03531B5E99EE009428AA /* LaunchScreen.xib in Resources */,
 				EF2D4DD91B6673EC00820C65 /* LoginNewVC.xib in Resources */,
+				EF85D5DB1B693769007E78C9 /* UserBasicInfoVC.xib in Resources */,
 				EF9A03501B5E99EE009428AA /* Images.xcassets in Resources */,
 				EF9A05011B5E9AAF009428AA /* msyh.ttf in Resources */,
 				EFE74DBB1B6296D200DB11BB /* TaskDetailTitleCell.xib in Resources */,
@@ -1794,6 +1803,7 @@
 				EF9A04B81B5E9AAF009428AA /* HomeHotView.m in Sources */,
 				EF9A05051B5E9AAF009428AA /* SVPullToRefreshView+OY_PullRefreshView.m in Sources */,
 				EF9A05081B5E9AAF009428AA /* XBDbVersionTable.m in Sources */,
+				EF85D5DA1B693769007E78C9 /* UserBasicInfoVC.m in Sources */,
 				EF9A049E1B5E9AAF009428AA /* BaseNoDataView.m in Sources */,
 				EF9A04B61B5E9AAF009428AA /* HomeAdDigitalCell.m in Sources */,
 				EF9A03451B5E99EE009428AA /* main.m in Sources */,

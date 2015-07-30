@@ -83,6 +83,11 @@
     return tabBarController;
 }
 
+- (void)getMainTabVC:(UIViewController *)mainTabVC appDelegate:(AppDelegate *)deleagte
+{
+    
+}
+
 - (UITabBarController*)setRootVC:(BOOL)bShowCart
 {
     TabHomeVC *homeVC = [[TabHomeVC alloc] init];

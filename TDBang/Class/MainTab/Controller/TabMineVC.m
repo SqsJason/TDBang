@@ -19,6 +19,7 @@
 #import "MineMyAddressVC.h"
 #import "SettingVC.h"
 #import "MineRechargeVC.h"
+#import "UserBasicInfoVC.h"
 
 @interface TabMineVC () <UITableViewDataSource,UITableViewDelegate,MineLoginViewDelegate,MineUserViewDelegate>
 {
@@ -49,9 +50,13 @@
     arrImages = @[@"me1",@"me2",@"me3",@"me6",@"me7"];//@"me4",@"me5",
     
     [self actionCustomRightBtnWithNrlImage:@"btnsetting" htlImage:@"btnsetting" title:@"" action:^{
-        SettingVC* vc = [[SettingVC alloc] init];
+        UserBasicInfoVC* vc = [[UserBasicInfoVC alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [wSelf.navigationController pushViewController:vc animated:YES];
+        
+//        SettingVC* vc = [[SettingVC alloc] init];
+//        vc.hidesBottomBarWhenPushed = YES;
+//        [wSelf.navigationController pushViewController:vc animated:YES];
     }];
     
     tbView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
