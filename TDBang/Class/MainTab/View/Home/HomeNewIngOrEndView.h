@@ -19,4 +19,7 @@
 - (void)setNewLoad;
 - (void)setNewing:(HomeNewing*)newing;
 - (void)setNewed:(HomeNewed*)newed;
+
+- (void)setButtonImage:(NSString *)imgName Title:(NSString *)title;
+
 @end

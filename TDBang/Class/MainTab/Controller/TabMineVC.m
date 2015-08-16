@@ -20,6 +20,7 @@
 #import "SettingVC.h"
 #import "MineRechargeVC.h"
 #import "UserBasicInfoVC.h"
+#import "ChangePasswordVC.h"
 
 @interface TabMineVC () <UITableViewDataSource,UITableViewDelegate,MineLoginViewDelegate,MineUserViewDelegate>
 {
@@ -39,25 +40,28 @@
     [[UserInstance ShardInstnce] isUserStillOnline];
 }
 
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotiTypeUserLogin object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotiTypeUserUpdateInfo object:nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLoginOk) name:kDidLoginOk object:nil];
-    __weak typeof (self) wSelf = self;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLoginOk) name:NotiTypeUserLogin object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didLoginOk) name:NotiTypeUserUpdateInfo object:nil];
+    
     self.title = @"我的";
     
-    arrTitles = @[@"我的云购记录",@"获得的商品",@"我的晒单",@"账户明细",@"收货地址管理"];//@"我的好友",@"消息中心",,
+    arrTitles = @[@"基本资料",@"我的银行卡",@"账户充值",@"余额提现",@"修改密码"];
     arrImages = @[@"me1",@"me2",@"me3",@"me6",@"me7"];//@"me4",@"me5",
     
-    [self actionCustomRightBtnWithNrlImage:@"btnsetting" htlImage:@"btnsetting" title:@"" action:^{
-        UserBasicInfoVC* vc = [[UserBasicInfoVC alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [wSelf.navigationController pushViewController:vc animated:YES];
-        
-//        SettingVC* vc = [[SettingVC alloc] init];
-//        vc.hidesBottomBarWhenPushed = YES;
-//        [wSelf.navigationController pushViewController:vc animated:YES];
-    }];
+    UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 10, 60, 40)];
+    [rightBtn setTitle:@"退出" forState:UIControlStateNormal];
+    [rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [rightBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:15]];
+    [rightBtn addTarget:self action:@selector(gotoLogin) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
     
     tbView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     tbView.delegate = self;
@@ -66,7 +70,12 @@
     tbView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     tbView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:tbView];
-    
+}
+
+- (void)gotoLogin
+{
+    [[Sessions sharedInstance] logout];
+    [self didLoginOk];
 }
 
 - (void)didLoginOk
@@ -101,15 +110,21 @@
 {
     if (section == 0)
     {
-        if ([UserInstance ShardInstnce].userId)
+        if ([[Sessions sharedInstance] isUserOnline])
         {
             MineUserView* v = [[MineUserView alloc] initWithFrame:CGRectMake(0, 0, mainWidth, 150)];
             v.delegate = self;
+            if ([[Sessions sharedInstance].userInfoModel isKindOfClass:[ENUserInfo class]]) {
+                [v setUserBasicInfo:[Sessions sharedInstance].userInfoModel hideJiFenButton:NO];
+            }else{
+                [[Sessions sharedInstance] isUserOnline];
+            }
             return v;
         }
         else
         {
             MineLoginView* v = [[MineLoginView alloc] initWithFrame:CGRectMake(0, 0, mainWidth, 150)];
+            [v setButtonsHide:NO];
             v.delegate = self;
             return v;
         }
@@ -151,46 +166,39 @@
     
     if (indexPath.section == 0)
     {
-        MineBuylistVC* vc = [[MineBuylistVC alloc] init];
+        UserBasicInfoVC* vc = [[UserBasicInfoVC alloc] init];
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
     else if (indexPath.section == 1)
     {
-        MineMyOrderVC* vc = [[MineMyOrderVC alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
+//        MineMyOrderVC* vc = [[MineMyOrderVC alloc] init];
+//        vc.hidesBottomBarWhenPushed = YES;
+//        [self.navigationController pushViewController:vc animated:YES];
     }
     else if (indexPath.section == 2)
     {
-        MineShowOrderVC* vc = [[MineShowOrderVC alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
+//        MineShowOrderVC* vc = [[MineShowOrderVC alloc] init];
+//        vc.hidesBottomBarWhenPushed = YES;
+//        [self.navigationController pushViewController:vc animated:YES];
     }
     else if (indexPath.section == 3)
     {
-        MineMoneyDetailVC* vc = [[MineMoneyDetailVC alloc] init];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
+//        MineMoneyDetailVC* vc = [[MineMoneyDetailVC alloc] init];
+//        vc.hidesBottomBarWhenPushed = YES;
+//        [self.navigationController pushViewController:vc animated:YES];
     }
     else if (indexPath.section == 4)
     {
-        MineMyAddressVC* vc = [[MineMyAddressVC alloc] initWithType:MineAddressType_Common orderId:0];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
+        ChangePasswordVC *changePwd = [[ChangePasswordVC alloc] initWithNibName:@"ChangePasswordVC" bundle:nil];
+        [self.navigationController pushViewController:changePwd animated:YES];
     }
 }
 
 #pragma mark - login view delegate
 - (void)doLogin
 {
-//    LoginVC* vc = [[LoginVC alloc] init];
-//    UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:vc];
-//    [self.tabBarController presentViewController:nav animated:YES completion:nil];
-    
-    LoginNewVC* vc = [[LoginNewVC alloc] initWithNibName:@"LoginNewVC" bundle:nil];
-    UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    [self.navigationController presentViewController:nav animated:YES completion:nil];
+    [[Sessions sharedInstance] gotoLogin:self];
 }
 
 - (void)btnPayAction

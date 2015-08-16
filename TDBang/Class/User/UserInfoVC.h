@@ -7,6 +7,7 @@
 //
 
 #import "OneBaseVC.h"
+#import "UserInfoModel.h"
 
 @interface UserInfoVC : OneBaseVC<UITableViewDataSource, UITableViewDelegate>
 
@@ -47,5 +48,10 @@
 @property (strong, nonatomic) IBOutlet UITableViewCell *OwnDecribeCell;
 @property (weak, nonatomic) IBOutlet UITextField *tfOwnDescribe;
 
+
+@property (nonatomic, strong) ENUserInfo *userInfo;
+
+@property (weak, nonatomic) IBOutlet UILabel *lblCredit;
+@property (weak, nonatomic) IBOutlet UILabel *lblService;
 
 @end

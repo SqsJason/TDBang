@@ -16,4 +16,6 @@
 
 @property (nonatomic,weak)id<MineLoginViewDelegate> delegate;
 
+- (void)setButtonsHide:(BOOL)isHide;
+
 @end

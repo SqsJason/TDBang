@@ -10,4 +10,6 @@
 
 @interface LoginNewVC : OneBaseVC
 
+- (IBAction)actionBack:(id)sender;
+
 @end

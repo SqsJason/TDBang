@@ -29,4 +29,14 @@
     return self;
 }
 
+- (void) setContentWithCommentModel:(TaskCommentModel *)comment
+{
+    
+}
+
+- (void)updateConstraints{
+    _lblContent.preferredMaxLayoutWidth = mainWidth - 30;
+    [super updateConstraints];
+}
+
 @end

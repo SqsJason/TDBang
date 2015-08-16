@@ -9,6 +9,7 @@
 #import "TaskDetailTitleCell.h"
 
 @implementation TaskDetailTitleCell
+@synthesize delegate;
 
 - (void)awakeFromNib {
     // Initialization code
@@ -20,4 +21,18 @@
     // Configure the view for the selected state
 }
 
+- (void)setContent:(TaskModel *)task
+{
+    NSDictionary *dicCreateUser = task.createUser;
+    _lblUserName.text = [dicCreateUser objectForKey:@"nickName"];
+    [_imvUserHead setImage_oy:nil image:[dicCreateUser objectForKey:@"headFilePath"]];
+}
+
+- (IBAction)actionQueryAllTasks:(id)sender {
+    [delegate didClickQueryAllTasks];
+}
+
+- (IBAction)actionQueryAllAcceptTasks:(id)sender {
+    [delegate didClickQueryAllAcceptTasks];
+}
 @end

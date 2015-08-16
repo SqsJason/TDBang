@@ -17,6 +17,11 @@
 @synthesize state,str;
 @end
 
+@implementation RegisterResut
+
+@synthesize result,success;
+@end
+
 @implementation RegGetCode
 @synthesize result,success;
 @end
@@ -50,7 +55,7 @@
  */
 + (void)regPhoneCode:(NSString*)phone code:(NSString*)code pwd:(NSString *)pwd nickName:(NSString *)nickN success:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure
 {
-    NSString* url = [NSString stringWithFormat:@"%@&SessionID=%@&phone=%@&code=%@&pwd=%@&nickName=%@",API_URL(aRegister),[Sessions sharedInstance].accessToken,phone,code,pwd,nickN];
+    NSString* url = [NSString stringWithFormat:@"%@&SessionID=%@&phone=%@&code=%@&pwd=%@&nickName=%@",API_URL(aRegister),[Sessions sharedInstance].userUDID,phone,code,pwd,nickN];
     [[XBApi SharedXBApi] requestWithURL:url paras:nil type:XBHttpResponseType_Json success:success failure:failure];
 }
 

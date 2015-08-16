@@ -38,7 +38,29 @@
 //登录
 #define aLogin                      @"user.do?method=doLogin"
 
+//获取当前用户信息
+#define aGetCurrentUserInfo         @"user.do?method=getCurrentUserInfo"
+#define aGetUserInfoById            @"user.do?method=getById"
+#define aChangePassword             @"user.do?method=updatePwd"
+#define aUpdateUserInfo             @"user.do?method=saveUser"
 
+//查询任务
+#define aQueryTasks                 @"task.do?method=query"
 
+//任务相关
+#define aGetRecommentTasks          @"task.do?method=queryRecommendYou"
 
+//获取首页推荐任务
+#define aGetHomeAdviceTasks         @"task.do?method=queryRecommendDefault"
+
+//查询某个人已接的任务
+#define aGetReleasedTasks           @"task.do?method=queryReleaseByUserId"
+
+//查询某个人已接的任务
+#define aReleasedTask               @"task.do?method=save"
+
+//查询某个人已接的任务
+#define aAcceptTask                 @"task.do?method=queryMySign"
+
+#define aTaskComments               @"task.do?method=queryComment"
 

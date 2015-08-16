@@ -10,6 +10,8 @@
 #import "AllProModel.h"
 #import "AllProItemCell.h"
 #import "HomeAdviceCell.h"
+#import "GetRecommendTasks.h"
+#import "CJSONDeserializer.h"
 
 #define pageSize    10
 
@@ -24,6 +26,10 @@
     __block int             proType;
     __block int             proSort;
     NSMutableArray          *arrAdvices;
+    NSInteger               pageNo;
+    NSInteger               AllProViewPageSize;
+    float                   distance;
+    __block NSMutableArray  *arrQueryTasks;
 }
 
 @end
@@ -51,6 +57,9 @@
         
         self.backgroundColor = [UIColor redColor];
         
+        arrQueryTasks = [NSMutableArray array];
+        
+        
         tbView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, mainWidth, frame.size.height) style:UITableViewStyleGrouped];
         tbView.delegate = self;
         tbView.dataSource = self;
@@ -72,24 +81,28 @@
         [arrAdvices addObject:@"Advices6"];
         
         proType = 0;
+        pageNo  = 1;
+        __weak typeof (wSelf) weakSelf = self;
         [tbView addPullToRefreshWithActionHandler:^{
-            __strong typeof (wSelf) sSelf = wSelf;
-            sSelf->curPage = 1;
-            [wSelf getDatas:sSelf->proType sort:sSelf->proSort block:^{
-                sSelf->arrPros = nil;
-            }];
+            [weakSelf getNewestTasks];
         }];
         
         [tbView addInfiniteScrollingWithActionHandler:^{
-            __strong typeof (wSelf) sSelf = wSelf;
-            sSelf->curPage ++;
-            [wSelf getDatas:sSelf->proType sort:sSelf->proSort block:nil];
+            [weakSelf getNewestTasks];
         }];
         
         [tbView.pullToRefreshView setOYStyle];
         [tbView triggerPullToRefresh];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveReleaseNoti) name:NotiTypeReleaseTask object:nil];
     }
     return self;
+}
+
+- (void)receiveReleaseNoti
+{
+    pageNo = 1;
+    [self getNewestTasks];
 }
 
 #pragma mark - set data
@@ -123,14 +136,88 @@
     }   failure:^(NSError* error){
         [tbView.pullToRefreshView stopAnimating];
         [tbView.infiniteScrollingView stopAnimating];
-        //[[XBToastManager ShardInstance] showtoast:[NSString stringWithFormat:@"获取商品数据异常:%@",error]];
     }];
+}
+
+- (void)getNewestTasks
+{
+    //117.198639,34.276989
+    __weak UITableView* wTb = tbView;
+    NSString *strLat;
+    if ([Sessions sharedInstance].locationLat != nil) {
+        strLat = [Sessions sharedInstance].locationLat;
+    }else{
+        strLat = @"0";
+    }
+    strLat = @"34.276989";
+    
+    NSString *strLng;
+    if ([Sessions sharedInstance].locationLat != nil) {
+        strLng = [Sessions sharedInstance].locationLng;
+    }else{
+        strLng = @"0";
+    }
+    strLng = @"117.198639";
+    
+    NSString *strProvince;
+    if ([Sessions sharedInstance].locationLat != nil) {
+        strProvince = [Sessions sharedInstance].province;
+    }else{
+        strProvince = @"0";
+    }
+    strProvince = @"";
+    NSString *strCity;
+    strCity = @"";
+    NSString *strDis = @"";
+    NSString *strStreet = @"";
+    NSString *strDistance = @"";
+    
+    //distance查询距离半径
+    [GetRecommendTasks fentchTasksWithPage:[NSString stringWithFormat:@"%ld",(long)pageNo]
+                                      rows:[NSString stringWithFormat:@"%ld",(long)pageSize]
+                                       lat:strLat
+                                       lng:strLng
+                                  province:strProvince
+                                      city:strCity
+                                       dis:strDis
+                                    street:strStreet
+                                  distance:strDistance
+                                    status:@""
+                                     order:@""
+                                   success:^(AFHTTPRequestOperation *operation, NSObject *result) {
+                                       [wTb.pullToRefreshView stopAnimating];
+                                       [tbView.infiniteScrollingView stopAnimating];
+                                       
+                                       QueryTasksParser *parser = [[QueryTasksParser alloc] initWithDictionary:(NSDictionary *)result];
+                                       if ([parser.success boolValue]) {
+                                           pageNo ++;
+                                           NSString *strResult = [(NSDictionary *)result objectForKey:@"result"];
+                                           //将解析得到的内容存放字典中，编码格式为UTF8，防止取值的时候发生乱码
+                                           NSDictionary *rootDic = [[CJSONDeserializer deserializer] deserialize:[strResult dataUsingEncoding:NSUTF8StringEncoding] error:nil];
+                                           if (![Jxb_Common_Common isNullOrNilObject:[rootDic objectForKey:@"rows"]]) {
+                                               for (NSDictionary *dic in [rootDic objectForKey:@"rows"]) {
+                                                   TaskModel *taskModel = [[TaskModel alloc] initWithDictionary:dic];
+                                                   [arrQueryTasks addObject:taskModel];
+                                               }
+                                           }else{
+                                               [[XBToastManager ShardInstance] showtoast:@"未查到相关任务"];
+                                           }
+                                       }else{
+                                           [[XBToastManager ShardInstance] showtoast:@"未查到相关任务"];
+                                       }
+                                       
+                                       [wTb reloadData];
+                                   } failure:^(NSError *error) {
+                                       [wTb.pullToRefreshView stopAnimating];
+                                       [tbView.infiniteScrollingView stopAnimating];
+                                       [[XBToastManager ShardInstance] showtoast:@"网络请求失败"];
+                                   }];
 }
 
 #pragma mark - tableview
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return arrAdvices.count;
+    return arrQueryTasks.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -162,28 +249,20 @@
         cell = [[[NSBundle mainBundle] loadNibNamed:@"HomeAdviceCell" owner:self options:nil] lastObject];
     }
     
+    [cell setContent:[arrQueryTasks objectAtIndex:indexPath.section]];
+    
     cell.imvAdviceIcon.hidden = YES;
     cell.constraintsTitlePaddingLeft.constant = -20;
     
     return cell;
-    
-//    static NSString *CellIdentifier = @"allProItemCell";
-//    AllProItemCell *cell = (AllProItemCell*)[tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
-//    if(cell == nil)
-//    {
-//        cell = [[AllProItemCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-//    }
-//    [cell setProItem:[arrPros objectAtIndex:indexPath.row] type:ProCellType_All];
-//    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    int proid = [[[arrPros objectAtIndex:indexPath.row] goodsID] intValue];
     if(delegate)
     {
-        [delegate doClickProduct:proid];
+        [delegate doClickProduct:(int)indexPath.row taskModel:[arrQueryTasks objectAtIndex:indexPath.section]];
     }
 }
 

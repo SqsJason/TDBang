@@ -9,8 +9,7 @@
 /**
  **     New Global Color Theme
  **/
-#define k_GlobalColor_Purple            [UIColor colorWithRed:130/255.0 green:45/255.0 blue:139/255.0 alpha:1.0]
-#define k_GlobalColor_Gray66            [UIColor colorWithRed:66/255.0 green:66/255.0 blue:66/255.0 alpha:1.0]
+#define Color_CommonBGColor            [UIColor hexFloatColor:@"f8f8f8"]
 
 ////////////////// UINavigationBar
 #pragma mark - UINavigationBar

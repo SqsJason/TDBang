@@ -15,10 +15,12 @@
 @property (strong, nonatomic) IBOutlet UITableViewCell *conmentCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *moreConmentCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *noticeCell;
+
+@property (strong, nonatomic) TaskModel *taskModel;
+
 @property (weak, nonatomic) IBOutlet UIButton *btnWantEnroll;
 - (IBAction)wantEnrollAction:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *btnWantComplaint;
 - (IBAction)wantComplaintAction:(id)sender;
-
 
 @end

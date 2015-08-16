@@ -28,17 +28,37 @@
     if (self)
     {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
-      
-        view1 = [[HomeNewIngOrEndView alloc] initWithFrame:CGRectMake(0, 0, mainWidth / 2, 60)];
-        view1.delegate = self;
-        [self addSubview:view1];
-    
-        view2 = [[HomeNewIngOrEndView alloc] initWithFrame:CGRectMake(mainWidth / 2, 0, mainWidth / 2, 60)];
-        view2.delegate = self;
-       [self addSubview:view2];
-
     }
     return self;
+}
+
+- (void)setHolderButtonImage_O:(NSString *)imgNameO
+                       Title_O:(NSString *)titleO
+                       Image_T:(NSString *)imgNameT
+                       Title_T:(NSString *)titleT
+                           tag:(NSInteger)aTag
+{
+    view1 = [[HomeNewIngOrEndView alloc] initWithFrame:CGRectMake(0, 0, mainWidth / 2, 60)];
+    [view1 setButtonImage:imgNameO Title:titleO];
+    view1.delegate = self;
+    [self addSubview:view1];
+    UIButton *btn1 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, mainWidth / 2, 60)];
+    btn1.tag = aTag;
+    [btn1 setTitle:@"" forState:UIControlStateNormal];
+    btn1.backgroundColor = [UIColor clearColor];
+    [btn1 addTarget:self action:@selector(firstButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:btn1];
+    
+    view2 = [[HomeNewIngOrEndView alloc] initWithFrame:CGRectMake(mainWidth / 2, 0, mainWidth / 2, 60)];
+    [view2 setButtonImage:imgNameT Title:titleT];
+    view2.delegate = self;
+    [self addSubview:view2];
+    UIButton *btn2 = [[UIButton alloc] initWithFrame:CGRectMake(mainWidth / 2, 0, mainWidth / 2, 60)];
+    btn2.tag = aTag;
+    btn2.backgroundColor = [UIColor clearColor];
+    [btn2 setTitle:@"" forState:UIControlStateNormal];
+    [btn2 addTarget:self action:@selector(secondButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:btn2];
 }
 
 - (void)setNews:(HomeNewingList*)listNewing homepage:(NSArray*)listHomepage
@@ -86,4 +106,21 @@
         [delegate doClickGoods:goodsId codeId:codeId];
     }
 }
+
+- (void)firstButtonAction:(UIButton *)sender
+{
+    if(delegate && [delegate respondsToSelector:@selector(firstItemClicked:)])
+    {
+        [delegate firstItemClicked:sender];
+    }
+}
+
+- (void)secondButtonAction:(UIButton *)sender
+{
+    if(delegate && [delegate respondsToSelector:@selector(secondItemClicked:)])
+    {
+        [delegate secondItemClicked:sender];
+    }
+}
+
 @end

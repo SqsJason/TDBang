@@ -20,4 +20,16 @@
     // Configure the view for the selected state
 }
 
+- (void) setContentWithCommentModel:(TaskCommentModel *)comment
+{
+    NSDictionary *userDic = comment.user;
+    [_imvHeadImage setImage_oy:nil image:[userDic objectForKeyNotNull:@"headFilePath"]];
+    _lblConment.text = comment.content;
+}
+
+- (void)updateConstraints{
+    _lblConment.preferredMaxLayoutWidth = mainWidth - 75;
+    [super updateConstraints];
+}
+
 @end

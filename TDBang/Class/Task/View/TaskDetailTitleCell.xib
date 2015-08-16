@@ -20,12 +20,6 @@
                             <constraint firstAttribute="height" constant="60" id="hxq-1Q-Gxa"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xM8-Fo-U3S">
-                        <rect key="frame" x="80" y="15" width="48" height="21.5"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="6wH-OU-lAZ">
                         <rect key="frame" x="298" y="30" width="12" height="20"/>
                         <constraints>
@@ -61,6 +55,9 @@
                             <color key="titleColor" red="0.4693647111" green="0.4693647111" blue="0.4693647111" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <connections>
+                            <action selector="actionQueryAllTasks:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="ABZ-Ma-IcL"/>
+                        </connections>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="a0g-eW-F1D">
                         <rect key="frame" x="123" y="92" width="10" height="16"/>
@@ -76,6 +73,9 @@
                             <color key="titleColor" red="0.4693647111" green="0.4693647111" blue="0.4693647111" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
+                        <connections>
+                            <action selector="actionQueryAllAcceptTasks:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="uAc-dZ-Gv8"/>
+                        </connections>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_arrow_right" translatesAutoresizingMaskIntoConstraints="NO" id="VDM-oA-IjG">
                         <rect key="frame" x="282" y="92" width="10" height="16"/>
@@ -86,11 +86,16 @@
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r6G-Hd-1mT">
                         <rect key="frame" x="80" y="40" width="205" height="30"/>
-                        <color key="backgroundColor" red="0.87450678660000003" green="0.87450678660000003" blue="0.87450678660000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="lMD-FF-khr"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xM8-Fo-U3S">
+                        <rect key="frame" x="80" y="15" width="48" height="21.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="b8N-OJ-RQW" firstAttribute="leading" secondItem="a0g-eW-F1D" secondAttribute="trailing" constant="27" id="3Cb-7p-fWy"/>
@@ -122,6 +127,13 @@
                     <constraint firstAttribute="trailing" secondItem="o7o-7X-DH5" secondAttribute="trailing" id="wUe-EF-X9H"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="btnAllAcceptTasks" destination="F4j-U4-Jmp" id="ZDz-P1-qCG"/>
+                <outlet property="btnAllTasks" destination="2MD-wZ-r8A" id="0wM-Wh-Pv1"/>
+                <outlet property="imvUserHead" destination="gpN-eO-hTp" id="WlQ-X6-6cJ"/>
+                <outlet property="lblUserName" destination="xM8-Fo-U3S" id="xtN-gM-MRb"/>
+                <outlet property="vStarHolder" destination="r6G-Hd-1mT" id="cPc-XX-XJG"/>
+            </connections>
             <point key="canvasLocation" x="217" y="285"/>
         </tableViewCell>
     </objects>

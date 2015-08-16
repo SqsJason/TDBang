@@ -10,10 +10,22 @@
 #import "HomeModel.h"
 
 @protocol HomeNewCellDelegate <NSObject>
+
+- (void)firstItemClicked:(UIButton *)sender;
+- (void)secondItemClicked:(UIButton *)sender;
+@optional
 - (void)doClickGoods:(int)goodsId codeId:(int)codeId;
+
 @end
 
 @interface HomeNewCell : UITableViewCell
 @property(nonatomic,weak)id<HomeNewCellDelegate> delegate;
 - (void)setNews:(HomeNewingList*)listNewing homepage:(NSArray*)listHomepage;
+
+- (void)setHolderButtonImage_O:(NSString *)imgNameO
+                       Title_O:(NSString *)titleO
+                       Image_T:(NSString *)imgNameT
+                       Title_T:(NSString *)titleT
+                           tag:(NSInteger)aTag;
+
 @end

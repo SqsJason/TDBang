@@ -7,11 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserInfoModel.h"
 
 @protocol MineUserViewDelegate <NSObject>
 - (void)btnPayAction;
 @end
 
 @interface MineUserView : UIView
+{
+    UIImageView *imvHead;
+    UILabel* lbl;
+    UILabel* lblDescription;
+}
 @property(nonatomic,weak)id<MineUserViewDelegate> delegate;
+
+- (void)setUserBasicInfo:(ENUserInfo *)userInfo hideJiFenButton:(BOOL)isHide;
+
 @end

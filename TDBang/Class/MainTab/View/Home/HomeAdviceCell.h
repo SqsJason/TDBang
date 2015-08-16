@@ -13,5 +13,14 @@
 @property (weak, nonatomic) IBOutlet UIImageView *imvAdviceIcon;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *constraintsTitlePaddingLeft;
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
+@property (weak, nonatomic) IBOutlet UILabel *lblPayment;
+@property (weak, nonatomic) IBOutlet UILabel *lblDateTime;
+@property (weak, nonatomic) IBOutlet UIImageView *imvStatusImage;
+@property (weak, nonatomic) IBOutlet UILabel *lblNeedPeople;
+@property (weak, nonatomic) IBOutlet UILabel *lblDistance;
+
+
+- (void)setContent:(TaskModel *)taskDetil;
+
 
 @end

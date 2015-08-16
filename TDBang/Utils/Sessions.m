@@ -9,11 +9,15 @@
 
 #import "Sessions.h"
 #import <objc/runtime.h>
+#import "LoginModel.h"
+#import "CJSONDeserializer.h"
+#import "LoginNewVC.h"
 
 #define SESSION_KEY @"SESSION_DATA"
 
 @implementation Sessions
-@synthesize accessToken,userUDID;
+@synthesize accessToken,userUDID,userInfoModel;
+@synthesize locationLat,locationLng;
 
 + (Sessions*)sharedInstance {
     DEFINE_SHARED_INSTANCE_USING_BLOCK(^{
@@ -38,6 +42,8 @@
     self.userObjectName             = nil;
     self.numMessage                 = 0;
     self.numPoints                  = 0;
+    self.locationLat                = nil;
+    self.locationLng                = nil;
     
     self.strExpirationDate          = nil;
     self.ID_for_primaryProfileImage = nil;
@@ -179,6 +185,86 @@
 {
 	return [self methodsArrayOfObject:self
 						withClassType:[self class]];
+}
+
+- (void)gotoLogin:(UIViewController *)fromPage
+{
+    LoginNewVC* vc = [[LoginNewVC alloc] initWithNibName:@"LoginNewVC" bundle:nil];
+    UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    [fromPage.navigationController presentViewController:nav animated:YES completion:nil];
+}
+
+- (void)logout
+{
+    accessToken = nil;
+    userUDID = nil;
+    userInfoModel = nil;
+    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:kXBCookie];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:TDBUserInfo];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotiTypeUserLogout object:nil];
+}
+
+- (NSDictionary *)parseJsonData:(NSString *)strJson
+{
+    NSString *jsonStringSrc     =  strJson;
+    NSData *jsonData            =  [jsonStringSrc  dataUsingEncoding : NSUTF8StringEncoding];
+    NSError *error              =  nil ;
+    NSDictionary *dictionary    =  [[CJSONDeserializer deserializer] deserializeAsDictionary:jsonData error:&error ];
+    return dictionary;
+}
+
+- (BOOL)isUserOnline
+{
+    NSString* cookie = [[[NSUserDefaults standardUserDefaults] objectForKey:kXBCookie] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    __block BOOL isUserOnline = NO;
+    if(!cookie || cookie.length == 0)
+    {
+        [self logout];
+        return isUserOnline;
+    }else{
+        isUserOnline = YES;
+        NSDictionary *dicUserInfo = [[NSUserDefaults standardUserDefaults] objectForKey:TDBUserInfo];
+        if ([Jxb_Common_Common isNullOrNilObject:dicUserInfo]) {
+            [self getCurrentUserInfoSuccess:^(NSObject *result) {
+                
+            } failure:^(NSError *error) {
+                
+            }];
+        }else{
+            ENUserInfo *userInfo = [[ENUserInfo alloc] initUserInfoModelWithDic:dicUserInfo];
+            [Sessions sharedInstance].userInfoModel = userInfo;
+        }
+        
+        return isUserOnline;
+    }
+}
+
+- (void) getCurrentUserInfoSuccess:(void(^)(NSObject* result))success failure:(void(^)(NSError* error))failure
+{
+    [LoginModel getCurrentUserInfoSuccess:^(AFHTTPRequestOperation *operation, NSObject *result) {
+        [[XBToastManager ShardInstance] hideprogress];
+        
+        UserInfoParser* userInfoParser = [[UserInfoParser alloc] initWithDictionary:(NSDictionary*)result];
+        if ([userInfoParser.success boolValue]) {
+            NSDictionary *dictionary    =  [self parseJsonData:userInfoParser.result];
+            ENUserInfo *userInfo        = [[ENUserInfo alloc] initUserInfoModelWithDic:dictionary];
+            if (userInfo != nil) {
+                [Sessions sharedInstance].userInfoModel = userInfo;
+                success(result);
+            }else{
+                [self logout];
+                failure(nil);
+            }
+        }else{
+            failure(nil);
+            [self logout];
+        }
+    } failure:^(NSError *error) {
+        failure(error);
+        [[XBToastManager ShardInstance] hideprogress];
+        [self logout];
+    }];
 }
 
 

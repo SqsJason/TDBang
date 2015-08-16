@@ -17,8 +17,18 @@
 #import "MineLoginView.h"
 #import "HomeNewCell.h"
 #import "TaskDetailVC.h"
+#import "MineUserView.h"
+#import "QueryReleasedTaskVC.h"
+#import "QueryAcceptVC.h"
 
-@interface TabNewestVC () <UITableViewDataSource,UITableViewDelegate,AllProTypeViewDelegate,HomeNewCellDelegate>
+@interface TabNewestVC ()
+<
+UITableViewDataSource,
+UITableViewDelegate,
+AllProTypeViewDelegate,
+HomeNewCellDelegate,
+HomeNewCellDelegate
+>
 {
     LMDropdownView  *dropdownView;
     
@@ -36,9 +46,18 @@
 
 @implementation TabNewestVC
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotiTypeUserLogin object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotiTypeUserLogout object:nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"管理";
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshMyData) name:NotiTypeUserLogin object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshMyData) name:NotiTypeUserLogout object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadNewest) name:kDidNotifyReloadNewest object:nil];
     
@@ -52,18 +71,6 @@
     }
     
     __weak typeof (self) wSelf = self;
-    
-//    btnRigth = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [btnRigth addTarget:self action:@selector(btnRightAction) forControlEvents:UIControlEventTouchUpInside];
-//    if(![OyTool ShardInstance].bIsForReview)
-//    {
-//        [self actionCustomNavBtn:btnRigth nrlImage:@"" htlImage:@"" title:@"全部分类▽"];
-//    }
-//    else
-//    {
-//        [self actionCustomNavBtn:btnRigth nrlImage:@"" htlImage:@"" title:[dicTypeName.allValues objectAtIndex:0]];
-//    }
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:btnRigth];
     
     tbView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     tbView.delegate = self;
@@ -119,6 +126,16 @@
     }
     [btn sizeToFit];
 }
+
+#pragma mark - load data
+/**
+ *  刷新数据
+ */
+- (void)refreshMyData
+{
+    [tbView reloadData];
+}
+
 
 #pragma mark - right button action
 - (void)btnRightAction
@@ -205,8 +222,22 @@
 {
     if (section == 0)
     {
-        MineLoginView* v = [[MineLoginView alloc] initWithFrame:CGRectMake(0, 0, mainWidth, 150)];
-        return v;
+        if ([[Sessions sharedInstance] isUserOnline])
+        {
+            MineUserView* v = [[MineUserView alloc] initWithFrame:CGRectMake(0, 0, mainWidth, 150)];
+            if ([[Sessions sharedInstance].userInfoModel isKindOfClass:[ENUserInfo class]]) {
+                [v setUserBasicInfo:[Sessions sharedInstance].userInfoModel hideJiFenButton:YES];
+            }else{
+                [[Sessions sharedInstance] isUserOnline];
+            }
+            return v;
+        }
+        else
+        {
+            MineLoginView* v = [[MineLoginView alloc] initWithFrame:CGRectMake(0, 0, mainWidth, 150)];
+            [v setButtonsHide:YES];
+            return v;
+        }
     }
     if (section == 1 || section == 2)
     {
@@ -263,6 +294,26 @@
             cell = [[HomeNewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
         [cell setDelegate:self];
+        
+        if (indexPath.section == 0) {
+            [cell setHolderButtonImage_O:@"icon_yifarenwu"
+                                 Title_O:@"已发任务"
+                                 Image_T:@"icon_yijierenwu"
+                                 Title_T:@"已接任务"
+                                     tag:0];
+        }else if (indexPath.section == 1){
+            [cell setHolderButtonImage_O:@"icon_wodepinglun"
+                                 Title_O:@"我的评论"
+                                 Image_T:@"icon_tadepinglun"
+                                 Title_T:@"他的评论"
+                                     tag:1];
+        }else if(indexPath.section == 2){
+            [cell setHolderButtonImage_O:@"icon_tousu"
+                                 Title_O:@"投诉"
+                                 Image_T:@"icon_jianyi"
+                                 Title_T:@"建议"
+                                     tag:2];
+        }
         return cell;
     }
 }
@@ -271,45 +322,29 @@
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if(indexPath.row < [[[[HomeInstance ShardInstnce] listNewing] listItems] count])
-    {
-        HomeNewing* item = [[[[HomeInstance ShardInstnce] listNewing] listItems] objectAtIndex:indexPath.row];
-        ProductDetailVC* vc = [[ProductDetailVC alloc] initWithGoodsId:0 codeId:[item.codeID intValue]];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    else
-    {
-        NewestProItme* item = [listNew objectAtIndex:indexPath.row - [HomeInstance ShardInstnce].listNewing.listItems.count];
-        
-        ProductLotteryVC* vc = [[ProductLotteryVC alloc] initWithGoods:[item.codeGoodsID intValue] codeId:[item.codeID intValue]];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
-    }
+    
 }
 
 #pragma mark - type view delegate
-- (void)selectedTypeCode:(int)code
+- (void)selectedTypeCode:(int)code{}
+
+-(void)doClickGoods:(int)goodsId codeId:(int)codeId{}
+
+- (void)firstItemClicked:(UIButton *)sender
 {
-    iCodeType = code;
-    [dropdownView hide];
-    
-    NSString* key = [NSString stringWithFormat:@"%d",code];
-    NSString* name = [dicTypeName objectForKey:key];
-    
-    [self actionCustomNavBtn:btnRigth nrlImage:@"" htlImage:@"0" title:name];
-    
-    __weak typeof (self) wSelf = self;
-    curPage = 1;
-    [self getData:^{
-        __strong typeof (wSelf) sSelf = wSelf;
-        sSelf->listNew = nil;
-    }];
+    if (sender.tag == 0) {
+        QueryReleasedTaskVC *releaseTask = [[QueryReleasedTaskVC alloc] initWithNibName:@"QueryReleasedTaskVC" bundle:nil];
+        releaseTask.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:releaseTask animated:YES];
+    }
 }
 
--(void)doClickGoods:(int)goodsId codeId:(int)codeId
+- (void)secondItemClicked:(UIButton *)sender;
 {
-    
+    if (sender.tag == 0) {
+        QueryAcceptVC *acceptVC = [[QueryAcceptVC alloc] initWithNibName:@"QueryAcceptVC" bundle:nil];
+        [self.navigationController pushViewController:acceptVC animated:YES];
+    }
 }
 
 @end

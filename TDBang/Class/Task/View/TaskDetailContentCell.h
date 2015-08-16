@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QueryComment.h"
 
 @interface TaskDetailContentCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *lblContent;

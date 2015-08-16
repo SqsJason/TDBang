@@ -19,6 +19,8 @@
                 <outlet property="btnHoleTasks" destination="kEh-eN-tuS" id="rLv-In-54Q"/>
                 <outlet property="btnUpcomingTasks" destination="tWM-TT-iWM" id="0U9-Rd-gYS"/>
                 <outlet property="imv_TitleImage" destination="Nnu-AB-hhS" id="lpl-j9-ubD"/>
+                <outlet property="lblCredit" destination="hcp-iX-7Aw" id="PKP-CH-t6A"/>
+                <outlet property="lblService" destination="Jpd-M0-5xx" id="1zf-GH-U4q"/>
                 <outlet property="tfCompanyDescribe" destination="72y-lW-XmW" id="rOA-o1-Wwi"/>
                 <outlet property="tfOwnDescribe" destination="7CX-ih-TOK" id="XfV-Mf-2Qa"/>
                 <outlet property="tfPhoneNumber" destination="OTE-kK-6Yl" id="mZJ-x7-5WU"/>
@@ -36,7 +38,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="1wz-7b-VqH">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="1wz-7b-VqH" customClass="TPKeyboardAvoidingTableView">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
@@ -73,17 +75,17 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dc9-0D-J7f">
                         <rect key="frame" x="108" y="25" width="470" height="30"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="信用:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcp-iX-7Aw">
-                                <rect key="frame" x="0.0" y="0.0" width="60" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="信用:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcp-iX-7Aw">
+                                <rect key="frame" x="0.0" y="0.0" width="220" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="Abf-D9-nWw"/>
+                                    <constraint firstAttribute="width" constant="160" id="Abf-D9-nWw"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="hcp-iX-7Aw" secondAttribute="bottom" id="JuF-0a-ioB"/>
                             <constraint firstItem="hcp-iX-7Aw" firstAttribute="leading" secondItem="dc9-0D-J7f" secondAttribute="leading" id="e4v-ud-ykh"/>
@@ -94,17 +96,17 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8AY-EI-UOj">
                         <rect key="frame" x="108" y="65" width="470" height="30"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="服务:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jpd-M0-5xx">
-                                <rect key="frame" x="0.0" y="0.0" width="60" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="服务:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jpd-M0-5xx">
+                                <rect key="frame" x="0.0" y="0.0" width="204" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="ToR-hJ-IRa"/>
+                                    <constraint firstAttribute="width" constant="160" id="ToR-hJ-IRa"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="Jpd-M0-5xx" secondAttribute="bottom" id="IWG-4T-1Df"/>
                             <constraint firstItem="Jpd-M0-5xx" firstAttribute="leading" secondItem="8AY-EI-UOj" secondAttribute="leading" id="Tlj-Of-vt7"/>

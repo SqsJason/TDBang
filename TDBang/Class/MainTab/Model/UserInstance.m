@@ -8,6 +8,7 @@
 
 #import "UserInstance.h"
 #import "UserModel.h"
+#import "LoginModel.h"
 
 static UserInstance* user = nil;
 
@@ -22,12 +23,45 @@ static UserInstance* user = nil;
     __block NSString* userMoney;
     __block NSString* userLevel;
     __block NSString* userLevelName;
+    
+    __block NSString* idNo;
+    __block NSString* regType;
+    __block NSString* userDesc;
+    __block NSString* sex;
+    __block NSString* serialId;
+    __block NSString* tel;
+    __block NSString* companyName;
+    __block NSString* fuwuStar;
+    __block NSString* headFilePath;
+    __block NSString* nickName;
+    __block NSString* age;
+    __block NSString* xinyongStar;
+    __block NSString* createDate;
+    __block NSString* headFileId;
+    __block NSString* loginPwd;
+    __block NSString* loginName;
 }
 
 @end
 
 @implementation UserInstance
 @synthesize userName,userPhone,userId,userPhoto,userFuFen,userExp,userMoney,userLevel,userLevelName;
+@synthesize idNo;
+@synthesize regType;
+@synthesize userDesc;
+@synthesize sex;
+@synthesize serialId;
+@synthesize tel;
+@synthesize companyName;
+@synthesize fuwuStar;
+@synthesize headFilePath;
+@synthesize nickName;
+@synthesize age;
+@synthesize xinyongStar;
+@synthesize createDate;
+@synthesize headFileId;
+@synthesize loginPwd;
+@synthesize loginName;
 
 +(UserInstance*)ShardInstnce
 {
@@ -66,6 +100,22 @@ static UserInstance* user = nil;
     userMoney = nil;
     userLevel = nil;
     userLevelName = nil;
+    idNo = nil;
+    regType = nil;
+    userDesc = nil;
+    sex = nil;
+    serialId = nil;
+    tel = nil;
+    companyName = nil;
+    fuwuStar = nil;
+    headFilePath = nil;
+    nickName = nil;
+    age = nil;
+    xinyongStar = nil;
+    createDate = nil;
+    headFileId = nil;
+    loginPwd = nil;
+    loginName = nil;
     
     [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:kXBCookie];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -86,24 +136,12 @@ static UserInstance* user = nil;
         OYUser* user = [[OYUser alloc] initWithDictionary:(NSDictionary*)result];
         if ([user.code intValue] == 0)
         {
-            userName = user.username;
-            [UserModel getUserDetail:^(AFHTTPRequestOperation* operation, NSObject* result){
-                NSString* body = [NSString stringWithFormat:@"%@",result];
-                userFuFen = [[Jxb_Common_Common sharedInstance] getMidString:body front:@"可用福分 <span class=\"orange\">" end:@"<"];
-                userExp = [[Jxb_Common_Common sharedInstance] getMidString:body front:@"经验值 <span class=\"orange\">" end:@"<"];
-                userMoney = [[Jxb_Common_Common sharedInstance] getMidString:body front:@"余额 <span class=\"orange\">" end:@"<"];
-                userId = [[Jxb_Common_Common sharedInstance] getMidString:body front:@"<a href=\"/userpage/" end:@"\""];
-                userPhoto = [[Jxb_Common_Common sharedInstance] getMidString:body front:@"class=\"z-Himg\"><img src=\"" end:@"\""];
-                userPhone = [[Jxb_Common_Common sharedInstance] getMidString:body front:[NSString stringWithFormat:@"%@</b><em>(",userName] end:@")"];
-                userLevel = [[Jxb_Common_Common sharedInstance] getMidString:body front:@"z-class-icon" end:@" g"];
-                NSString* tmp = [[Jxb_Common_Common sharedInstance] getMidString:body front:@"z-class-icon" end:@"</div>"];
-                userLevelName = [[Jxb_Common_Common sharedInstance] getMidString:tmp front:@"</s>" end:@"<"];
-                if(!userPhone)
-                    userPhone = userName;
-                [[NSNotificationCenter defaultCenter] postNotificationName:kDidLoginOk object:nil];
-
+            [LoginModel getCurrentUserInfoSuccess:^(AFHTTPRequestOperation *operation, NSObject *result) {
+                UserInfoParser* userInfoParser = [[UserInfoParser alloc] initWithDictionary:(NSDictionary*)result];
+                if ([userInfoParser.success boolValue]) {
+                }
+            } failure:^(NSError *error) {
                 
-            } failure:^(NSError* error){
             }];
         }
         else

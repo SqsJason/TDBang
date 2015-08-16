@@ -27,40 +27,53 @@ const static float userHeadPadding_Right    = 30.0;
     self = [super initWithFrame:frame];
     if (self)
     {
-        self.backgroundColor = [UIColor hexFloatColor:@"f8f8f8"];
-        UIImageView *imvBG = [[UIImageView alloc] initWithFrame:self.frame];
-        imvBG.image = [UIImage imageNamed:@"mine_headview_bg"];
-        imvBG.contentMode = UIViewContentModeScaleToFill;
-        [self addSubview:imvBG];
         
-        UIImageView *imvHead = [[UIImageView alloc] init];
-        imvHead.layer.cornerRadius = userHead_Size/2;
-        imvHead.layer.masksToBounds = YES;
-        imvHead.image = [UIImage imageNamed:@"kefu"];
-        
-        UILabel* lbl = [[UILabel alloc] init];
-        lbl.text = @"您还没有登录哦~";
-        lbl.textColor = [UIColor grayColor];
-        lbl.font = [UIFont systemFontOfSize:16];
-        CGSize s = [lbl.text textSizeWithFont:lbl.font constrainedToSize:CGSizeMake(MAXFLOAT, 999) lineBreakMode:NSLineBreakByCharWrapping];
-        
-        float headPadding_L = (mainWidth - s.width - userHead_Size - 2*userHeadPadding_Right)/2;
-        imvHead.frame = CGRectMake(headPadding_L, userHeadPadding_Top, userHead_Size, userHead_Size);
-        lbl.frame = CGRectMake(headPadding_L + imvHead.frame.size.width + userHeadPadding_Right, userHeadPadding_Top, s.width, s.height);
-        
-        [self addSubview:imvHead];
-        [self addSubview:lbl];
-        
-        UIButton* btn = [[UIButton alloc] initWithFrame:CGRectMake(headPadding_L + imvHead.frame.size.width + userHeadPadding_Right, 60, 90, 40)];
-        [btn.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
-        [btn setTitle:@"马上登录" forState:UIControlStateNormal];
-        [btn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-        [btn setBackgroundColor:[UIColor whiteColor]];
-        btn.layer.borderWidth = 0.5;
-        btn.layer.borderColor = [UIColor hexFloatColor:@"dedede"].CGColor;
-        [btn addTarget:self action:@selector(btnLoginAction) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:btn];
-        
+    }
+    return self;
+}
+
+- (void)setButtonsHide:(BOOL)isHide
+{
+    self.backgroundColor = [UIColor hexFloatColor:@"f8f8f8"];
+    UIImageView *imvBG = [[UIImageView alloc] initWithFrame:self.frame];
+    imvBG.image = [UIImage imageNamed:@"mine_headview_bg"];
+    imvBG.contentMode = UIViewContentModeScaleToFill;
+    [self addSubview:imvBG];
+    
+    UIImageView *imvHead = [[UIImageView alloc] init];
+    imvHead.layer.cornerRadius = userHead_Size/2;
+    imvHead.layer.masksToBounds = YES;
+    imvHead.image = [UIImage imageNamed:@"noimage"];
+    
+    UILabel* lbl = [[UILabel alloc] init];
+    lbl.text = @"您还没有登录哦~";
+    lbl.textColor = [UIColor whiteColor];
+    lbl.font = [UIFont systemFontOfSize:16];
+    CGSize s = [lbl.text textSizeWithFont:lbl.font constrainedToSize:CGSizeMake(MAXFLOAT, 999) lineBreakMode:NSLineBreakByCharWrapping];
+    
+    float headPadding_L = (mainWidth - s.width - userHead_Size - 2*userHeadPadding_Right)/2;
+    imvHead.frame = CGRectMake(headPadding_L, userHeadPadding_Top, userHead_Size, userHead_Size);
+    lbl.frame = CGRectMake(headPadding_L + imvHead.frame.size.width + userHeadPadding_Right, userHeadPadding_Top, s.width, s.height);
+    
+    [self addSubview:imvHead];
+    [self addSubview:lbl];
+    
+    float fLoginBtn_Top = 65;
+    if (isHide) {
+        fLoginBtn_Top = 75;
+    }
+    
+    UIButton* btn = [[UIButton alloc] initWithFrame:CGRectMake(headPadding_L + imvHead.frame.size.width + userHeadPadding_Right, fLoginBtn_Top, 90, 40)];
+    [btn.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
+    [btn setTitle:@"马上登录" forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+    [btn setBackgroundColor:[UIColor whiteColor]];
+    btn.layer.borderWidth = 0.5;
+    btn.layer.borderColor = [UIColor hexFloatColor:@"dedede"].CGColor;
+    [btn addTarget:self action:@selector(btnLoginAction) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:btn];
+    
+    if (!isHide) {
         CGFloat width = (mainWidth - 1)/2;
         CGFloat height = 30;
         CGFloat perW = 0;
@@ -77,7 +90,7 @@ const static float userHeadPadding_Right    = 30.0;
         lblNew.textColor = [UIColor whiteColor];
         lblNew.textAlignment = NSTextAlignmentCenter;
         lblNew.frame = CGRectMake(perW, btnNew.frame.origin.y, width, height);
-                [self addSubview:lblNew];
+        [self addSubview:lblNew];
         
         UIButton * btnShow = [[UIButton alloc] initWithFrame:CGRectMake(perW * 2 + width + 1, btnNew.frame.origin.y, width, height)];
         btnShow.backgroundColor = [UIColor blackColor];
@@ -93,7 +106,6 @@ const static float userHeadPadding_Right    = 30.0;
         lblShow.textAlignment = NSTextAlignmentCenter;
         [self addSubview:lblShow];
     }
-    return self;
 }
 
 - (void)btnLoginAction

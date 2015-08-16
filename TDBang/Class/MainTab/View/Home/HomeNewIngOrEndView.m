@@ -28,18 +28,15 @@
     self = [super initWithFrame:frame];
     if(self)
     {
-//        viewIng = [[HomeNewingView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-//        viewIng.delegate = self;
-//        [self addSubview:viewIng];
-//        
-//        viewEd = [[HomeNewedView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
-//        viewEd.delegate = self;
-//        [self addSubview:viewEd];
-        
-        viewLoading = [[HomeNewLoadView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height) image:@"kefu" title:@"发布任务"];
-        [self addSubview:viewLoading];
     }
     return self;
+}
+
+- (void)setButtonImage:(NSString *)imgName Title:(NSString *)title
+{
+    CGRect frame = self.frame;
+    viewLoading = [[HomeNewLoadView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height) image:imgName title:title];
+    [self addSubview:viewLoading];
 }
 
 - (void)setNewLoad

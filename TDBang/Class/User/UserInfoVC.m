@@ -16,6 +16,7 @@
 @end
 
 @implementation UserInfoVC
+@synthesize userInfo;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,32 +31,25 @@
     _tvUserInfo.backgroundColor = [UIColor hexFloatColor:@"f6f6f6"];
     _imv_TitleImage.layer.cornerRadius = 40.0;
     _imv_TitleImage.layer.masksToBounds = YES;
-    UITapGestureRecognizer *_left = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handTap:)];
-    [self.view addGestureRecognizer:_left];
     
     if (arrTextFields == nil) {
         arrTextFields = [[NSMutableArray alloc] init];
     }else{
         [arrTextFields removeAllObjects];
     }
-    [arrTextFields addObject:_tfPhoneNumber];
-    [arrTextFields addObject:_tfUserAge];
-    [arrTextFields addObject:_tfUserName];
-    [arrTextFields addObject:_tfUserGender];
-    [arrTextFields addObject:_tfCompanyDescribe];
-    [arrTextFields addObject:_tfOwnDescribe];
+    
+    [_imv_TitleImage setImage_oy:nil image:userInfo.headFilePath];
+    
+    _tfPhoneNumber.text = userInfo.tel;
+    _tfUserAge.text = userInfo.age;
+    _tfUserName.text = userInfo.nickName;
+    _tfUserGender.text = userInfo.sex;
+    _tfCompanyDescribe.text = userInfo.companyName;
+    _tfOwnDescribe.text = userInfo.userDesc;
+    
+    _lblCredit.text = [NSString stringWithFormat:@"信用: %@颗星",userInfo.xinyongStar];
+    _lblService.text = [NSString stringWithFormat:@"服务: %@颗星",userInfo.fuwuStar];
 }
-
-- (void) handTap:(UITapGestureRecognizer*) gesture
-{
-    for (UITextField *tf in arrTextFields) {
-        if ([tf isFirstResponder]) {
-            [tf resignFirstResponder];
-            break;
-        }
-    }
-}
-
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {

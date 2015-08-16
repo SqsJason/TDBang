@@ -184,7 +184,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadApp) name:kDidShowCart object:nil];
     
-    [[UserInstance ShardInstnce] isUserStillOnline];
+    [[Sessions sharedInstance] isUserOnline];
     
     [[AFNetworkReachabilityManager sharedManager] startMonitoring];
     
@@ -202,20 +202,10 @@
     // set  makeKeyAndVisible
     [[self window] makeKeyAndVisible];
     
-    [Sessions sharedInstance].accessToken = [OpenUDID value];
+    [Sessions sharedInstance].accessToken = [OpenUDID value];//userUDID
+    NSLog(@"%@",[OpenUDID value]);
+    [Sessions sharedInstance].userUDID = [OpenUDID value];
     [[Sessions sharedInstance] save];
-    
-    //    UIViewController* vcMain = [self loadFramework];
-    //    if (vcMain && oyUseLib)
-    //    {
-    //        [[self window] setRootViewController:vcMain];
-    //    }
-    //    else
-    //    {
-    //        UIViewController *rootViewController = [self setRootVC:NO];
-    //        [[self window] setRootViewController:rootViewController];
-    //        [self setCartNum];
-    //    }
     
     return YES;
 }
@@ -259,7 +249,7 @@
 #pragma mark - umeng
 - (void)setUmeng
 {
-    NSString* umApp = @"";//自行设置key
+    NSString* umApp = @"TDB_Key";//自行设置key
     [MobClick startWithAppkey:umApp reportPolicy:SENDWIFIONLY channelId:nil];
     NSString *version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
     [MobClick setAppVersion:version];
@@ -280,10 +270,10 @@
                                            categories:nil];
     } else {
         //categories 必须为nil
-        [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-                                                       UIRemoteNotificationTypeSound |
-                                                       UIRemoteNotificationTypeAlert)
-                                           categories:nil];
+//        [APService registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+//                                                       UIRemoteNotificationTypeSound |
+//                                                       UIRemoteNotificationTypeAlert)
+//                                           categories:nil];
     }
 #else
     //categories 必须为nil
@@ -322,3 +312,8 @@
 }
 
 @end
+
+AppDelegate *appDelegate(void)
+{
+    return (AppDelegate *)[[UIApplication sharedApplication] delegate];
+}

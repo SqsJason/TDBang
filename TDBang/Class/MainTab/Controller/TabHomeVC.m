@@ -27,6 +27,7 @@
 #import "HomeAdviceCell.h"
 #import "HomeAdviceTitleCell.h"
 #import "TaskDetailVC.h"
+#import "GetRecommendTasks.h"
 
 /*
  tFont: AppleSDGothicNeo-Bold
@@ -56,6 +57,9 @@
     {
         [timer invalidate];
         timer = nil;
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:kDidNotifyFromBack object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:NotiTypeUserLogin object:nil];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:NotiTypeUserLogout object:nil];
     }
 }
 
@@ -63,26 +67,25 @@
     [super viewDidLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshMyData) name:kDidNotifyFromBack object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshMyData) name:NotiTypeUserLogin object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshMyData) name:NotiTypeUserLogout object:nil];
     
     self.title = @"首页";
     __weak typeof (self) wSelf = self;
     
     if(![OyTool ShardInstance].bIsForReview)
     {
-        [self actionCustomRightBtnWithNrlImage:@"search" htlImage:@"search" title:@"" action:^{
-            SearchVC* vc = [[SearchVC alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            [wSelf.navigationController pushViewController:vc animated:YES];
-        }];
+//        [self actionCustomRightBtnWithNrlImage:@"search" htlImage:@"search" title:@"" action:^{
+//            SearchVC* vc = [[SearchVC alloc] init];
+//            vc.hidesBottomBarWhenPushed = YES;
+//            [wSelf.navigationController pushViewController:vc animated:YES];
+//        }];
     }
     
     if (arrAdvices == nil) {
         arrAdvices = [[NSMutableArray alloc] init];
     }
-    
-    [arrAdvices addObject:@"Advices1"];
-    [arrAdvices addObject:@"Advices2"];
-    [arrAdvices addObject:@"Advices3"];
+
     
     tbView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     tbView.delegate = self;
@@ -93,8 +96,7 @@
     [self.view addSubview:tbView];
     
     [tbView addPullToRefreshWithActionHandler:^{
-        [wSelf getNewest];
-        [wSelf getOrderShows];
+        [wSelf getNewestRecommentTasks];
     }];
  
     [tbView.pullToRefreshView setOYStyle];
@@ -113,30 +115,24 @@
  */
 - (void)refreshMyData
 {
-    [self getNewest];
-    [self getOrderShows];
+    [tbView reloadData];
 }
 
 /**
- *  最新揭晓
+ *  最新推荐任务
  */
-- (void)getNewest
+- (void)getNewestRecommentTasks
 {
     __weak UITableView* wTb = tbView;
-    [HomeModel getNewing:^(AFHTTPRequestOperation* operation, NSObject* result){
-         [HomeInstance ShardInstnce].listNewing = [[HomeNewingList alloc] initWithDictionary:(NSDictionary*)result];
-        [HomeModel getHomePage:^(AFHTTPRequestOperation* operation, NSObject* result){
-            listHomepage = [[HomePageList alloc] initWithDictionary:(NSDictionary*)result];
-            [wTb.pullToRefreshView stopAnimating];
-            [wTb reloadData];
-            [[NSNotificationCenter defaultCenter] postNotificationName:kDidNotifyReloadNewest object:nil];
-        } failure:^(NSError* error){
-            [wTb.pullToRefreshView stopAnimating];
-                //[[XBToastManager ShardInstance] showtoast:[NSString stringWithFormat:@"获取首页商品异常：%@",error]];
-        }];
-    } failure:^(NSError* error){
+    [GetRecommendTasks getRecommendTasksWithCity:@"徐州" success:^(AFHTTPRequestOperation *operation, NSObject *result) {
         [wTb.pullToRefreshView stopAnimating];
-        //[[XBToastManager ShardInstance] showtoast:[NSString stringWithFormat:@"获取最新揭晓异常：%@",error]];
+        RecommentTasksParser *parser = [[RecommentTasksParser alloc] initWithDictionary:(NSDictionary *)result];
+        if ([parser.success boolValue]) {
+            
+            [wTb reloadData];
+        }
+    } failure:^(NSError *error) {
+        [wTb.pullToRefreshView stopAnimating];
     }];
 }
 
@@ -150,14 +146,12 @@
         [HomeInstance ShardInstnce].listAd1 = [[HomeSearchAdList alloc] initWithDictionary:(NSDictionary*)result];
         [wTb reloadData];
     } failure:^(NSError* error){
-        //[[XBToastManager ShardInstance] showtoast:[NSString stringWithFormat:@"获取搜索广告1异常:%@",error]];
     }];
 
     [HomeModel getSearchAd2:^(AFHTTPRequestOperation* operation, NSObject* result){
         [HomeInstance ShardInstnce].listAd2 = [[HomeSearchAdList alloc] initWithDictionary:(NSDictionary*)result];
         [wTb reloadData];
     } failure:^(NSError* error){
-        //[[XBToastManager ShardInstance] showtoast:[NSString stringWithFormat:@"获取搜索广告2异常:%@",error]];
     }];
 }
 
@@ -171,7 +165,6 @@
         [HomeInstance ShardInstnce].listOrderShows = [[HomeOrderShowList alloc] initWithDictionary:(NSDictionary*)result];
         [wTb reloadData];
     } failure:^(NSError* error){
-        //[[XBToastManager ShardInstance] showtoast:[NSString stringWithFormat:@"获取首页晒单分享异常:%@",error]];
     }];
 }
 
@@ -258,7 +251,7 @@
     }
     else
     {
-        static NSString *CellIdentifier = @"homeAdviceCell";
+        static NSString *CellIdentifier = @"HomeAdviceCell";
         HomeAdviceCell *cell = (HomeAdviceCell*)[tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
         if(cell == nil)
         {
@@ -312,28 +305,24 @@
     }
     else if(index == 1)
     {
-        ShowOrderListVC* vc = [[ShowOrderListVC alloc] initWithGoodsId:0];
-        vc.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:vc animated:YES];
+//        ShowOrderListVC* vc = [[ShowOrderListVC alloc] initWithGoodsId:0];
+//        vc.hidesBottomBarWhenPushed = YES;
+//        [self.navigationController pushViewController:vc animated:YES];
     }
     else if(index == 2)
     {
-        if(![UserInstance ShardInstnce].userId)
-        {
-//            LoginVC* vc = [[LoginVC alloc] init];
+//        if(![UserInstance ShardInstnce].userId)
+//        {
+//            LoginNewVC* vc = [[LoginNewVC alloc] initWithNibName:@"LoginNewVC" bundle:nil];
 //            UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:vc];
 //            [self.navigationController presentViewController:nav animated:YES completion:nil];
-            
-            LoginNewVC* vc = [[LoginNewVC alloc] initWithNibName:@"LoginNewVC" bundle:nil];
-            UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:vc];
-            [self.navigationController presentViewController:nav animated:YES completion:nil];
-        }
-        else
-        {
-            MineBuylistVC* vc = [[MineBuylistVC alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-        }
+//        }
+//        else
+//        {
+//            MineBuylistVC* vc = [[MineBuylistVC alloc] init];
+//            vc.hidesBottomBarWhenPushed = YES;
+//            [self.navigationController pushViewController:vc animated:YES];
+//        }
         
     }
 }

@@ -18,6 +18,11 @@
 @property(nonatomic,copy)NSString* str;
 @end
 
+@interface RegisterResut : OneBaseParser
+@property(nonatomic,copy)NSNumber* success;
+@property(nonatomic,copy)NSString* result;
+@end
+
 @interface RegGetCode : OneBaseParser
 @property(nonatomic,copy)NSNumber* success;
 @property(nonatomic,copy)NSString* result;

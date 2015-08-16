@@ -51,6 +51,12 @@
 #import "OpenUDID.h"
 #import "Config.h"
 #import "Sessions.h"
+#import "QueryTasksModel.h"
+#import "NSDictionary+Utility.h"
+#import "color.h"
+#import "CJSONDeserializer.h"
+#import "TPKeyboardAvoidingTableView.h"
+#import "QRadioButton.h"
 
 
 #define kDidNotifyFromBack      @"kDidNotifyFromBack"

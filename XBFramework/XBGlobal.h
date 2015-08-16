@@ -7,7 +7,8 @@
 //
 
 
-#define kXBCookie   @"kXBCookie"
+#define kXBCookie     @"key_XBCookie"
+#define TDBUserInfo   @"key_TDBUserInfo"
 
 #define kHttpAllowSaveCache    @"http_a_s_c"
 #define kHttpAllowFetchCache   @"http_a_f_c"

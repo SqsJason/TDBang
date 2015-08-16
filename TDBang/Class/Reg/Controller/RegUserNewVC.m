@@ -11,6 +11,7 @@
 #import "RegUserNextVC.h"
 #import "RegSetPwdVC.h"
 #import "CJSONDeserializer.h"
+#import "UserInfoModel.h"
 
 const static int flTimeWait = 150;
 
@@ -161,27 +162,25 @@ const static int flTimeWait = 150;
     
     __weak typeof (self) wSelf = self;
     [[XBToastManager ShardInstance] showprogress];
-    
     [RegModel regPhoneCode:_tfPhone.text code:_tfCode.text pwd:_tfPassword.text nickName:_tfNickName.text success:^(AFHTTPRequestOperation *operation, NSObject *result) {
-        //NSDictionary* dic = [operation.response allHeaderFields];
         [[XBToastManager ShardInstance] hideprogress];
-        RegResut* p = [[RegResut alloc] initWithDictionary:(NSDictionary*)result];
-        if([p.code intValue] == 1)
-        {
-            [[XBToastManager ShardInstance] hideprogress];
-            [[XBToastManager ShardInstance] showtoast:@"验证码校验不正确[1]"];
-            return ;
-        }
-        if([p.state intValue] == 1)
-        {
-            [[XBToastManager ShardInstance] showtoast:@"验证码校验不正确[2]"];
-            return;
-        }
-        if([p.state intValue] == 0)
-        {
-            RegSetPwdVC* vc = [[RegSetPwdVC alloc] initWithStr:p.str phone:_tfPhone.text];
-            vc.hidesBottomBarWhenPushed = YES;
-            [wSelf.navigationController pushViewController:vc animated:YES];
+        
+        
+        RegisterResut* p = [[RegisterResut alloc] initWithDictionary:(NSDictionary*)result];
+        if ([p.success boolValue]) {
+            [[XBToastManager ShardInstance] showtoast:@"注册成功"];
+            
+            ENUserInfo *userInfo = [[ENUserInfo alloc] initUserInfoModelWithDic:[[Sessions sharedInstance] parseJsonData:p.result]];
+            [Sessions sharedInstance].userInfoModel = userInfo;
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotiTypeUserLogin object:nil];
+            [wSelf dismissViewControllerAnimated:YES completion:^{}];
+            [[Sessions sharedInstance] getCurrentUserInfoSuccess:^(NSObject *result) {
+//                [[NSNotificationCenter defaultCenter] postNotificationName:NotiTypeUserLogin object:nil];
+            } failure:^(NSError *error) {
+                
+            }]; 
+        }else{
+            [[XBToastManager ShardInstance] showtoast:@"注册失败"];
         }
     } failure:^(NSError *error) {
         [[XBToastManager ShardInstance] hideprogress];

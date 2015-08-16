@@ -8,6 +8,8 @@
 
 #import "HomeNewLoadView.h"
 
+static const float image_Heght = 26;
+
 @interface HomeNewLoadView ()
 {
     UIImageView             *imgProduct;
@@ -33,7 +35,7 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        imgProduct = [[UIImageView alloc] initWithFrame:CGRectMake(30, (frame.size.height - 40) / 2, 40, 40)];
+        imgProduct = [[UIImageView alloc] initWithFrame:CGRectMake(30, (frame.size.height - image_Heght) / 2, image_Heght, image_Heght)];
         imgProduct.image = [UIImage imageNamed:@"noimage"];
         [self addSubview:imgProduct];
         
@@ -53,7 +55,7 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        imgProduct = [[UIImageView alloc] initWithFrame:CGRectMake(30, (frame.size.height - 40) / 2, 40, 40)];
+        imgProduct = [[UIImageView alloc] initWithFrame:CGRectMake(30, (frame.size.height - image_Heght) / 2, image_Heght, image_Heght)];
         imgProduct.image = [UIImage imageNamed:imgName];
         [self addSubview:imgProduct];
         

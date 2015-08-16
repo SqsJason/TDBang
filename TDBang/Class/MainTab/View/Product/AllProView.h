@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @protocol AllProViewDelegate <NSObject>
-- (void)doClickProduct:(int)goodsId;
+- (void)doClickProduct:(int)taskId taskModel:(TaskModel *)taskModel;
 @end
 
 @interface AllProView : UIView

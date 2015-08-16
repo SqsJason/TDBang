@@ -18,6 +18,11 @@
 @property(nonatomic,copy)NSString* result;
 @end
 
+@interface UserInfoParser : OneBaseParser
+@property(nonatomic,copy)NSNumber* success;
+@property(nonatomic,copy)NSString* result;
+@end
+
 @interface LoginOkParser : OneBaseParser
 @end
 
@@ -25,4 +30,6 @@
 
 + (void)doLogin:(NSString*)name pwd:(NSString*)pwd success:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure;
 + (void)doLoginOK:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure;
++ (void)getCurrentUserInfoSuccess:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure;
+
 @end

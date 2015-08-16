@@ -12,6 +12,8 @@
 #import "TaskDetailContentCell.h"
 #import "oneConmentCell.h"
 #import "UserInfoVC.h"
+#import "QueryComment.h"
+#import "UserInfoModel.h"
 
 @interface TaskDetailVC ()<UITableViewDataSource, UITableViewDelegate>
 {
@@ -19,9 +21,12 @@
     oneConmentCell *oneContentCell;
 }
 
+@property (nonatomic, strong) NSMutableArray *arrTasksComments;
+
 @end
 
 @implementation TaskDetailVC
+@synthesize taskModel;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -36,13 +41,38 @@
     _btnWantEnroll.layer.cornerRadius = 20.0f;
     _btnWantEnroll.layer.masksToBounds = YES;
     
+    _arrTasksComments = [NSMutableArray array];
+    
+    _tableView.backgroundColor = [UIColor hexFloatColor:@"f6f6f6"];
     _noticeCell.contentView.backgroundColor = [UIColor hexFloatColor:@"f6f6f6"];
     
     contentCell = [[[NSBundle mainBundle] loadNibNamed:@"TaskDetailContentCell" owner:self options:nil] lastObject];
-    contentCell.lblContent.text = @"这个问题得到了300+的支持和450+的收藏，答案得到了730+的支持，很详细的说明了如何在iOS7和iOS8上实现UITableView的动态行高功能.";
+    contentCell.lblContent.text = taskModel.content;
     
     oneContentCell = [[[NSBundle mainBundle] loadNibNamed:@"oneConmentCell" owner:self options:nil] lastObject];
     oneContentCell.lblConment.text = @"这个问题得到了300+的支持和450+的收藏，答案得到了730+的支持.";
+    
+    [QueryComment getTaskCommentWithSession:[Sessions sharedInstance].accessToken
+                                     taskId:taskModel.id
+                                    success:^(AFHTTPRequestOperation *operation, NSObject *result) {
+                                        QueryCommentParser *parser = [[QueryCommentParser alloc] initWithDictionary:(NSDictionary *)result];
+                                        if ([parser.success boolValue]) {
+                                            NSString *strTemp = [NSString stringWithFormat:@"{\"rows\":%@}",parser.result];
+                                            NSDictionary *dicParser = [[Sessions sharedInstance] parseJsonData:strTemp];
+                                            
+                                            for (NSDictionary *dicJson in [dicParser objectForKeyNotNull:@"rows"]) {
+                                                TaskCommentModel *task = [[TaskCommentModel alloc] initWithDictionary:dicJson];
+                                                [wSelf.arrTasksComments addObject:task];
+                                            }
+
+                                            //刷新TableView
+                                            [wSelf.tableView reloadData];
+                                        }else{
+                                            
+                                        }
+                                    } failure:^(NSError *error) {
+                                        
+                                    }];
 }
 
 #pragma mark - tableview
@@ -64,7 +94,15 @@
             return 1;
             break;
         case 3:
-            return 3;
+        {
+            if (_arrTasksComments.count > 3) {
+                return 2 + 3;
+            }else if(_arrTasksComments == 0){
+                return 1;
+            }else{
+                return 2 + _arrTasksComments.count;
+            }
+        }
             break;
         case 4:
             return 1;
@@ -99,14 +137,42 @@
         return [self getCellHeight:contentCell];
     }else if (indexPath.section == 3)
     {
-        //只创建一个cell用作测量高度
         if (indexPath.row == 0) {
             return 44;
-        }else if (indexPath.row == 1){
-            oneContentCell.lblConment.text = @"这个问题得到了300+的支持和450+的收藏，答案得到了730+的支持，很详细的说明了如何在iOS7和iOS8上实现UITableView的动态行高功能.这个问题得到了300+的支持和450+的收藏，答案得到了730+的支持，很详细的说明了如何在iOS7和iOS8上实现UITableView的动态行高功能.";
-            return [self getCellHeight:oneContentCell];
         }else{
-            return 44;
+            if (_arrTasksComments.count > 3) {
+                if (indexPath.row == 4) {
+                    return 44;
+                }else{
+                    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+                    cell.bounds = CGRectMake(0, 0, self.tableView.bounds.size.width, cell.bounds.size.height);
+                    
+                    [cell setNeedsLayout];
+                    [cell layoutIfNeeded];
+                    
+                    float height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+                    return height;
+                }
+            }else if(_arrTasksComments.count == 0){
+                if (indexPath.row == 0) {
+                    return 44;
+                }else{
+                    return 0;
+                }
+            }else{
+                if (indexPath.row == _arrTasksComments.count + 1) {
+                    return 44;
+                }else{
+                    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+                    cell.bounds = CGRectMake(0, 0, self.tableView.bounds.size.width, cell.bounds.size.height);
+                    
+                    [cell setNeedsLayout];
+                    [cell layoutIfNeeded];
+                    
+                    float height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+                    return height;
+                }
+            }
         }
     }else{
         return 200;
@@ -138,7 +204,7 @@
             {
                 cell = [[[NSBundle mainBundle] loadNibNamed:@"TaskDetailTitleCell" owner:self options:nil] lastObject];
             }
-            
+            [cell setContent:taskModel];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
@@ -151,7 +217,7 @@
             {
                 cell = [[[NSBundle mainBundle] loadNibNamed:@"TaskDetailJobCell" owner:self options:nil] lastObject];
             }
-            
+            [cell setContent:taskModel];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             return cell;
         }
@@ -166,10 +232,38 @@
         {
             if (indexPath.row == 0) {
                 return _conmentCell;
-            }else if (indexPath.row == 1){
-                return oneContentCell;
             }else{
-                return _moreConmentCell;
+                if (_arrTasksComments.count > 3) {
+                    if (indexPath.row == 4) {
+                        return _moreConmentCell;
+                    }else{
+                        static NSString *CellIdentifier = @"oneConmentCell";
+                        oneConmentCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                        if (!cell)
+                        {
+                            cell = [[[NSBundle mainBundle] loadNibNamed:@"oneConmentCell" owner:self options:nil] lastObject];
+                        }
+                        [cell setContentWithCommentModel:[_arrTasksComments objectAtIndex:indexPath.row - 1]];
+                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                        return cell;
+                    }
+                }else if (_arrTasksComments.count == 0){
+                    return _moreConmentCell;
+                }else{
+                    if (indexPath.row == _arrTasksComments.count + 1) {
+                        return _moreConmentCell;
+                    }else{
+                        static NSString *CellIdentifier = @"oneConmentCell";
+                        oneConmentCell *cell = [self.tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+                        if (!cell)
+                        {
+                            cell = [[[NSBundle mainBundle] loadNibNamed:@"oneConmentCell" owner:self options:nil] lastObject];
+                        }
+                        [cell setContentWithCommentModel:[_arrTasksComments objectAtIndex:indexPath.row - 1]];
+                        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                        return cell;
+                    }
+                }
             }
         }
             break;
@@ -190,8 +284,10 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     
     if(indexPath.section == 0){
-        UserInfoVC *userInfo = [[UserInfoVC alloc] initWithNibName:@"UserInfoVC" bundle:nil];
-        [self.navigationController pushViewController:userInfo animated:YES];
+        ENUserInfo *userModel = [[ENUserInfo alloc] initUserInfoModelWithDic:taskModel.createUser];
+        UserInfoVC *userInfoVC = [[UserInfoVC alloc] initWithNibName:@"UserInfoVC" bundle:nil];
+        userInfoVC.userInfo = userModel;
+        [self.navigationController pushViewController:userInfoVC animated:YES];
     }
 }
 

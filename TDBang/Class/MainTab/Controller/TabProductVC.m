@@ -12,6 +12,7 @@
 #import "ProductDetailVC.h"
 #import "TaskDetailVC.h"
 #import "ReleaseTaskVC.h"
+#import "GetRecommendTasks.h"
 
 typedef enum
 {
@@ -19,6 +20,16 @@ typedef enum
     TbViewType_Order = 1,
     TbViewType_Smart = 2
 }TbViewType;
+
+typedef enum
+{
+    TDBTsakStatusType_baoming_pre = 0,//任务状态：草稿：未支付，不可报名
+    TDBTsakStatusType_BaoMing_Ing = 1,//任务状态：已支付，选标中
+    TDBTsakStatusType_Start_Ing = 2,// 任务选标完成，正在执行中
+    TDBTsakStatusType_Task_End = 3,// 任务已截止
+    TDBTsakStatusType_Task_Delete = 4// 任务已删除
+    
+}TDBTsakStatus;
 
 @interface TabProductVC ()<UITableViewDataSource,UITableViewDelegate,AllProViewDelegate>
 {
@@ -42,6 +53,12 @@ typedef enum
     NSInteger       indexType;
     NSInteger       indexOrder;
     NSInteger       indexSmart;
+    
+    NSInteger       pageNo;
+    NSInteger       pageSize;
+    float           distance;
+    
+    NSArray         *arrDistances;
 }
 @end
 
@@ -57,31 +74,27 @@ typedef enum
     return self;
 }
 
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotiTypeUserLogin object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotiTypeUserLogout object:nil];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"任务";
-    __weak typeof (self) wSelf = self;
+    __weak typeof(self)wSelf = self;
+    [self actionCustomRightBtnWithNrlImage:@"icon_release_white" htlImage:@"icon_release_white" title:@"" action:^{
+        [wSelf gotoReleaseTask];
+    }];
     
-    if(![OyTool ShardInstance].bIsForReview)
-    {
-        [self actionCustomRightBtnWithNrlImage:@"search" htlImage:@"search" title:@"" action:^{
-            ReleaseTaskVC* vc = [[ReleaseTaskVC alloc] init];
-            [wSelf.navigationController pushViewController:vc animated:YES];
-        }];
-        
-        
-        arrOfType = @[@"距离",@"同城",@"500米以内",@"1000米以内",@"5公里以内",@"10公里以内"];
-        arrOfOrder = @[@"任务状态",@"全部",@"报名中",@"进行中",@"已完成"];
-        arrOfSmart = @[@"智能排序",@"发布时间",@"离我最近",@"佣金金额",@"商户星级"];
-        arrOfOrderFlag = @[@"10",@"20",@"30",@"31",@"50"];
-    }
-    else
-    {
-        arrOfType = @[@"家用电器",@"化妆个护",@"钟表首饰",@"其他商品"];
-        arrOfTypeImage = @[@"sort104",@"sort2",@"sort222",@"sort312"];
-        arrOfOrder = @[@"即将揭晓",@"人气",@"价值（由高到低）",@"价值（由低到高）",@"最新"];
-        arrOfOrderFlag = @[@"10",@"20",@"30",@"31",@"50"];
-    }
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshMyData) name:NotiTypeUserLogin object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshMyData) name:NotiTypeUserLogout object:nil];
+    
+    arrOfType = @[@"距离",@"同城",@"500米以内",@"1000米以内",@"5公里以内",@"10公里以内"];
+    arrOfOrder = @[@"任务状态",@"全部",@"报名中",@"进行中",@"已完成"];
+    arrOfSmart = @[@"智能排序",@"发布时间",@"离我最近",@"佣金金额",@"商户星级"];
+    arrOfOrderFlag = @[@"10",@"20",@"30",@"31",@"50"];
     
     float btnWidth = (mainWidth-1.5)/3;
     
@@ -97,7 +110,7 @@ typedef enum
     
     UIImageView *imvDownDis = [[UIImageView alloc] initWithFrame:CGRectMake(btnType.frame.origin.x + btnWidth - 13, 15, 10, 15)];
     imvDownDis.image =[UIImage imageNamed:@"down"];
-    [self.view addSubview:imvDownDis];
+//    [self.view addSubview:imvDownDis];
     
     btnOrder = [[UIButton alloc] initWithFrame:CGRectMake(btnWidth + 0.5, 0, btnWidth , 43.5)];
     [btnOrder setTitle:[arrOfOrder objectAtIndex:0] forState:UIControlStateNormal];
@@ -111,7 +124,7 @@ typedef enum
     
     UIImageView *imvDownSta = [[UIImageView alloc] initWithFrame:CGRectMake(btnOrder.frame.origin.x + btnWidth - 13, 15, 10, 15)];
     imvDownSta.image =[UIImage imageNamed:@"down"];
-    [self.view addSubview:imvDownSta];
+//    [self.view addSubview:imvDownSta];
     
     btnSmart = [[UIButton alloc] initWithFrame:CGRectMake(2*btnWidth + 1, 0, btnWidth, 43.5)];
     [btnSmart setTitle:[arrOfSmart objectAtIndex:0] forState:UIControlStateNormal];
@@ -125,7 +138,7 @@ typedef enum
     
     UIImageView *imvDownSmar = [[UIImageView alloc] initWithFrame:CGRectMake(btnSmart.frame.origin.x + btnWidth - 15, 15, 10, 15)];
     imvDownSmar.image =[UIImage imageNamed:@"down"];
-    [self.view addSubview:imvDownSmar];
+//    [self.view addSubview:imvDownSmar];
     
     UIImageView *imgLine1 = [[UIImageView alloc] initWithFrame:CGRectMake(btnWidth + 0.5, 0, 0.5, 43.5)];
     imgLine1.backgroundColor = [UIColor hexFloatColor:@"dedede"];
@@ -152,7 +165,7 @@ typedef enum
     tbTaskList = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     tbTaskList.delegate = self;
     tbTaskList.dataSource = self;
-    tbTaskList.backgroundColor = [UIColor whiteColor];
+    tbTaskList.backgroundColor = [UIColor redColor];
     tbTaskList.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     tbTaskList.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     tbTaskList.tag = 1;
@@ -164,15 +177,96 @@ typedef enum
     allProView.delegate = self;
     allProView.proType = [[[arrOfTypeImage objectAtIndex:0] stringByReplacingOccurrencesOfString:@"sort" withString:@""] intValue];
     [self.view addSubview:allProView];
+    
+    pageNo = 0;
+    pageSize = 10;
+    
+    __weak typeof(self) weakSelf = self;
+    [tbTaskList addPullToRefreshWithActionHandler:^{
+        [weakSelf getNewestTasks];
+    }];
 }
 
-- (void)doClickProduct:(int)goodsId
+- (void)gotoReleaseTask
+{
+    ReleaseTaskVC *releaseTask = [[ReleaseTaskVC alloc] initWithNibName:@"ReleaseTaskVC" bundle:nil];
+    releaseTask.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:releaseTask animated:YES];
+}
+
+- (void)getNewestTasks
+{
+    __weak UITableView* wTb = tbTaskList;
+    NSString *strLat;
+    if ([Sessions sharedInstance].locationLat != nil) {
+        strLat = [Sessions sharedInstance].locationLat;
+    }else{
+        strLat = @"0";
+    }
+    strLat = @"";
+    
+    NSString *strLng;
+    if ([Sessions sharedInstance].locationLat != nil) {
+        strLng = [Sessions sharedInstance].locationLng;
+    }else{
+        strLng = @"0";
+    }
+    strLng = @"";
+    
+    NSString *strProvince;
+    if ([Sessions sharedInstance].locationLat != nil) {
+        strProvince = [Sessions sharedInstance].province;
+    }else{
+        strProvince = @"0";
+    }
+    strProvince = @"江苏";
+    NSString *strCity;
+    strCity = @"徐州";
+    NSString *strDis = @"";
+    NSString *strStreet = @"";
+    NSString *strDistance = @"";
+    
+    //distance查询距离半径
+    [GetRecommendTasks fentchTasksWithPage:[NSString stringWithFormat:@"%ld",(long)pageNo]
+                                      rows:[NSString stringWithFormat:@"%ld",(long)pageSize]
+                                       lat:strLat
+                                       lng:strLng
+                                  province:strProvince
+                                      city:strCity
+                                       dis:strDis
+                                    street:strStreet
+                                  distance:strDistance
+                                    status:@"2"
+                                     order:@""
+                                   success:^(AFHTTPRequestOperation *operation, NSObject *result) {
+                                       [wTb.pullToRefreshView stopAnimating];
+                                       QueryTasksParser *parser = [[QueryTasksParser alloc] initWithDictionary:(NSDictionary *)result];
+                                       if ([parser.success boolValue]) {
+                                           pageNo ++;
+                                       }else{
+                                           
+                                       }
+                                   } failure:^(NSError *error) {
+                                       [wTb.pullToRefreshView stopAnimating];
+                                   }];
+}
+
+#pragma mark - load data
+/**
+ *  刷新数据
+ */
+- (void)refreshMyData
+{
+    [tbViewType reloadData];
+}
+
+- (void)doClickProduct:(int)taskId taskModel:(TaskModel *)taskModel
 {
     TaskDetailVC *vc = [[TaskDetailVC alloc] initWithNibName:@"TaskDetailVC" bundle:nil];
     vc.hidesBottomBarWhenPushed = YES;
+    vc.taskModel = taskModel;
     [self.navigationController pushViewController:vc animated:YES];
 }
-
 
 /**
  *  btn action
