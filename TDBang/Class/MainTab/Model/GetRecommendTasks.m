@@ -22,7 +22,7 @@
 
 + (void)getRecommendTasksWithCity:(NSString *)cityname success:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure
 {
-    NSString* url = [NSString stringWithFormat:@"%@&SessionID=%@&city=%@",API_URL(aGetHomeAdviceTasks),[Sessions sharedInstance].accessToken,cityname];
+    NSString* url = [NSString stringWithFormat:@"%@&SessionID=%@&city=%@",API_URL(aGetHomeAdviceTasks),appDelegate().accessToken,cityname];
     url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"%@",url);
     [[XBApi SharedXBApi] requestWithURL:url paras:nil type:XBHttpResponseType_Json success:success failure:failure];
@@ -44,7 +44,7 @@
 {
     NSString* url = [NSString stringWithFormat:@"%@&SessionID=%@&page=%@&rows=%@&lat=%@&lng=%@",
                      API_URL(aQueryTasks),
-                     [Sessions sharedInstance].accessToken,
+                     appDelegate().accessToken,
                      pageNo,
                      pageSize,
                      lat,

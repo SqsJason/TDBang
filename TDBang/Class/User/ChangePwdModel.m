@@ -18,7 +18,7 @@
 
 + (void)changePwd:(NSString*)newPwd oldPwd:(NSString*)oldPwd success:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure
 {
-    NSString* url = [NSString stringWithFormat:@"%@&SessionID=%@&newPwd=%@&oldPwd=%@",API_URL(aChangePassword),[Sessions sharedInstance].accessToken,newPwd,oldPwd];
+    NSString* url = [NSString stringWithFormat:@"%@&SessionID=%@&newPwd=%@&oldPwd=%@",API_URL(aChangePassword),appDelegate().accessToken,newPwd,oldPwd];
     [[XBApi SharedXBApi] requestWithURL:url paras:nil type:XBHttpResponseType_Json success:success failure:failure];
 }
 

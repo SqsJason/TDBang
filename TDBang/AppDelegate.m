@@ -195,16 +195,16 @@
     
     UIViewController *rootViewController = [self setRootVC:YES];
     [[self window] setRootViewController:rootViewController];
-    [self setCartNum];
     
     // set  backgroundColor
     [[self window] setBackgroundColor:[UIColor whiteColor]];
     // set  makeKeyAndVisible
     [[self window] makeKeyAndVisible];
     
+    self.accessToken = [[NSString alloc] init];
     [Sessions sharedInstance].accessToken = [OpenUDID value];//userUDID
-    NSLog(@"%@",[OpenUDID value]);
     [Sessions sharedInstance].userUDID = [OpenUDID value];
+    self.accessToken = [OpenUDID value];
     [[Sessions sharedInstance] save];
     
     return YES;

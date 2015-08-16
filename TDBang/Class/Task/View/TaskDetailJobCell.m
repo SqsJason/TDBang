@@ -37,6 +37,30 @@
     
     _lblTaskLocation.text = [NSString stringWithFormat:@"%@%@%@",task.city,task.dis,task.street];
     _lblAddress.text = [NSString stringWithFormat:@"距离: %@",[dicOther objectForKey:@"distanceStr"]];
+    
+    NSString *strName;
+    switch ([task.status integerValue]) {
+        case TASK_STATUS_baoming_pre:
+            strName = @"icon_task_status_zhifu";
+            break;
+        case TASK_STATUS_BaoMing_ing:
+            strName = @"icon_task_status_baoming";
+            break;
+        case TASK_STATUS_START_ing:
+            strName = @"icon_task_status_start_ing";
+            break;
+        case TASK_STATUS_END:
+            strName = @"icon_task_status_wancheng";
+            break;
+        case TASK_STATUS_DELETE:
+            strName = @"";
+            break;
+            
+        default:
+            strName = @"";
+            break;
+    }
+    _imvStatusIcon.image = [UIImage imageNamed:strName];
 }
 
 - (IBAction)actionMapClick:(id)sender {

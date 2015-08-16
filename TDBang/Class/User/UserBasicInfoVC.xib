@@ -27,8 +27,8 @@
                 <outlet property="tfEditUserDescribe" destination="tHY-1t-QCH" id="L4E-O2-XKS"/>
                 <outlet property="tfEditUserGender" destination="CLh-VU-EXv" id="bmG-0Z-TPj"/>
                 <outlet property="tfEditUserPhone" destination="JT8-QA-wea" id="xmt-06-nBg"/>
-                <outlet property="tfUserIdentity" destination="1hB-G4-Wdk" id="Ktn-cc-62F"/>
                 <outlet property="tfeditUserName" destination="tsD-q9-O1B" id="fKc-Gc-Q5R"/>
+                <outlet property="tvBasicInfo" destination="0VD-ML-46t" id="5Yw-Si-cnm"/>
                 <outlet property="vGender" destination="aU6-5m-aUB" id="UCT-L7-En7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -81,8 +81,8 @@
                         <color key="textColor" white="0.41885964910000001" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号: 13888881234" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uh4-zd-XuR">
-                        <rect key="frame" x="110" y="70" width="165.5" height="20.5"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="手机号: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uh4-zd-XuR">
+                        <rect key="frame" x="110" y="70" width="61" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="0.41885964910000001" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>

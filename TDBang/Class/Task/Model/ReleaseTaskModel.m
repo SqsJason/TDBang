@@ -36,7 +36,7 @@
                           fmQQ:(NSString *)fmQQ
                        success:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure
 {
-    NSString* url = [NSString stringWithFormat:@"%@&SessionID=%@", API_URL(aReleasedTask), [Sessions sharedInstance].accessToken];
+    NSString* url = [NSString stringWithFormat:@"%@&SessionID=%@", API_URL(aReleasedTask), appDelegate().accessToken];
     if (![fmName isEqualToString:@""]) {
         [url stringByAppendingString:[NSString stringWithFormat:@"&fmName=%@",fmName]];
 //        [url stringByAppendingFormat:@"&fmName=%@",fmName];

@@ -43,7 +43,7 @@ const static float userHeadPadding_Right    = 30.0;
     UIImageView *imvHead = [[UIImageView alloc] init];
     imvHead.layer.cornerRadius = userHead_Size/2;
     imvHead.layer.masksToBounds = YES;
-    imvHead.image = [UIImage imageNamed:@"noimage"];
+    imvHead.image = [UIImage imageNamed:@"photo_login"];
     
     UILabel* lbl = [[UILabel alloc] init];
     lbl.text = @"您还没有登录哦~";

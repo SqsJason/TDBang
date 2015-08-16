@@ -13,6 +13,9 @@
     QRadioButtonDelegate
 >
 
+
+@property (weak, nonatomic) IBOutlet TPKeyboardAvoidingTableView *tvBasicInfo;
+
 @property (strong, nonatomic) IBOutlet UITableViewCell *UserInfoTitleCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *BasicInfoCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *PhoneNumberCell;
@@ -24,7 +27,6 @@
 @property (strong, nonatomic) IBOutlet UITableViewCell *ReleaseTaskCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *IndentityCell;
 
-@property (weak, nonatomic) IBOutlet UITextField *tfUserIdentity;
 @property (weak, nonatomic) IBOutlet UIImageView *imvUserHead;
 @property (weak, nonatomic) IBOutlet UILabel *lblUserName;
 @property (weak, nonatomic) IBOutlet UILabel *lblUserPhoneNum;

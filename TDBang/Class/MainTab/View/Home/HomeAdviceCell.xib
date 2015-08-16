@@ -36,14 +36,14 @@
                     <color key="textColor" red="0.9647059440612793" green="0.1098039299249649" blue="0.12156863510608673" alpha="1" colorSpace="deviceRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="10个月前 发布" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBr-hN-czM">
-                    <rect key="frame" x="98" y="68" width="103" height="19.5"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10个月前 发布" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBr-hN-czM">
+                    <rect key="frame" x="98" y="68" width="90.5" height="17"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.52211881463535348" green="0.52211881463535348" blue="0.52211881463535348" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="招聘30人" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ofo-Im-ZwZ">
-                    <rect key="frame" x="520" y="58" width="70" height="20.5"/>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="招聘30人" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ofo-Im-ZwZ">
+                    <rect key="frame" x="520" y="58" width="70" height="21"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                     <color key="textColor" red="0.30738556310691506" green="0.63747376203536987" blue="0.54546627194503527" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -83,6 +83,7 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Ofo-Im-ZwZ" secondAttribute="trailing" constant="10" id="0nf-K1-JUe"/>
+                <constraint firstItem="Ofo-Im-ZwZ" firstAttribute="top" secondItem="1FH-Ku-7NG" secondAttribute="bottom" constant="21" id="4vI-UE-bbA"/>
                 <constraint firstAttribute="trailing" secondItem="Ukw-0g-csv" secondAttribute="trailing" id="8Bx-Dk-MkW"/>
                 <constraint firstItem="3As-9H-nCJ" firstAttribute="leading" secondItem="XVw-jG-EEd" secondAttribute="trailing" constant="8" id="BS2-c3-m7Y"/>
                 <constraint firstItem="UFf-Cn-dek" firstAttribute="top" secondItem="1FH-Ku-7NG" secondAttribute="bottom" constant="8" id="C6U-2D-vQF"/>
@@ -101,6 +102,7 @@
                 <constraint firstAttribute="bottom" secondItem="Ukw-0g-csv" secondAttribute="bottom" id="ge2-yc-Lub"/>
                 <constraint firstItem="Xn7-is-EcO" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="igC-2w-6gu"/>
                 <constraint firstAttribute="trailing" secondItem="1FH-Ku-7NG" secondAttribute="trailing" constant="15" id="jdr-VV-EhK"/>
+                <constraint firstItem="Ofo-Im-ZwZ" firstAttribute="bottom" secondItem="UFf-Cn-dek" secondAttribute="bottom" id="pCo-Oq-N1U"/>
                 <constraint firstItem="wjc-Gl-FEv" firstAttribute="leading" secondItem="XVw-jG-EEd" secondAttribute="trailing" constant="8" id="rJt-QP-lSs"/>
                 <constraint firstItem="fBr-hN-czM" firstAttribute="leading" secondItem="XVw-jG-EEd" secondAttribute="trailing" constant="8" id="u79-sm-SbE"/>
                 <constraint firstItem="Ofo-Im-ZwZ" firstAttribute="top" secondItem="UFf-Cn-dek" secondAttribute="bottom" constant="8" id="vra-22-S7x"/>
@@ -120,6 +122,7 @@
             <connections>
                 <outlet property="constraintsTitlePaddingLeft" destination="dNC-rV-k21" id="SWO-JJ-Hko"/>
                 <outlet property="imvAdviceIcon" destination="3As-9H-nCJ" id="vaJ-rJ-fMj"/>
+                <outlet property="imvBigPhoto" destination="XVw-jG-EEd" id="IPK-Yz-HI5"/>
                 <outlet property="imvStatusImage" destination="UFf-Cn-dek" id="Sm0-Op-SNd"/>
                 <outlet property="lblDateTime" destination="fBr-hN-czM" id="1cg-iN-ppM"/>
                 <outlet property="lblDistance" destination="1FH-Ku-7NG" id="CJx-My-AjY"/>

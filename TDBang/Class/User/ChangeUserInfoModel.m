@@ -27,7 +27,7 @@
                success:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success
                failure:(void(^)(NSError* error))failure
 {
-    NSString* url = [NSString stringWithFormat:@"%@&SessionID=%@&tel=%@&serialId=%@&nickName=%@&sex=%@&age=%@&companyName=%@&userDesc=%@",API_URL(aUpdateUserInfo),[Sessions sharedInstance].accessToken,phone,idNumber,nickName,gender,age,companyName,userDesc];
+    NSString* url = [NSString stringWithFormat:@"%@&SessionID=%@&tel=%@&serialId=%@&nickName=%@&sex=%@&age=%@&companyName=%@&userDesc=%@",API_URL(aUpdateUserInfo),appDelegate().accessToken,phone,idNumber,nickName,gender,age,companyName,userDesc];
     url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"URL: %@",url);
     

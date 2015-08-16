@@ -67,16 +67,27 @@
     [rbFemale.titleLabel setFont:[UIFont boldSystemFontOfSize:11.0f]];
     [self.vGender addSubview:rbFemale];
     
-    if ([[Sessions sharedInstance].userInfoModel.sex integerValue] == 0) {
+    if ([[Sessions sharedInstance].userInfoModel.sex isEqualToString:@"女"]) {
         currentGender = @"0";
         [rbFemale setChecked:YES];
     }else{
         currentGender = @"1";
         [rbMale setChecked:YES];
     }
+    
+    arrTextFields = [NSMutableArray array];
+    __weak typeof (self) sSelf = self;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [arrTextFields addObject:sSelf.tfChangeIdentity];
+        [arrTextFields addObject:sSelf.tfEditUserPhone];
+        [arrTextFields addObject:sSelf.tfeditUserName];
+        [arrTextFields addObject:sSelf.tfEditUserAge];
+        [arrTextFields addObject:sSelf.tfEditUserCompany];
+        [arrTextFields addObject:sSelf.tfEditUserDescribe];
+    });
 }
 
-- (void) handTap:(UITapGestureRecognizer*) gesture
+- (void) hideAllKeyboards
 {
     for (UITextField *tf in arrTextFields) {
         if ([tf isFirstResponder]) {
@@ -167,7 +178,7 @@
         return;
     }
     
-    if(_tfUserIdentity.text.length == 0)
+    if(_tfChangeIdentity.text.length == 0)
     {
         [[XBToastManager ShardInstance] showtoast:@"请填写身份证号码"];
         return;
@@ -204,7 +215,7 @@
     __weak typeof(self) wSelf = self;
     
     [ChangeUserInfoModel updateUserInfo:_tfEditUserPhone.text
-                            identityNum:_tfUserIdentity.text
+                            identityNum:_tfChangeIdentity.text
                                nickName:_tfeditUserName.text
                                  gender:currentGender
                                     age:_tfEditUserAge.text
@@ -213,21 +224,7 @@
                                 success:^(AFHTTPRequestOperation *operation, NSObject *result) {
                                     UpdateUserInfoParser *parser = [[UpdateUserInfoParser alloc] initWithDictionary:(NSDictionary *)result];
                                     if ([parser.success boolValue]) {
-                                        [Sessions sharedInstance].userInfoModel.nickName = wSelf.tfeditUserName.text;
-                                        [Sessions sharedInstance].userInfoModel.serialId = wSelf.tfUserIdentity.text;
-                                        
-                                        [Sessions sharedInstance].userInfoModel.tel = wSelf.tfEditUserPhone.text;
-                                        
-                                        [Sessions sharedInstance].userInfoModel.age = wSelf.tfEditUserAge.text;
-                                        
-                                        [Sessions sharedInstance].userInfoModel.sex = currentGender;
-                                        
-                                        [Sessions sharedInstance].userInfoModel.companyName = wSelf.tfEditUserCompany.text;
-                                        
-                                        [Sessions sharedInstance].userInfoModel.userDesc = wSelf.tfEditUserDescribe.text;
-                                        
-                                        [[NSNotificationCenter defaultCenter] postNotificationName:NotiTypeUserUpdateInfo object:nil];
-                                        [[XBToastManager ShardInstance] showtoast:@"信息修改成功"];
+                                        [wSelf updateUserInfoSuccess];
                                     }else{
                                         [[XBToastManager ShardInstance] showtoast:parser.result];
                                         if ([parser.result isEqualToString:ErrorLoginFailed]) {
@@ -238,6 +235,31 @@
                                 } failure:^(NSError *error) {
                                     [[XBToastManager ShardInstance] showtoast:@"网络连接异常"];
                                 }];
+    [self hideAllKeyboards];
+}
+
+- (void) updateUserInfoSuccess
+{
+    [Sessions sharedInstance].userInfoModel.nickName = self.tfeditUserName.text;
+    [Sessions sharedInstance].userInfoModel.serialId = self.tfChangeIdentity.text;
+    
+    [Sessions sharedInstance].userInfoModel.tel = self.tfEditUserPhone.text;
+    
+    [Sessions sharedInstance].userInfoModel.age = self.tfEditUserAge.text;
+    
+    [Sessions sharedInstance].userInfoModel.sex = currentGender;
+    
+    [Sessions sharedInstance].userInfoModel.companyName = self.tfEditUserCompany.text;
+    
+    [Sessions sharedInstance].userInfoModel.userDesc = self.tfEditUserDescribe.text;
+    
+    ENUserInfo *userInfo = [Sessions sharedInstance].userInfoModel;
+    NSDictionary *dicUserInfo = [[Sessions sharedInstance] propertiesDictionaryOfObject:userInfo withClassType:[ENUserInfo class]];
+    [[NSUserDefaults standardUserDefaults] setObject:dicUserInfo forKey:TDBUserInfo];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotiTypeUserUpdateInfo object:nil];
+    [[XBToastManager ShardInstance] showtoast:@"信息修改成功"];
 }
 
 #pragma mark - QRadioButtonDelegate

@@ -20,6 +20,7 @@
 #import "MineUserView.h"
 #import "QueryReleasedTaskVC.h"
 #import "QueryAcceptVC.h"
+#import "ManageHeadCell.h"
 
 @interface TabNewestVC ()
 <
@@ -52,25 +53,16 @@ HomeNewCellDelegate
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotiTypeUserLogout object:nil];
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"管理";
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshMyData) name:NotiTypeUserLogin object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshMyDataAll) name:NotiTypeUserLogin object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshMyData) name:NotiTypeUserLogout object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadNewest) name:kDidNotifyReloadNewest object:nil];
-    
-    if (![OyTool ShardInstance].bIsForReview)
-    {
-        dicTypeName = @{@"0":@"全部分类▽",@"100":@"手机数码▽",@"106":@"电脑办公▽",@"104":@"家用电器▽",@"2":@"化妆个护▽",@"222":@"钟表首饰▽",@"312":@"其他商品▽"};
-    }
-    else
-    {
-        dicTypeName = @{@"104":@"家用电器▽",@"2":@"化妆个护▽",@"222":@"钟表首饰▽",@"312":@"其他商品▽"};
-    }
-    
-    __weak typeof (self) wSelf = self;
     
     tbView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     tbView.delegate = self;
@@ -79,33 +71,6 @@ HomeNewCellDelegate
     tbView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tbView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:tbView];
-
-    if([OyTool ShardInstance].bIsForReview)
-        iCodeType =  [[dicTypeName.allKeys objectAtIndex:0] intValue];
-    else
-        iCodeType = 0;
-    [tbView addPullToRefreshWithActionHandler:^{
-        __strong typeof (wSelf) sSelf = wSelf;
-        sSelf->curPage = 1;
-        [wSelf getData:^{
-            sSelf->listNew = nil;
-        }];
-    }];
-    
-    [tbView addInfiniteScrollingWithActionHandler:^{
-        __strong typeof (wSelf) sSelf = wSelf;
-        sSelf->curPage ++;
-        [wSelf getData:nil];
-    }];
-    
-    [tbView.pullToRefreshView setOYStyle];
-    [tbView triggerPullToRefresh];
-    
-    AllProTypeView* tview = [[AllProTypeView alloc] initWithFrame:self.view.bounds];
-    tview.delegate = self;
-    
-    dropdownView = [[LMDropdownView alloc] init];
-    dropdownView.contentBackgroundColor = [UIColor whiteColor];
 }
 
 - (void)actionCustomNavBtn:(UIButton *)btn nrlImage:(NSString *)nrlImage
@@ -133,66 +98,30 @@ HomeNewCellDelegate
  */
 - (void)refreshMyData
 {
+    NSIndexPath *index = [NSIndexPath indexPathForRow:0 inSection:0];
+    [tbView reloadRowsAtIndexPaths:@[index] withRowAnimation:UITableViewRowAnimationNone];
+}
+
+- (void)refreshMyDataAll
+{
     [tbView reloadData];
 }
 
 
 #pragma mark - right button action
-- (void)btnRightAction
-{
-    if ([dropdownView isOpen])
-    {
-        [dropdownView hide];
-    }
-    else
-    {
-        [tbView reloadData];
-        [dropdownView showInView:self.view withContentView:tbView atOrigin:CGPointMake(0, 0)];
-    }
-
-}
+- (void)btnRightAction{}
 
 #pragma mark - notify
-- (void)reloadNewest
-{
-    [NewestModel getAllNewest:iCodeType page:curPage size:10 index:1 success:^(AFHTTPRequestOperation* operation, NSObject* result){
-        NewestProList* list = [[NewestProList alloc] initWithDictionary:(NSDictionary*)result];
-        listNew =  [NSMutableArray arrayWithArray:list.Rows];
-        [tbView reloadData];
-    } failure:^(NSError* error){
-        //[[XBToastManager ShardInstance] showtoast:[NSString stringWithFormat:@"获取最新揭晓页面数据异常:%@",error]];
-    }];
-}
+- (void)reloadNewest{}
 
 #pragma mark - getdata
 - (void)getData:(void (^)(void))block
-{
-    [NewestModel getAllNewest:iCodeType page:curPage size:10 index:(curPage-1)*10+1 success:^(AFHTTPRequestOperation* operation, NSObject* result){
-        [tbView.pullToRefreshView stopAnimating];
-        [tbView.infiniteScrollingView stopAnimating];
-        if(block!=NULL)
-            block();
-        NewestProList* list = [[NewestProList alloc] initWithDictionary:(NSDictionary*)result];
-        if (!listNew)
-        {
-            listNew = [NSMutableArray arrayWithArray:list.Rows];
-        }
-        else
-        {
-            [listNew addObjectsFromArray:list.Rows];
-        }
-        [tbView reloadData];
-        [tbView setShowsInfiniteScrolling:listNew.count<[list.count integerValue]];
-    } failure:^(NSError* error){
-        [tbView.pullToRefreshView stopAnimating];
-        [tbView.infiniteScrollingView stopAnimating];
-    }];
-}
+{}
 
 #pragma mark - tableview
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 5;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -202,7 +131,10 @@ HomeNewCellDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0 || indexPath.section == 1 || indexPath.section == 2)
+    if (indexPath.section == 0) {
+        return 80;
+    }
+    if (indexPath.section == 1 || indexPath.section == 2 || indexPath.section == 3)
         return 60;
     return 44;
         
@@ -210,9 +142,9 @@ HomeNewCellDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (section == 0)
-        return 150;
-    if (section == 1 || section == 2)
+    if (section == 0 || section == 1)
+        return 0;
+    if (section == 2 || section == 3)
         return 35;
     return 15;
     
@@ -220,31 +152,12 @@ HomeNewCellDelegate
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    if (section == 0)
-    {
-        if ([[Sessions sharedInstance] isUserOnline])
-        {
-            MineUserView* v = [[MineUserView alloc] initWithFrame:CGRectMake(0, 0, mainWidth, 150)];
-            if ([[Sessions sharedInstance].userInfoModel isKindOfClass:[ENUserInfo class]]) {
-                [v setUserBasicInfo:[Sessions sharedInstance].userInfoModel hideJiFenButton:YES];
-            }else{
-                [[Sessions sharedInstance] isUserOnline];
-            }
-            return v;
-        }
-        else
-        {
-            MineLoginView* v = [[MineLoginView alloc] initWithFrame:CGRectMake(0, 0, mainWidth, 150)];
-            [v setButtonsHide:YES];
-            return v;
-        }
-    }
-    if (section == 1 || section == 2)
+    if (section == 2 || section == 3)
     {
         UIView *headV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, mainWidth, 35)];
         headV.backgroundColor = [UIColor clearColor];
         UILabel *lblTitle = [[UILabel alloc] initWithFrame:CGRectMake(30, 0, mainWidth-30, 35)];
-        if (section == 1) {
+        if (section == 2) {
             lblTitle.text = @"任务评论";
         }else{
             lblTitle.text = @"投诉与建议";
@@ -268,7 +181,7 @@ HomeNewCellDelegate
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 3) {
+    if (indexPath.section == 4) {
         UITableViewCell *cell =  nil;
         if(cell == nil)
         {
@@ -286,6 +199,27 @@ HomeNewCellDelegate
         [cell addSubview:img];
         
         return cell;
+    }else if (indexPath.section == 0){
+        ManageHeadCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ManageHeadCell"];
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"ManageHeadCell" owner:self options:nil] lastObject];
+        if ([[Sessions sharedInstance] isUserOnline])
+        {
+            cell.btnLoginNow.hidden = YES;
+            cell.lblUserDescribe.hidden = NO;
+            if ([[Sessions sharedInstance].userInfoModel isKindOfClass:[ENUserInfo class]]) {
+                cell.lblUseName.text = [NSString stringWithFormat:@"欢迎您,%@",[Sessions sharedInstance].userInfoModel.nickName];
+                cell.lblUserDescribe.text = [Sessions sharedInstance].userInfoModel.userDesc;
+                [cell.imUserHead setImage_oy:nil image:[Sessions sharedInstance].userInfoModel.headFilePath];
+            }
+        }else
+        {
+            cell.btnLoginNow.hidden = NO;
+            cell.lblUserDescribe.hidden = YES;
+            cell.lblUseName.text = @"您还没有登陆哦~";
+            cell.lblUserDescribe.text = [Sessions sharedInstance].userInfoModel.userDesc;
+            [cell.imUserHead setImage:[UIImage imageNamed:@"photo_login"]];
+        }
+        return cell;
     }else{
         static NSString *CellIdentifier = @"homeNewCell";
         HomeNewCell *cell = (HomeNewCell*)[tableView  dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -295,19 +229,19 @@ HomeNewCellDelegate
         }
         [cell setDelegate:self];
         
-        if (indexPath.section == 0) {
+        if (indexPath.section == 1) {
             [cell setHolderButtonImage_O:@"icon_yifarenwu"
                                  Title_O:@"已发任务"
                                  Image_T:@"icon_yijierenwu"
                                  Title_T:@"已接任务"
                                      tag:0];
-        }else if (indexPath.section == 1){
+        }else if (indexPath.section == 2){
             [cell setHolderButtonImage_O:@"icon_wodepinglun"
                                  Title_O:@"我的评论"
                                  Image_T:@"icon_tadepinglun"
                                  Title_T:@"他的评论"
                                      tag:1];
-        }else if(indexPath.section == 2){
+        }else if(indexPath.section == 3){
             [cell setHolderButtonImage_O:@"icon_tousu"
                                  Title_O:@"投诉"
                                  Image_T:@"icon_jianyi"
@@ -321,8 +255,6 @@ HomeNewCellDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    
 }
 
 #pragma mark - type view delegate
@@ -343,6 +275,7 @@ HomeNewCellDelegate
 {
     if (sender.tag == 0) {
         QueryAcceptVC *acceptVC = [[QueryAcceptVC alloc] initWithNibName:@"QueryAcceptVC" bundle:nil];
+        acceptVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:acceptVC animated:YES];
     }
 }

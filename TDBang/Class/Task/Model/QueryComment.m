@@ -20,7 +20,7 @@
 
 + (void)getTaskCommentWithSession:(NSString *)sessionID taskId:(NSString *)taskId success:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure
 {
-    NSString* url = [NSString stringWithFormat:@"%@&SessionID=%@&taskId=%@",API_URL(aTaskComments),[Sessions sharedInstance].accessToken,taskId];
+    NSString* url = [NSString stringWithFormat:@"%@&SessionID=%@&taskId=%@",API_URL(aTaskComments),appDelegate().accessToken,taskId];
     url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"%@",url);
     [[XBApi SharedXBApi] requestWithURL:url paras:nil type:XBHttpResponseType_Json success:success failure:failure];

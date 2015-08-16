@@ -12,7 +12,7 @@
 
 const static float userHead_Size            = 70.0;
 const static float userHeadPadding_Top      = 30.0;
-const static float userHeadPadding_Right    = 30.0;
+const static float userHeadPadding_Right    = 20.0;
 
 @interface MineUserView ()
 {
@@ -58,6 +58,9 @@ const static float userHeadPadding_Right    = 30.0;
     CGSize s = [lbl.text textSizeWithFont:lbl.font constrainedToSize:CGSizeMake(MAXFLOAT, 999) lineBreakMode:NSLineBreakByCharWrapping];
     
     float headPadding_L = (mainWidth - s.width - 90 - userHead_Size - 2*userHeadPadding_Right)/2;
+    if (headPadding_L < 0) {
+        headPadding_L = 5;
+    }
     imvHead.frame = CGRectMake(headPadding_L, userHeadPadding_Top, userHead_Size, userHead_Size);
     lbl.frame = CGRectMake(headPadding_L + imvHead.frame.size.width + userHeadPadding_Right, userHeadPadding_Top, s.width, s.height);
     
@@ -69,7 +72,7 @@ const static float userHeadPadding_Right    = 30.0;
     float maxWidth = mainWidth - userHead_Size - 2*userHeadPadding_Right - headPadding_L;
     CGSize describSize = [lblDescription.text textSizeWithFont:lblDescription.font constrainedToSize:CGSizeMake(maxWidth, 999) lineBreakMode:NSLineBreakByCharWrapping];
     
-    float fDescribeTop =  userHeadPadding_Top + 22;
+    float fDescribeTop =  userHeadPadding_Top + 27;
     if (isHide) {
         fDescribeTop += 10;
     }

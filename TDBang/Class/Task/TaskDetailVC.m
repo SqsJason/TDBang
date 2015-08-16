@@ -52,7 +52,7 @@
     oneContentCell = [[[NSBundle mainBundle] loadNibNamed:@"oneConmentCell" owner:self options:nil] lastObject];
     oneContentCell.lblConment.text = @"这个问题得到了300+的支持和450+的收藏，答案得到了730+的支持.";
     
-    [QueryComment getTaskCommentWithSession:[Sessions sharedInstance].accessToken
+    [QueryComment getTaskCommentWithSession:appDelegate().accessToken
                                      taskId:taskModel.id
                                     success:^(AFHTTPRequestOperation *operation, NSObject *result) {
                                         QueryCommentParser *parser = [[QueryCommentParser alloc] initWithDictionary:(NSDictionary *)result];

@@ -7,10 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserInfoModel.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) UIWindow      *window;
+@property (strong, nonatomic) NSString      *accessToken;
+@property (nonatomic, strong) ENUserInfo    *userInfo;
 
 - (void)setCartNum;
 

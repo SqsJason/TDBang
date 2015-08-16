@@ -29,14 +29,14 @@
 
 + (void)doLogin:(NSString*)name pwd:(NSString*)pwd success:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure
 {
-    NSString* url = [NSString stringWithFormat:@"%@&SessionID=%@&loginName=%@&loginPwd=%@",API_URL(aLogin),[Sessions sharedInstance].accessToken,name,pwd];
+    NSString* url = [NSString stringWithFormat:@"%@&SessionID=%@&loginName=%@&loginPwd=%@",API_URL(aLogin),appDelegate().accessToken,name,pwd];
     NSLog(@"%@",url);
     [[XBApi SharedXBApi] requestWithURL:url paras:nil type:XBHttpResponseType_Json success:success failure:failure];
 }
 
 + (void)getCurrentUserInfoSuccess:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure
 {
-    NSString* url = [NSString stringWithFormat:@"%@&SessionID=%@",API_URL(aGetCurrentUserInfo),[Sessions sharedInstance].accessToken];
+    NSString* url = [NSString stringWithFormat:@"%@&SessionID=%@",API_URL(aGetCurrentUserInfo),appDelegate().accessToken];
     [[XBApi SharedXBApi] requestWithURL:url paras:nil type:XBHttpResponseType_Json success:success failure:failure];
 }
 

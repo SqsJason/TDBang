@@ -96,6 +96,13 @@ typedef enum
     arrOfSmart = @[@"智能排序",@"发布时间",@"离我最近",@"佣金金额",@"商户星级"];
     arrOfOrderFlag = @[@"10",@"20",@"30",@"31",@"50"];
     
+    NSArray *arrAllListTitles = @[arrOfType,arrOfOrder,arrOfSmart];
+    MXPullDownMenu *menu = [[MXPullDownMenu alloc] initWithArray:arrAllListTitles selectedColor:RGB(245, 175, 57)];
+    menu.delegate = self;
+    menu.frame = CGRectMake(0, 0, mainWidth, 44);
+    [self.view addSubview:menu];
+    
+    /*
     float btnWidth = (mainWidth-1.5)/3;
     
     btnType = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, btnWidth, 44)];
@@ -107,11 +114,7 @@ typedef enum
     [btnType setImage:[UIImage imageNamed:@"product_type_distance"] forState:UIControlStateNormal];
     [btnType setImageEdgeInsets:UIEdgeInsetsMake(8,0,8,0)];
     [self.view addSubview:btnType];
-    
-    UIImageView *imvDownDis = [[UIImageView alloc] initWithFrame:CGRectMake(btnType.frame.origin.x + btnWidth - 13, 15, 10, 15)];
-    imvDownDis.image =[UIImage imageNamed:@"down"];
-//    [self.view addSubview:imvDownDis];
-    
+
     btnOrder = [[UIButton alloc] initWithFrame:CGRectMake(btnWidth + 0.5, 0, btnWidth , 43.5)];
     [btnOrder setTitle:[arrOfOrder objectAtIndex:0] forState:UIControlStateNormal];
     btnOrder.titleLabel.font = [UIFont systemFontOfSize:15];
@@ -122,10 +125,6 @@ typedef enum
     [btnOrder setImageEdgeInsets:UIEdgeInsetsMake(8,0,8,0)];
     [self.view addSubview:btnOrder];
     
-    UIImageView *imvDownSta = [[UIImageView alloc] initWithFrame:CGRectMake(btnOrder.frame.origin.x + btnWidth - 13, 15, 10, 15)];
-    imvDownSta.image =[UIImage imageNamed:@"down"];
-//    [self.view addSubview:imvDownSta];
-    
     btnSmart = [[UIButton alloc] initWithFrame:CGRectMake(2*btnWidth + 1, 0, btnWidth, 43.5)];
     [btnSmart setTitle:[arrOfSmart objectAtIndex:0] forState:UIControlStateNormal];
     btnSmart.titleLabel.font = [UIFont systemFontOfSize:15];
@@ -135,22 +134,19 @@ typedef enum
     [btnSmart setImage:[UIImage imageNamed:@"product_type_smart"] forState:UIControlStateNormal];
     [btnSmart setImageEdgeInsets:UIEdgeInsetsMake(8,0,8,0)];
     [self.view addSubview:btnSmart];
+     */
     
-    UIImageView *imvDownSmar = [[UIImageView alloc] initWithFrame:CGRectMake(btnSmart.frame.origin.x + btnWidth - 15, 15, 10, 15)];
-    imvDownSmar.image =[UIImage imageNamed:@"down"];
-//    [self.view addSubview:imvDownSmar];
-    
-    UIImageView *imgLine1 = [[UIImageView alloc] initWithFrame:CGRectMake(btnWidth + 0.5, 0, 0.5, 43.5)];
-    imgLine1.backgroundColor = [UIColor hexFloatColor:@"dedede"];
-    [self.view addSubview:imgLine1];
-    
-    UIImageView *imgLine2 = [[UIImageView alloc] initWithFrame:CGRectMake(2*btnWidth + 1, 0, 0.5, 43.5)];
-    imgLine2.backgroundColor = [UIColor hexFloatColor:@"dedede"];
-    [self.view addSubview:imgLine2];
-    
-    UIImageView *imgLine3 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 43.5, mainWidth, 0.5)];
-    imgLine3.backgroundColor = [UIColor hexFloatColor:@"dedede"];
-    [self.view addSubview:imgLine3];
+//    UIImageView *imgLine1 = [[UIImageView alloc] initWithFrame:CGRectMake(btnWidth + 0.5, 0, 0.5, 43.5)];
+//    imgLine1.backgroundColor = [UIColor hexFloatColor:@"dedede"];
+//    [self.view addSubview:imgLine1];
+//    
+//    UIImageView *imgLine2 = [[UIImageView alloc] initWithFrame:CGRectMake(2*btnWidth + 1, 0, 0.5, 43.5)];
+//    imgLine2.backgroundColor = [UIColor hexFloatColor:@"dedede"];
+//    [self.view addSubview:imgLine2];
+//    
+//    UIImageView *imgLine3 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 43.5, mainWidth, 0.5)];
+//    imgLine3.backgroundColor = [UIColor hexFloatColor:@"dedede"];
+//    [self.view addSubview:imgLine3];
     
     tbViewType = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     tbViewType.delegate = self;
@@ -468,4 +464,12 @@ typedef enum
     
     [allProView setTypeAndOrder:[[[arrOfTypeImage objectAtIndex:indexType] stringByReplacingOccurrencesOfString:@"sort" withString:@""] intValue] sort:[[arrOfOrderFlag objectAtIndex:indexOrder] intValue]];
 }
+
+#pragma mark - MXPullDownMenuDelegate
+
+- (void)PullDownMenu:(MXPullDownMenu *)pullDownMenu didSelectRowAtColumn:(NSInteger)column row:(NSInteger)row
+{
+    NSLog(@"%ld -- %ld", (long)column, (long)row);
+}
+
 @end

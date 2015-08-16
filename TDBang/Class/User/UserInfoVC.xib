@@ -75,8 +75,8 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dc9-0D-J7f">
                         <rect key="frame" x="108" y="25" width="470" height="30"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="信用:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcp-iX-7Aw">
-                                <rect key="frame" x="0.0" y="0.0" width="220" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="信用:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hcp-iX-7Aw">
+                                <rect key="frame" x="0.0" y="0.0" width="160" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="160" id="Abf-D9-nWw"/>
                                 </constraints>
@@ -96,8 +96,8 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8AY-EI-UOj">
                         <rect key="frame" x="108" y="65" width="470" height="30"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="服务:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jpd-M0-5xx">
-                                <rect key="frame" x="0.0" y="0.0" width="204" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="服务:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jpd-M0-5xx">
+                                <rect key="frame" x="0.0" y="0.0" width="160" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="160" id="ToR-hJ-IRa"/>
                                 </constraints>

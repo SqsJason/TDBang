@@ -38,10 +38,10 @@
  */
 + (void)regPhoneSms:(NSString*)phone success:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure
 {
-    NSString* url = [NSString stringWithFormat:@"%@&SessionID=%@&phone=%@",API_URL(aGetCode),[Sessions sharedInstance].accessToken,phone];
+    NSString* url = [NSString stringWithFormat:@"%@&SessionID=%@&phone=%@",API_URL(aGetCode),appDelegate().accessToken,phone];
     NSDictionary *parasDic;
-    if (![Jxb_Common_Common isNullOrNilObject:phone] && ![Jxb_Common_Common isNullOrNilObject:[Sessions sharedInstance].accessToken]) {
-        parasDic = @{@"SessionID" : [Sessions sharedInstance].accessToken, @"phone" : phone};
+    if (![Jxb_Common_Common isNullOrNilObject:phone] && ![Jxb_Common_Common isNullOrNilObject:appDelegate().accessToken]) {
+        parasDic = @{@"SessionID" : appDelegate().accessToken, @"phone" : phone};
     }
     [[XBApi SharedXBApi] requestWithURL:url paras:nil type:XBHttpResponseType_Json success:success failure:failure];
 }

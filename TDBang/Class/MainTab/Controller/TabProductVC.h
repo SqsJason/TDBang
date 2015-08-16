@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MXPullDownMenu.h"
 
-@interface TabProductVC : OneBaseVC
+@interface TabProductVC : OneBaseVC<MXPullDownMenuDelegate>
 
 @end

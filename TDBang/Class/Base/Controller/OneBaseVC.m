@@ -41,12 +41,6 @@
     
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
     
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addCartAnimation:) name:kDidAddCart object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addCartAnimation2:) name:kDidAddCartSearch object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(addCartAnimation3:) name:kDidAddCartOpt object:nil];
-    
-    
     viewEmpty = [[BaseNoDataView alloc] initWithFrame:self.view.bounds];
     viewLoad = [[BaseLoadView alloc] initWithFrame:self.view.bounds];
 }

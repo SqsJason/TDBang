@@ -56,10 +56,11 @@
     arrTitles = @[@"基本资料",@"我的银行卡",@"账户充值",@"余额提现",@"修改密码"];
     arrImages = @[@"me1",@"me2",@"me3",@"me6",@"me7"];//@"me4",@"me5",
     
-    UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 10, 60, 40)];
+    UIButton *rightBtn = [[UIButton alloc] initWithFrame:CGRectMake(80, 10, 50, 40)];
     [rightBtn setTitle:@"退出" forState:UIControlStateNormal];
     [rightBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [rightBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:15]];
+    [rightBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:14]];
+    rightBtn.titleLabel.textAlignment = NSTextAlignmentRight;
     [rightBtn addTarget:self action:@selector(gotoLogin) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
     
@@ -191,6 +192,7 @@
     else if (indexPath.section == 4)
     {
         ChangePasswordVC *changePwd = [[ChangePasswordVC alloc] initWithNibName:@"ChangePasswordVC" bundle:nil];
+        changePwd.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:changePwd animated:YES];
     }
 }

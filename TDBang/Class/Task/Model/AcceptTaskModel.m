@@ -16,7 +16,7 @@
 
 + (void)getAcceptTasksWithSession:(NSString *)sessionID success:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure
 {
-    NSString* url = [NSString stringWithFormat:@"%@&SessionID=%@",API_URL(aAcceptTask),[Sessions sharedInstance].accessToken];
+    NSString* url = [NSString stringWithFormat:@"%@&SessionID=%@",API_URL(aAcceptTask),appDelegate().accessToken];
     url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSLog(@"%@",url);
     [[XBApi SharedXBApi] requestWithURL:url paras:nil type:XBHttpResponseType_Json success:success failure:failure];

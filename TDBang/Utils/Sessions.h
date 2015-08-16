@@ -9,6 +9,22 @@
 #import <Foundation/Foundation.h>
 #import "UserInfoModel.h"
 
+typedef NS_ENUM(NSInteger, TaskStatusType) {
+    TASK_STATUS_baoming_pre = 1,
+    TASK_STATUS_BaoMing_ing = 2,
+    TASK_STATUS_START_ing = 3,
+    TASK_STATUS_END = 4,
+    TASK_STATUS_DELETE = 5
+};
+
+/*
+ public static final int TASK_STATUS_baoming_pre = 1;// 任务状态：草稿：未支付，不可报名
+ public static final int TASK_STATUS_BaoMing_ing = 2;// 任务状态：已支付，选标中
+ public static final int TASK_STATUS_START_ing = 3;// 任务选标完成，正在执行中
+ public static final int TASK_STATUS_END = 4;// 任务已截止
+ public static final int TASK_STATUS_DELETE = 5;// 任务已删除
+ */
+
 #define SESSION_VERSION @"09012014"
 
 @interface Sessions : NSObject
@@ -45,6 +61,8 @@
 - (void)getCurrentUserInfoSuccess:(void(^)(NSObject* result))success failure:(void(^)(NSError* error))failure;
 
 - (NSDictionary *)parseJsonData:(NSString *)strJson;
+
+- (NSDictionary*)propertiesDictionaryOfObject:(id)obj withClassType:(Class)cls;
 
 ////////////////////////////////////////////////////
 //Define all Session-related functions here

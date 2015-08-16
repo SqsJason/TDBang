@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		6B81E6F43F9EC282DB2F5164 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 809CA04F2CE11973CC00DEA4 /* libPods.a */; };
+		EF13E79E1B80A26500798C1A /* ManageHeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF13E79C1B80A26500798C1A /* ManageHeadCell.m */; };
+		EF13E79F1B80A26500798C1A /* ManageHeadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF13E79D1B80A26500798C1A /* ManageHeadCell.xib */; };
+		EF13E7A81B80ECAE00798C1A /* QueryTaskListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = EF13E7A61B80ECAE00798C1A /* QueryTaskListVC.m */; };
+		EF13E7A91B80ECAE00798C1A /* QueryTaskListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF13E7A71B80ECAE00798C1A /* QueryTaskListVC.xib */; };
+		EF13E7AD1B80EDE500798C1A /* MXPullDownMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = EF13E7AC1B80EDE500798C1A /* MXPullDownMenu.m */; };
 		EF2D4DD81B6673EC00820C65 /* LoginNewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2D4DD61B6673EC00820C65 /* LoginNewVC.m */; };
 		EF2D4DD91B6673EC00820C65 /* LoginNewVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF2D4DD71B6673EC00820C65 /* LoginNewVC.xib */; };
 		EF624C251B6D24E300F307AD /* ChangePasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = EF624C231B6D24E300F307AD /* ChangePasswordVC.m */; };
@@ -153,8 +158,6 @@
 		EF9A04FD1B5E9AAF009428AA /* ShowOrderItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9A045F1B5E9AAF009428AA /* ShowOrderItemCell.m */; };
 		EF9A04FE1B5E9AAF009428AA /* ShowOrderPostTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9A04611B5E9AAF009428AA /* ShowOrderPostTopCell.m */; };
 		EF9A04FF1B5E9AAF009428AA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EF9A046A1B5E9AAF009428AA /* Localizable.strings */; };
-		EF9A05001B5E9AAF009428AA /* cyjx.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EF9A046C1B5E9AAF009428AA /* cyjx.ttf */; };
-		EF9A05011B5E9AAF009428AA /* msyh.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EF9A046D1B5E9AAF009428AA /* msyh.ttf */; };
 		EF9A05021B5E9AAF009428AA /* OpenUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9A04701B5E9AAF009428AA /* OpenUDID.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		EF9A05031B5E9AAF009428AA /* ASPopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9A04741B5E9AAF009428AA /* ASPopUpView.m */; };
 		EF9A05041B5E9AAF009428AA /* ASProgressPopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9A04761B5E9AAF009428AA /* ASProgressPopUpView.m */; };
@@ -250,6 +253,14 @@
 		55C2AAEC37C44718FC2B2393 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		809CA04F2CE11973CC00DEA4 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		97365352072220ABB7003B2B /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		EF13E79B1B80A26500798C1A /* ManageHeadCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManageHeadCell.h; sourceTree = "<group>"; };
+		EF13E79C1B80A26500798C1A /* ManageHeadCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManageHeadCell.m; sourceTree = "<group>"; };
+		EF13E79D1B80A26500798C1A /* ManageHeadCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ManageHeadCell.xib; sourceTree = "<group>"; };
+		EF13E7A51B80ECAE00798C1A /* QueryTaskListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QueryTaskListVC.h; sourceTree = "<group>"; };
+		EF13E7A61B80ECAE00798C1A /* QueryTaskListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QueryTaskListVC.m; sourceTree = "<group>"; };
+		EF13E7A71B80ECAE00798C1A /* QueryTaskListVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QueryTaskListVC.xib; sourceTree = "<group>"; };
+		EF13E7AB1B80EDE500798C1A /* MXPullDownMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MXPullDownMenu.h; sourceTree = "<group>"; };
+		EF13E7AC1B80EDE500798C1A /* MXPullDownMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MXPullDownMenu.m; sourceTree = "<group>"; };
 		EF2D4DD51B6673EC00820C65 /* LoginNewVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginNewVC.h; sourceTree = "<group>"; };
 		EF2D4DD61B6673EC00820C65 /* LoginNewVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginNewVC.m; sourceTree = "<group>"; };
 		EF2D4DD71B6673EC00820C65 /* LoginNewVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginNewVC.xib; sourceTree = "<group>"; };
@@ -532,8 +543,6 @@
 		EF9A04681B5E9AAF009428AA /* font.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = font.h; sourceTree = "<group>"; };
 		EF9A04691B5E9AAF009428AA /* LCdefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LCdefine.h; sourceTree = "<group>"; };
 		EF9A046A1B5E9AAF009428AA /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
-		EF9A046C1B5E9AAF009428AA /* cyjx.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = cyjx.ttf; sourceTree = "<group>"; };
-		EF9A046D1B5E9AAF009428AA /* msyh.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = msyh.ttf; sourceTree = "<group>"; };
 		EF9A046F1B5E9AAF009428AA /* OpenUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenUDID.h; sourceTree = "<group>"; };
 		EF9A04701B5E9AAF009428AA /* OpenUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenUDID.m; sourceTree = "<group>"; };
 		EF9A04731B5E9AAF009428AA /* ASPopUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASPopUpView.h; sourceTree = "<group>"; };
@@ -699,6 +708,15 @@
 				55C2AAEC37C44718FC2B2393 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		EF13E7AA1B80EDE500798C1A /* MXPullDownMenu */ = {
+			isa = PBXGroup;
+			children = (
+				EF13E7AB1B80EDE500798C1A /* MXPullDownMenu.h */,
+				EF13E7AC1B80EDE500798C1A /* MXPullDownMenu.m */,
+			);
+			path = MXPullDownMenu;
 			sourceTree = "<group>";
 		};
 		EF624C7D1B714A0C00F307AD /* TPKeyboardAvoiding */ = {
@@ -1021,6 +1039,9 @@
 				EF9A039A1B5E9AAF009428AA /* TabProductVC.m */,
 				EF9A039B1B5E9AAF009428AA /* TabShopCartVC.h */,
 				EF9A039C1B5E9AAF009428AA /* TabShopCartVC.m */,
+				EF13E7A51B80ECAE00798C1A /* QueryTaskListVC.h */,
+				EF13E7A61B80ECAE00798C1A /* QueryTaskListVC.m */,
+				EF13E7A71B80ECAE00798C1A /* QueryTaskListVC.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1130,6 +1151,9 @@
 				EF9A03D21B5E9AAF009428AA /* NewestedCell.m */,
 				EF9A03D31B5E9AAF009428AA /* NewestingCell.h */,
 				EF9A03D41B5E9AAF009428AA /* NewestingCell.m */,
+				EF13E79B1B80A26500798C1A /* ManageHeadCell.h */,
+				EF13E79C1B80A26500798C1A /* ManageHeadCell.m */,
+				EF13E79D1B80A26500798C1A /* ManageHeadCell.xib */,
 			);
 			path = Newest;
 			sourceTree = "<group>";
@@ -1450,12 +1474,11 @@
 		EF9A046B1B5E9AAF009428AA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EF13E7AA1B80EDE500798C1A /* MXPullDownMenu */,
 				EFD09B2D1B7E632700794617 /* Images */,
 				EF624C971B72582F00F307AD /* QRadioButton */,
 				EF9A046E1B5E9AAF009428AA /* OpenUDID */,
 				EF624C7D1B714A0C00F307AD /* TPKeyboardAvoiding */,
-				EF9A046C1B5E9AAF009428AA /* cyjx.ttf */,
-				EF9A046D1B5E9AAF009428AA /* msyh.ttf */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1863,7 +1886,7 @@
 				EF624CA11B72582F00F307AD /* radio_unchecked.png in Resources */,
 				EF9A05641B5FE9E9009428AA /* HomeAdviceCell.xib in Resources */,
 				EFE74DCA1B63F50700DB11BB /* oneConmentCell.xib in Resources */,
-				EF9A05001B5E9AAF009428AA /* cyjx.ttf in Resources */,
+				EF13E79F1B80A26500798C1A /* ManageHeadCell.xib in Resources */,
 				EFD09B511B7E632700794617 /* logo100.png in Resources */,
 				EFD09B491B7E632700794617 /* 40.png in Resources */,
 				EF9A034E1B5E99EE009428AA /* Main.storyboard in Resources */,
@@ -1889,6 +1912,7 @@
 				EF624C741B711FD300F307AD /* QueryReleasedTaskVC.xib in Resources */,
 				EF624CA21B72582F00F307AD /* radio_unchecked@2x.png in Resources */,
 				EF624C9F1B72582F00F307AD /* radio_checked.png in Resources */,
+				EF13E7A91B80ECAE00798C1A /* QueryTaskListVC.xib in Resources */,
 				EF85D5DB1B693769007E78C9 /* UserBasicInfoVC.xib in Resources */,
 				EF624C261B6D24E300F307AD /* ChangePasswordVC.xib in Resources */,
 				EFD09B4E1B7E632700794617 /* 76.png in Resources */,
@@ -1900,7 +1924,6 @@
 				EFD09B4A1B7E632700794617 /* 50.png in Resources */,
 				EF9A03501B5E99EE009428AA /* Images.xcassets in Resources */,
 				EFD09B571B7E632700794617 /* logo87.png in Resources */,
-				EF9A05011B5E9AAF009428AA /* msyh.ttf in Resources */,
 				EFE74DBB1B6296D200DB11BB /* TaskDetailTitleCell.xib in Resources */,
 				EFD09B561B7E632700794617 /* logo58.png in Resources */,
 				EFD09B451B7E632700794617 /* 120.png in Resources */,
@@ -2049,6 +2072,7 @@
 				EF9A04FE1B5E9AAF009428AA /* ShowOrderPostTopCell.m in Sources */,
 				EF9A04D31B5E9AAF009428AA /* MineMyOrderModel.m in Sources */,
 				EF9A04F91B5E9AAF009428AA /* SettingWifiCell.m in Sources */,
+				EF13E7AD1B80EDE500798C1A /* MXPullDownMenu.m in Sources */,
 				EF624C291B6D403200F307AD /* ChangePwdModel.m in Sources */,
 				EF9A04B11B5E9AAF009428AA /* CartCell.m in Sources */,
 				EF9A055E1B5EA5F1009428AA /* XBParser.m in Sources */,
@@ -2090,6 +2114,8 @@
 				EF9A05561B5EA5F1009428AA /* UIButton+StringTag.m in Sources */,
 				EF624C731B711FD300F307AD /* QueryReleasedTaskVC.m in Sources */,
 				EF9A04A21B5E9AAF009428AA /* ProBuyingProgress.m in Sources */,
+				EF13E7A81B80ECAE00798C1A /* QueryTaskListVC.m in Sources */,
+				EF13E79E1B80A26500798C1A /* ManageHeadCell.m in Sources */,
 				EF9A04F81B5E9AAF009428AA /* SettingFeedCell.m in Sources */,
 				EF624C2C1B6D44E400F307AD /* ChangeUserInfoModel.m in Sources */,
 				EF9A04D21B5E9AAF009428AA /* MineMyBuyModel.m in Sources */,

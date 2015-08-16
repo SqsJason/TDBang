@@ -57,6 +57,7 @@
 #import "CJSONDeserializer.h"
 #import "TPKeyboardAvoidingTableView.h"
 #import "QRadioButton.h"
+#import "AppDelegate.h"
 
 
 #define kDidNotifyFromBack      @"kDidNotifyFromBack"
