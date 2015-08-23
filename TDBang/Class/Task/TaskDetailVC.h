@@ -15,6 +15,9 @@
 @property (strong, nonatomic) IBOutlet UITableViewCell *conmentCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *moreConmentCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *noticeCell;
+@property (strong, nonatomic) IBOutlet UITextView *textviewComment;
+@property (strong, nonatomic) IBOutlet UIView *vCommentHolder;
+
 
 @property (strong, nonatomic) TaskModel *taskModel;
 
@@ -22,5 +25,10 @@
 - (IBAction)wantEnrollAction:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *btnWantComplaint;
 - (IBAction)wantComplaintAction:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIButton *btnComment;
+- (IBAction)actionCommentClick:(id)sender;
+
+
 
 @end

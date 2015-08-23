@@ -24,4 +24,6 @@
                success:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success
                failure:(void(^)(NSError* error))failure;
 
++ (void)submitAdviceTaskId:(NSString*)taskId content:(NSString*)content success:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure;
+
 @end

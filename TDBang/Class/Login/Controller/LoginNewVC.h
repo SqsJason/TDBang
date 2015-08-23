@@ -7,8 +7,15 @@
 //
 
 #import "OneBaseVC.h"
+#import <TencentOpenAPI/TencentOAuth.h>
 
 @interface LoginNewVC : OneBaseVC
+<
+    TencentSessionDelegate
+>
+{
+    TencentOAuth* _tencentOAuth;
+}
 
 - (IBAction)actionBack:(id)sender;
 

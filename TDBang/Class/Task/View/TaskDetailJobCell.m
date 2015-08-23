@@ -38,6 +38,13 @@
     _lblTaskLocation.text = [NSString stringWithFormat:@"%@%@%@",task.city,task.dis,task.street];
     _lblAddress.text = [NSString stringWithFormat:@"距离: %@",[dicOther objectForKey:@"distanceStr"]];
     
+    _lblSignCount.text = [dicOther objectForKeyNotNull:@"signCount"];
+    NSInteger leftCount = [[dicOther objectForKeyNotNull:@"fmZhaopinCount"] integerValue] - [[dicOther objectForKeyNotNull:@"signCount"] integerValue];
+    if (leftCount < 0) {
+        leftCount = 0;
+    }
+    _lblLeftCount.text = [NSString stringWithFormat:@"%ld",(long)leftCount];
+    
     NSString *strName;
     switch ([task.status integerValue]) {
         case TASK_STATUS_baoming_pre:

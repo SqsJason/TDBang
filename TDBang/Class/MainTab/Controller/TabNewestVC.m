@@ -21,6 +21,7 @@
 #import "QueryReleasedTaskVC.h"
 #import "QueryAcceptVC.h"
 #import "ManageHeadCell.h"
+#import "UserAdviceVC.h"
 
 @interface TabNewestVC ()
 <
@@ -277,6 +278,11 @@ HomeNewCellDelegate
         QueryAcceptVC *acceptVC = [[QueryAcceptVC alloc] initWithNibName:@"QueryAcceptVC" bundle:nil];
         acceptVC.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:acceptVC animated:YES];
+    }
+    else if (2 == sender.tag){
+        UserAdviceVC *advice = [[UserAdviceVC alloc] initWithNibName:@"UserAdviceVC" bundle:nil];
+        advice.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:advice animated:YES];
     }
 }
 

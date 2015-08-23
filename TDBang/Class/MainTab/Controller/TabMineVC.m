@@ -22,12 +22,22 @@
 #import "UserBasicInfoVC.h"
 #import "ChangePasswordVC.h"
 
-@interface TabMineVC () <UITableViewDataSource,UITableViewDelegate,MineLoginViewDelegate,MineUserViewDelegate>
+@interface TabMineVC ()
+<
+    UITableViewDataSource,
+    UITableViewDelegate,
+    MineLoginViewDelegate,
+    MineUserViewDelegate,
+    UIImagePickerControllerDelegate ,
+    UINavigationControllerDelegate,
+    UIActionSheetDelegate
+>
 {
     __block UITableView     *tbView;
     
     NSArray *arrTitles;
     NSArray *arrImages;
+    MineUserView* mineUserView;
 }
 @end
 
@@ -113,14 +123,14 @@
     {
         if ([[Sessions sharedInstance] isUserOnline])
         {
-            MineUserView* v = [[MineUserView alloc] initWithFrame:CGRectMake(0, 0, mainWidth, 150)];
-            v.delegate = self;
+            mineUserView = [[MineUserView alloc] initWithFrame:CGRectMake(0, 0, mainWidth, 150)];
+            mineUserView.delegate = self;
             if ([[Sessions sharedInstance].userInfoModel isKindOfClass:[ENUserInfo class]]) {
-                [v setUserBasicInfo:[Sessions sharedInstance].userInfoModel hideJiFenButton:NO];
+                [mineUserView setUserBasicInfo:[Sessions sharedInstance].userInfoModel hideJiFenButton:NO];
             }else{
                 [[Sessions sharedInstance] isUserOnline];
             }
-            return v;
+            return mineUserView;
         }
         else
         {
@@ -201,6 +211,48 @@
 - (void)doLogin
 {
     [[Sessions sharedInstance] gotoLogin:self];
+}
+
+#pragma mark - 上传头像 -
+- (void)actionUploadPhoto
+{
+    UIActionSheet *actionSheet = [[UIActionSheet alloc]
+                                  initWithTitle:nil
+                                  delegate:self
+                                  cancelButtonTitle:@"取消"
+                                  destructiveButtonTitle:nil
+                                  otherButtonTitles:@"相机", @"相册",nil];
+    actionSheet.actionSheetStyle = UIActionSheetStyleBlackOpaque;
+    actionSheet.tag = 0;
+    [actionSheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (actionSheet.tag == 0 && buttonIndex < 2) {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        
+        if (buttonIndex == 0) {
+            if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+                picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            else
+                picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        }else if(buttonIndex == 1){
+            picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        }
+        [self presentViewController:picker animated:YES completion:nil];
+    }
+}
+
+#pragma mark - UIImagePickerController Delegage
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+    [mineUserView setHeadImage:chosenImage];
+    [picker dismissViewControllerAnimated:YES completion:nil];
+    
+    
 }
 
 - (void)btnPayAction

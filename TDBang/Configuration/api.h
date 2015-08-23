@@ -43,6 +43,7 @@
 #define aGetUserInfoById            @"user.do?method=getById"
 #define aChangePassword             @"user.do?method=updatePwd"
 #define aUpdateUserInfo             @"user.do?method=saveUser"
+#define aUpdateUserHead             @"user.do?method=updateUserHead"
 
 //查询任务
 #define aQueryTasks                 @"task.do?method=query"
@@ -63,4 +64,7 @@
 #define aAcceptTask                 @"task.do?method=queryMySign"
 
 #define aTaskComments               @"task.do?method=queryComment"
+#define aSaveComments               @"task.do?method=saveComment"
+#define aSignTask                   @"task.do?method=saveSign"
+#define aComplain                   @"task.do?method=saveComplain"
 

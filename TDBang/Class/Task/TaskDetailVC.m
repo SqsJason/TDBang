@@ -14,8 +14,15 @@
 #import "UserInfoVC.h"
 #import "QueryComment.h"
 #import "UserInfoModel.h"
+#import "CommentsListVC.h"
+#import "YIPopupTextView.h"
 
-@interface TaskDetailVC ()<UITableViewDataSource, UITableViewDelegate>
+@interface TaskDetailVC ()
+<
+    UITableViewDataSource,
+    UITableViewDelegate,
+    YIPopupTextViewDelegate
+>
 {
     TaskDetailContentCell *contentCell;
     oneConmentCell *oneContentCell;
@@ -38,7 +45,7 @@
         [wSelf.navigationController popViewControllerAnimated:YES];
     }];
     
-    _btnWantEnroll.layer.cornerRadius = 20.0f;
+    _btnWantEnroll.layer.cornerRadius = 5.0f;
     _btnWantEnroll.layer.masksToBounds = YES;
     
     _arrTasksComments = [NSMutableArray array];
@@ -47,16 +54,22 @@
     _noticeCell.contentView.backgroundColor = [UIColor hexFloatColor:@"f6f6f6"];
     
     contentCell = [[[NSBundle mainBundle] loadNibNamed:@"TaskDetailContentCell" owner:self options:nil] lastObject];
-    contentCell.lblContent.text = taskModel.content;
     
     oneContentCell = [[[NSBundle mainBundle] loadNibNamed:@"oneConmentCell" owner:self options:nil] lastObject];
     oneContentCell.lblConment.text = @"这个问题得到了300+的支持和450+的收藏，答案得到了730+的支持.";
     
+    [self queryTaskComments];
+}
+
+- (void)queryTaskComments
+{
+    __weak typeof (self) wSelf = self;
     [QueryComment getTaskCommentWithSession:appDelegate().accessToken
                                      taskId:taskModel.id
                                     success:^(AFHTTPRequestOperation *operation, NSObject *result) {
                                         QueryCommentParser *parser = [[QueryCommentParser alloc] initWithDictionary:(NSDictionary *)result];
                                         if ([parser.success boolValue]) {
+                                            [wSelf.arrTasksComments removeAllObjects];
                                             NSString *strTemp = [NSString stringWithFormat:@"{\"rows\":%@}",parser.result];
                                             NSDictionary *dicParser = [[Sessions sharedInstance] parseJsonData:strTemp];
                                             
@@ -64,14 +77,13 @@
                                                 TaskCommentModel *task = [[TaskCommentModel alloc] initWithDictionary:dicJson];
                                                 [wSelf.arrTasksComments addObject:task];
                                             }
-
+                                            
                                             //刷新TableView
                                             [wSelf.tableView reloadData];
                                         }else{
                                             
                                         }
                                     } failure:^(NSError *error) {
-                                        
                                     }];
 }
 
@@ -130,11 +142,16 @@
     }
     
     if (indexPath.section == 1) {
-        return 255;
+        return 245;
     }
     
     if (indexPath.section == 2) {
-        return [self getCellHeight:contentCell];
+        UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+        cell.bounds = CGRectMake(0, 0, CGRectGetWidth(_tableView.frame), CGRectGetHeight(cell.bounds));
+        [cell setNeedsLayout];
+        [cell layoutIfNeeded];
+        CGFloat height = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+        return height + 1;
     }else if (indexPath.section == 3)
     {
         if (indexPath.row == 0) {
@@ -175,7 +192,7 @@
             }
         }
     }else{
-        return 200;
+        return 185;
     }
 }
 
@@ -224,8 +241,13 @@
             break;
         case 2:
         {
-            contentCell.selectionStyle = UITableViewCellSelectionStyleNone;
-            return contentCell;
+            static NSString *reuseIdetify = @"TaskDetailContentCell";
+            TaskDetailContentCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdetify];
+            if (cell == nil) {
+                cell = [[[NSBundle mainBundle] loadNibNamed:@"TaskDetailContentCell" owner:self options:nil] lastObject];
+            }
+            cell.lblContent.text = taskModel.content;
+            return cell;
         }
             break;
         case 3:
@@ -282,12 +304,20 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    UITableViewCell *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
     
     if(indexPath.section == 0){
         ENUserInfo *userModel = [[ENUserInfo alloc] initUserInfoModelWithDic:taskModel.createUser];
         UserInfoVC *userInfoVC = [[UserInfoVC alloc] initWithNibName:@"UserInfoVC" bundle:nil];
         userInfoVC.userInfo = userModel;
         [self.navigationController pushViewController:userInfoVC animated:YES];
+    }
+    else if (cell == _moreConmentCell)
+    {
+        //查看跟过评论
+        CommentsListVC *commentVC = [[CommentsListVC alloc] initWithNibName:@"CommentsListVC" bundle:nil];
+        commentVC.arrAllComments = self.arrTasksComments;
+        [self.navigationController pushViewController:commentVC animated:YES];
     }
 }
 
@@ -304,7 +334,85 @@
 }
 
 - (IBAction)wantEnrollAction:(id)sender {
+    [QueryComment signTaskWithTaskId:taskModel.id
+                             success:^(AFHTTPRequestOperation *operation, NSObject *result) {
+                                 QueryCommentParser *parser = [[QueryCommentParser alloc] initWithDictionary:(NSDictionary *)result];
+                                 if ([parser.success boolValue]) {
+                                     [[XBToastManager ShardInstance] showtoast:@"报名成功"];
+                                 }else{
+                                     [[XBToastManager ShardInstance] showtoast:[NSString stringWithFormat:@"%@",parser.result]];
+                                 }
+                             } failure:^(NSError *error) {
+                                 
+                             }];
 }
+
 - (IBAction)wantComplaintAction:(id)sender {
+    
 }
+- (IBAction)actionCommentClick:(id)sender {
+    // NOTE: maxCount = 0 to hide count
+    YIPopupTextView* popupTextView = [[YIPopupTextView alloc] initWithPlaceHolder:@"输入评论" maxCount:300];
+    popupTextView.delegate = self;
+    //popupTextView.closeButton.hidden = YES;
+    popupTextView.text = self.textviewComment.text;
+    [popupTextView showInView:self.view];
+}
+
+#pragma mark - YIPopupTextViewDelegate -
+- (void)popupTextView:(YIPopupTextView*)textView willDismissWithText:(NSString*)text{
+    
+}
+
+- (void)popupTextView:(YIPopupTextView*)textView didDismissWithText:(NSString*)text
+{
+    
+}
+
+- (void)sendComment:(NSString *)text
+{
+    if (text.length != 0) {
+        __weak typeof(self) wSelf = self;
+        [QueryComment writeCommentWithTaskId:taskModel.id
+                              commentContent:text
+                                     success:^(AFHTTPRequestOperation *operation, NSObject *result) {
+                                         QueryCommentParser *parser = [[QueryCommentParser alloc] initWithDictionary:(NSDictionary *)result];
+                                         if ([parser.success boolValue]) {
+                                             [wSelf queryTaskComments];
+                                         }else{
+                                             [[XBToastManager ShardInstance] showtoast:@"评论发送失败"];
+                                         }
+                                     } failure:^(NSError *error) {
+                                         [[XBToastManager ShardInstance] showtoast:@"网络异常,请检查网络连接"];
+                                     }];
+    }
+}
+
+-(void)showDeactiveView:(UIView *)outView duration:(CFTimeInterval)duration withTag:(int)aTag
+{
+    CAKeyframeAnimation *animation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+    animation.duration             = duration;
+    animation.removedOnCompletion  = NO;
+    animation.fillMode             = kCAFillModeForwards;
+    animation.timingFunction       = [CAMediaTimingFunction functionWithName:@"easeInEaseOut"];
+    NSMutableArray * values        = [NSMutableArray array];
+    if (aTag == 0) {
+        [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.7, 0.7, 1.0)]];
+        [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.9, 0.9, 1.0)]];
+        [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.02, 1.02, 1.0)]];
+        [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.98, 0.98, 0.9)]];
+        [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)]];
+    }else{
+        [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.05, 1.05, 1.5)]];
+        [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.95, 0.95, 0.9)]];
+        [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.05, 1.05, 1.5)]];
+        [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.95, 0.95, 0.9)]];
+        [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.05, 1.05, 1.5)]];
+        [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(0.95, 0.95, 0.9)]];
+        [values addObject:[NSValue valueWithCATransform3D:CATransform3DMakeScale(1.0, 1.0, 1.0)]];
+    }
+    animation.values = values;
+    [outView.layer addAnimation:animation forKey:nil];
+}
+
 @end

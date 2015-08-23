@@ -201,6 +201,12 @@
     // set  makeKeyAndVisible
     [[self window] makeKeyAndVisible];
     
+    //QQ登录权限
+    self.qqOAuthAccessToken = [[NSString alloc] init];
+    self.qqOAuthOpenId = [[NSString alloc] init];
+    self.currentCity = [[NSString alloc] init];
+    self.currentCity = @"徐州";
+    
     self.accessToken = [[NSString alloc] init];
     [Sessions sharedInstance].accessToken = [OpenUDID value];//userUDID
     [Sessions sharedInstance].userUDID = [OpenUDID value];
@@ -309,6 +315,16 @@
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     NSLog(@"did Fail To Register For Remote Notifications With Error: %@", error);
+}
+
+
+#pragma mark - 接QQ登录 -
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    return [TencentOAuth HandleOpenURL:url];
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+    return [TencentOAuth HandleOpenURL:url];
 }
 
 @end

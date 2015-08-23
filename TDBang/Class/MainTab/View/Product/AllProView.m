@@ -167,7 +167,7 @@
     }
     strProvince = @"";
     NSString *strCity;
-    strCity = @"";
+    strCity = appDelegate().currentCity;
     NSString *strDis = @"";
     NSString *strStreet = @"";
     NSString *strDistance = @"";

@@ -20,20 +20,6 @@
     // Configure the view for the selected state
 }
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
-    }
-    return self;
-}
-
-- (void) setContentWithCommentModel:(TaskCommentModel *)comment
-{
-    
-}
-
 - (void)updateConstraints{
     _lblContent.preferredMaxLayoutWidth = mainWidth - 30;
     [super updateConstraints];

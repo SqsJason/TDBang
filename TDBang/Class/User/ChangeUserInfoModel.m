@@ -34,4 +34,10 @@
     [[XBApi SharedXBApi] requestWithURL:url paras:nil type:XBHttpResponseType_Json success:success failure:failure];
 }
 
++ (void)submitAdviceTaskId:(NSString*)taskId content:(NSString*)content success:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure
+{
+    NSString* url = [NSString stringWithFormat:@"%@&SessionID=%@&taskId=%@&content=%@",API_URL(aComplain),appDelegate().accessToken,taskId,content];
+    [[XBApi SharedXBApi] requestWithURL:url paras:nil type:XBHttpResponseType_Json success:success failure:failure];
+}
+
 @end

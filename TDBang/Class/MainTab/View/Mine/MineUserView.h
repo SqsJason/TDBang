@@ -10,6 +10,7 @@
 #import "UserInfoModel.h"
 
 @protocol MineUserViewDelegate <NSObject>
+- (void)actionUploadPhoto;
 - (void)btnPayAction;
 @end
 
@@ -18,9 +19,11 @@
     UIImageView *imvHead;
     UILabel* lbl;
     UILabel* lblDescription;
+    UIButton *btnUpdloadPhoto;
 }
 @property(nonatomic,weak)id<MineUserViewDelegate> delegate;
 
 - (void)setUserBasicInfo:(ENUserInfo *)userInfo hideJiFenButton:(BOOL)isHide;
+- (void)setHeadImage:(UIImage *)image;
 
 @end

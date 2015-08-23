@@ -28,6 +28,7 @@
 #import "HomeAdviceTitleCell.h"
 #import "TaskDetailVC.h"
 #import "GetRecommendTasks.h"
+#import "SelectCityVC.h"
 
 /*
  tFont: AppleSDGothicNeo-Bold
@@ -63,6 +64,15 @@
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated{
+    __weak typeof (self) wSelf = self;
+    [self actionCustomLeftBtnWithNrlImage:nil htlImage:nil title:appDelegate().currentCity action:^{
+        SelectCityVC* vc = [[SelectCityVC alloc] initWithNibName:@"SelectCityVC" bundle:nil];
+        vc.hidesBottomBarWhenPushed = YES;
+        [wSelf.navigationController pushViewController:vc animated:YES];
+    }];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -73,20 +83,10 @@
     self.title = @"首页";
     __weak typeof (self) wSelf = self;
     
-    if(![OyTool ShardInstance].bIsForReview)
-    {
-//        [self actionCustomRightBtnWithNrlImage:@"search" htlImage:@"search" title:@"" action:^{
-//            SearchVC* vc = [[SearchVC alloc] init];
-//            vc.hidesBottomBarWhenPushed = YES;
-//            [wSelf.navigationController pushViewController:vc animated:YES];
-//        }];
-    }
-    
     if (arrAdvices == nil) {
         arrAdvices = [[NSMutableArray alloc] init];
     }
 
-    
     tbView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];
     tbView.delegate = self;
     tbView.dataSource = self;
@@ -351,4 +351,15 @@
     vc.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:vc animated:YES];
 }
+
+- (void)firstItemClicked:(UIButton *)sender
+{
+    
+}
+
+- (void)secondItemClicked:(UIButton *)sender
+{
+    
+}
+
 @end

@@ -15,6 +15,8 @@ _sharedObject = block(); \
 return _sharedObject; \
 
 /////////////////////////////////////
+//三方登录
+#define TencentOAuth_APPID              @"1104689247"
 
 //Appdelegate
 #define haveSelectedCity                @"haveSelectedCity"

@@ -13,6 +13,7 @@
 #import "TaskDetailVC.h"
 #import "ReleaseTaskVC.h"
 #import "GetRecommendTasks.h"
+#import "SelectCityVC.h"
 
 typedef enum
 {
@@ -78,6 +79,15 @@ typedef enum
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotiTypeUserLogin object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotiTypeUserLogout object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    __weak typeof (self) wSelf = self;
+    [self actionCustomLeftBtnWithNrlImage:nil htlImage:nil title:appDelegate().currentCity action:^{
+        SelectCityVC* vc = [[SelectCityVC alloc] initWithNibName:@"SelectCityVC" bundle:nil];
+        vc.hidesBottomBarWhenPushed = YES;
+        [wSelf.navigationController pushViewController:vc animated:YES];
+    }];
 }
 
 - (void)viewDidLoad {

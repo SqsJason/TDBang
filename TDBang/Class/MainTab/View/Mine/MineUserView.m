@@ -35,8 +35,11 @@ const static float userHeadPadding_Right    = 20.0;
         [self addSubview:imvBG];
         
         imvHead = [[UIImageView alloc] init];
-        imvHead.layer.cornerRadius = userHead_Size/2;
-        imvHead.layer.masksToBounds = YES;
+        [imvHead.layer setBorderColor:[UIColor colorWithWhite:220/255.0f alpha:1.0f].CGColor];
+        [imvHead.layer setBorderWidth:1.0f];
+        
+        btnUpdloadPhoto = [[UIButton alloc] init];
+        [btnUpdloadPhoto addTarget:self action:@selector(buttonChoosePhotoTapped:) forControlEvents:UIControlEventTouchUpInside];
         
         lbl = [[UILabel alloc] init];
         lbl.textColor = [UIColor whiteColor];
@@ -47,8 +50,19 @@ const static float userHeadPadding_Right    = 20.0;
         lblDescription.font = [UIFont systemFontOfSize:14];
         lblDescription.lineBreakMode = NSLineBreakByTruncatingTail;
         lblDescription.numberOfLines = 4;
+        
+        [self addSubview:imvHead];
+        [self addSubview:lbl];
+        [self addSubview:lblDescription];
+        [self addSubview:btnUpdloadPhoto];
     }
     return self;
+}
+
+- (void)buttonChoosePhotoTapped:(id)sender{
+    if (delegate && [delegate respondsToSelector:@selector(actionUploadPhoto)]) {
+        [delegate actionUploadPhoto];
+    }
 }
 
 - (void)setUserBasicInfo:(ENUserInfo *)userInfo hideJiFenButton:(BOOL)isHide
@@ -62,11 +76,8 @@ const static float userHeadPadding_Right    = 20.0;
         headPadding_L = 5;
     }
     imvHead.frame = CGRectMake(headPadding_L, userHeadPadding_Top, userHead_Size, userHead_Size);
+    btnUpdloadPhoto.frame = imvHead.frame;
     lbl.frame = CGRectMake(headPadding_L + imvHead.frame.size.width + userHeadPadding_Right, userHeadPadding_Top, s.width, s.height);
-    
-    [self addSubview:imvHead];
-    [self addSubview:lbl];
-    
     
     lblDescription.text = userInfo.userDesc;
     float maxWidth = mainWidth - userHead_Size - 2*userHeadPadding_Right - headPadding_L;
@@ -77,7 +88,6 @@ const static float userHeadPadding_Right    = 20.0;
         fDescribeTop += 10;
     }
     lblDescription.frame = CGRectMake(lbl.frame.origin.x, fDescribeTop, describSize.width, describSize.height);
-    [self addSubview:lblDescription];
     
     if (!isHide) {
         CGFloat width = (mainWidth - 1)/2;
@@ -112,6 +122,11 @@ const static float userHeadPadding_Right    = 20.0;
         lblShow.textAlignment = NSTextAlignmentCenter;
         [self addSubview:lblShow];
     }
+}
+
+- (void)setHeadImage:(UIImage *)image
+{
+    imvHead.image = image;
 }
 
 - (void)btnPayAction

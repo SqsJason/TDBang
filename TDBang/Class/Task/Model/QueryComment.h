@@ -29,6 +29,9 @@
 @interface QueryComment : NSObject
 
 + (void)getTaskCommentWithSession:(NSString *)sessionID taskId:(NSString *)taskId success:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure;
-//task.do?method= queryComment
+
++ (void)writeCommentWithTaskId:(NSString *)taskId commentContent:(NSString *)commentContent success:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure;
+
++ (void)signTaskWithTaskId:(NSString *)taskId success:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure;
 
 @end

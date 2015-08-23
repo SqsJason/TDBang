@@ -47,7 +47,7 @@ static const float RadioButton_W = 60;
                   _QQNumberCell,
                   _releaseCell];
     
-    _btnRelease.layer.cornerRadius = 20.;
+    _btnRelease.layer.cornerRadius = 5.;
     _btnRelease.layer.masksToBounds = YES;
     _releaseCell.contentView.backgroundColor = Color_CommonBGColor;
     self.tblReleaseTask.backgroundColor = Color_CommonBGColor;
@@ -107,6 +107,7 @@ static const float RadioButton_W = 60;
     
 }
 
+#pragma mark - UITableViewDataSource  UITableViewDelegate-
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 1;
@@ -216,6 +217,8 @@ static const float RadioButton_W = 60;
         [[XBToastManager ShardInstance] showtoast:@"请填QQ号码"];
         return;
     }
+    
+    //117.198639,34.276989
     __weak typeof(self) wSelf = self;
     [ReleaseTaskModel releaseTasksWithfmName:_tfTaskName.text
                                    fmContent:_tvInputTaskContent.text
@@ -224,8 +227,8 @@ static const float RadioButton_W = 60;
                                         city:@"徐州"
                                          dis:@"白云区"
                                       street:@"和平大道"
-                                         lat:@"34.253946"
-                                         lng:@"117.292136"
+                                         lat:@"34.276989"
+                                         lng:@"117.198639"
                                  fmStartDate:@"2015-9-1"
                                    fmEndDate:@"2015-9-10"
                                  fmStartTime:@"09:00"

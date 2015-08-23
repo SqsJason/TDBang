@@ -21,6 +21,8 @@
     __weak IBOutlet UIButton *btnLogin;
     __weak IBOutlet UIButton *btnQQLogin;
     
+    NSArray* _permissions;
+    
 }
 - (IBAction)actionLogin:(id)sender;
 - (IBAction)actionQQLogin:(id)sender;
@@ -44,6 +46,16 @@
     
     tfUserName.text = @"";
     tfPassword.text = @"";
+    
+    //QQ权限
+    _permissions = [NSArray arrayWithObjects:
+                    kOPEN_PERMISSION_GET_USER_INFO,
+                    kOPEN_PERMISSION_GET_SIMPLE_USER_INFO,
+                    kOPEN_PERMISSION_ADD_SHARE,
+                    kOPEN_PERMISSION_ADD_TOPIC,
+                    nil];
+    _tencentOAuth = [[TencentOAuth alloc] initWithAppId:TencentOAuth_APPID
+                                            andDelegate:self];
 }
 
 - (void) handTap:(UITapGestureRecognizer*) gesture
@@ -143,10 +155,6 @@
     }];
 }
 
-- (IBAction)actionQQLogin:(id)sender {
-    
-}
-
 - (IBAction)actionRegister:(id)sender {
     RegUserNewVC* vc  = [[RegUserNewVC alloc] initWithNibName:@"RegUserNewVC" bundle:nil];
     vc.hidesBottomBarWhenPushed = YES;
@@ -156,4 +164,63 @@
 - (IBAction)actionBack:(id)sender {
     [self dismissViewControllerAnimated:YES completion:^{}];
 }
+
+
+- (IBAction)actionQQLogin:(id)sender {
+    [_tencentOAuth authorize:_permissions inSafari:NO];
+}
+
+#pragma mark - QQ登录 -
+//登陆成功
+- (void)tencentDidLogin
+{
+    if (_tencentOAuth.accessToken && 0 != [_tencentOAuth.accessToken length])
+    {
+        //  记录登录用户的OpenID、Token以及过期时间
+        appDelegate().qqOAuthAccessToken = _tencentOAuth.accessToken;
+        appDelegate().qqOAuthOpenId = _tencentOAuth.openId;
+        [_tencentOAuth getUserInfo];
+    }
+    else
+    {
+        [[XBToastManager ShardInstance] showtoast:@"QQ登录失败"];
+    }
+}
+
+/**
+ * 获取用户信息成功的回调.
+ */
+- (void)getUserInfoResponse:(APIResponse*) response {
+    if (response.retCode == URLREQUEST_SUCCEED)
+    {
+        NSMutableString *str=[NSMutableString stringWithFormat:@""];
+        for (id key in response.jsonResponse) {
+            [str appendString: [NSString stringWithFormat:@"%@:%@\n",key,[response.jsonResponse objectForKey:key]]];
+        }
+        
+    }
+    else
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"操作失败" message:[NSString stringWithFormat:@"%@", response.errorMsg]
+                              
+                                                       delegate:self cancelButtonTitle:@"我知道啦" otherButtonTitles: nil];
+        [alert show];
+    }
+}
+
+//非网络原因导致登录失败
+-(void)tencentDidNotLogin:(BOOL)cancelled
+{
+    if (cancelled){
+        [[XBToastManager ShardInstance] showtoast:@"取消登录"];
+    }else{
+        [[XBToastManager ShardInstance] showtoast:@"登录失败"];
+    }
+}
+
+//网络原因导致登录失败
+-(void)tencentDidNotNetWork{
+    [[XBToastManager ShardInstance] showtoast:@"网络连接错误导致QQ登录失败"];
+}
+
 @end

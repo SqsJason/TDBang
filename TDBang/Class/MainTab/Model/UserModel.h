@@ -17,4 +17,6 @@
 
 + (void)getUserInfo:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure;
 + (void)getUserDetail:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure;
++ (void)uploadHeadImage:(NSData *)imageData success:(void(^)(AFHTTPRequestOperation* operation, NSObject* result))success failure:(void(^)(NSError* error))failure;
+
 @end
